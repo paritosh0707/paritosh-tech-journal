@@ -3,32 +3,13 @@ site_name: My Docs
 theme:
   name: material
   features:
-    # --- Content & Usability ---
-    - content.code.copy         # copy button for code blocks
-    - content.code.annotate     # annotations within code blocks
-    - content.tabs.link         # markdown tabs that work with links
-    - content.tooltips          # tooltips for icons or text
-    - content.math              # MathJax/KaTeX support
-
-    # # --- Navigation ---
-    # - navigation.expand         # expand all sidebar sections
-    # - navigation.tabs           # top-level nav as tabs
-    # - navigation.sections       # nested left sidebar nav like LangGraph
-    # - navigation.top            # "back to top" button
-    # - navigation.tracking       # highlights current section
-
-    # --- Search Enhancements ---
-    - search.highlight          # highlight keywords in search results
-    - search.share              # shareable links for search queries
-
-nav:
-  - Home: index.md
-  - Books:
-      - Pydantic:
-          - Introduction: Books/Pydantic/Introduction.md
-          - Chapter 1: Books/Pydantic/Chapter 1.md
-          - Chapter 2: Books/Pydantic/Chapter 2.md
-
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+    - content.math
+    - search.highlight
+    - search.share
 
   palette:
     - scheme: slate
@@ -42,6 +23,14 @@ nav:
       accent: deep orange
       toggle:
         icon: material/weather-night
+
+nav:
+  - Home: index.md
+  - Books:
+      - Pydantic:
+          - Introduction: Books/Pydantic/Introduction.md
+          - Chapter 1: Books/Pydantic/Chapter 1.md
+          - Chapter 2: Books/Pydantic/Chapter 2.md
 
 markdown_extensions:
   - admonition
@@ -74,10 +63,7 @@ markdown_extensions:
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-
 copyright: Copyright &copy; 2025 Paritosh Sharma
 
 extra_css:
-  - stylesheets/extra.css  # optional: for custom styling (create this if needed)
-
-
+  - stylesheets/extra.css  # optional
