@@ -1,0 +1,1 @@
+# paritosh-tech-journal
