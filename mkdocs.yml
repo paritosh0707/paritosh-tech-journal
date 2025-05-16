@@ -1,0 +1,77 @@
+site_name: My Docs
+
+theme:
+  name: material
+  features:
+    # --- Content & Usability ---
+    - content.code.copy         # copy button for code blocks
+    - content.code.annotate     # annotations within code blocks
+    - content.tabs.link         # markdown tabs that work with links
+    - content.tooltips          # tooltips for icons or text
+    - content.math              # MathJax/KaTeX support
+
+    # # --- Navigation ---
+    # - navigation.expand         # expand all sidebar sections
+    # - navigation.tabs           # top-level nav as tabs
+    # - navigation.sections       # nested left sidebar nav like LangGraph
+    # - navigation.top            # "back to top" button
+    # - navigation.tracking       # highlights current section
+
+    # --- Search Enhancements ---
+    - search.highlight          # highlight keywords in search results
+    - search.share              # shareable links for search queries
+
+
+
+
+  palette:
+    - scheme: slate
+      primary: green
+      accent: deep purple
+      toggle:
+        icon: material/weather-sunny
+
+    - scheme: default
+      primary: blue
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+
+copyright: Copyright &copy; 2025 Paritosh Sharma
+
+extra_css:
+  - stylesheets/extra.css  # optional: for custom styling (create this if needed)
+
+
