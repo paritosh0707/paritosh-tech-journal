@@ -21,7 +21,14 @@ theme:
     - search.highlight          # highlight keywords in search results
     - search.share              # shareable links for search queries
 
-
+nav:
+  - Home: index.md
+  - Books:
+      - Pydantic:
+          - Introduction: Books/Pydantic/Introduction.md
+          - Chapter 1: Books/Pydantic/Chapter 1.md
+          - Chapter 2: Books/Pydantic/Chapter 2.md
+      - Deep Learning: deep learning/index.md  # Adjust path if you have a file here
 
 
   palette:
