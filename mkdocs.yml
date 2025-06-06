@@ -1,4 +1,4 @@
-site_name: My Docs
+site_name: Tech Space
 
 theme:
   name: material
@@ -10,6 +10,7 @@ theme:
     - content.math
     - search.highlight
     - search.share
+  # toc_depth: 3
 
   palette:
     - scheme: slate
@@ -26,11 +27,19 @@ theme:
 
 nav:
   - Home: index.md
-  - Books:
+  - Mini Books:
       - Pydantic:
-          - Introduction: Books/Pydantic/Introduction.md
-          - Chapter 1: Books/Pydantic/Chapter 1.md
-          - Chapter 2: Books/Pydantic/Chapter 2.md
+          - Introduction: Mini Books/Pydantic/Introduction.md
+          - Chapter 1: Mini Books/Pydantic/Chapter 1.md
+          - Chapter 2: Mini Books/Pydantic/Chapter 2.md
+      - Transformers:
+          - Self Attention: Mini Books/Transformers/Self Attention/Self Attention.md
+      - Kubernetes:
+          - Why Kubernetes: Mini Books/Kubernetes/Why Kubernetes.md
+          - Pod: Mini Books/Kubernetes/Pod.md
+          - Kubernetes Architecture: Mini Books/Kubernetes/Kubernetes Architecture.md
+          - What is deployment: Mini Books/Kubernetes/What is deployment.md
+          
 
 markdown_extensions:
   - admonition
@@ -59,6 +68,7 @@ markdown_extensions:
   - pymdownx.tilde
   - toc:
       permalink: true
+      toc_depth: 3
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
