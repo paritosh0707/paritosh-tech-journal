@@ -10,11 +10,14 @@ theme:
     - content.math
     - search.highlight
     - search.share
-    - navigation.tabs
-    - navigation.sections
     - navigation.top
     - navigation.footer
     - navigation.tracking
+    - navigation.sections
+    - navigation.tabs
+    - navigation.path
+    - navigation.indexes
+
   # toc_depth: 3
 
   palette:
@@ -39,18 +42,22 @@ theme:
 nav:
   - Home: index.md
   - Mini Books:
-      - Pydantic:
-          - Introduction: Mini Books/Pydantic/Introduction.md
-          - Chapter 1: Mini Books/Pydantic/Chapter 1.md
-          - Chapter 2: Mini Books/Pydantic/Chapter 2.md
-      - Transformers:
-          - Self Attention: Mini Books/Transformers/Self Attention/Self Attention.md
-      - Kubernetes:
-          - Why Kubernetes: Mini Books/Kubernetes/Why Kubernetes.md
-          - Pod: Mini Books/Kubernetes/Pod.md
-          - Kubernetes Architecture: Mini Books/Kubernetes/Kubernetes Architecture.md
-          - What is deployment: Mini Books/Kubernetes/What is deployment.md
-          - Service: Mini Books/Kubernetes/Service.md
+      - Books:
+          - Pydantic:
+              - Introduction: Mini Books/Pydantic/Introduction.md
+              - Chapter 1: Mini Books/Pydantic/Chapter 1.md
+              - Chapter 2: Mini Books/Pydantic/Chapter 2.md
+
+          - Transformers:
+              - Self Attention: Mini Books/Transformers/Self Attention/Self Attention.md
+
+          - Kubernetes:
+              - Why Kubernetes: Mini Books/Kubernetes/Why Kubernetes.md
+              - Pod: Mini Books/Kubernetes/Pod.md
+              - Kubernetes Architecture: Mini Books/Kubernetes/Kubernetes Architecture.md
+              - What is deployment: Mini Books/Kubernetes/What is deployment.md
+              - Service: Mini Books/Kubernetes/Service.md
+
           
 
 markdown_extensions:
