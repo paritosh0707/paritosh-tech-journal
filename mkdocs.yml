@@ -1,4 +1,4 @@
-site_name: Tech Space
+site_name: Paritosh's Tech Universe
 
 theme:
   name: material
@@ -10,20 +10,31 @@ theme:
     - content.math
     - search.highlight
     - search.share
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.tracking
   # toc_depth: 3
 
   palette:
     - scheme: slate
-      primary: green
-      accent: deep purple
-      toggle:
-        icon: material/weather-sunny
-
-    - scheme: default
-      primary: blue
+      primary: cyan
       accent: deep orange
       toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+    - scheme: default
+      primary: indigo
+      accent: orange
+      toggle:
         icon: material/weather-night
+        name: Switch to dark mode
+
+  font:
+    text: Inter
+    code: JetBrains Mono
 
 nav:
   - Home: index.md
@@ -39,6 +50,7 @@ nav:
           - Pod: Mini Books/Kubernetes/Pod.md
           - Kubernetes Architecture: Mini Books/Kubernetes/Kubernetes Architecture.md
           - What is deployment: Mini Books/Kubernetes/What is deployment.md
+          - Service: Mini Books/Kubernetes/Service.md
           
 
 markdown_extensions:
@@ -72,8 +84,9 @@ markdown_extensions:
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - assets/collapsible-toc.js
 
 copyright: Copyright &copy; 2025 Paritosh Sharma
 
 extra_css:
-  - stylesheets/extra.css  # optional
+  - assets/extra.css
