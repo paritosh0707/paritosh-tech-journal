@@ -832,4 +832,80 @@ body[data-md-color-scheme="slate"] .custom-alert-title {
 
 body[data-md-color-scheme="slate"] .custom-alert-message {
   color: #b0bec5 !important;
+}
+
+/* Mission Header Styles */
+.mission-header {
+  text-align: center;
+  margin: 2rem 0 3rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 153, 204, 0.1) 100%);
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+}
+
+.mission-title {
+  color: var(--primary-tech);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.mission-tagline {
+  color: var(--text-secondary);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* About Section Styles */
+.about-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(10px);
+}
+
+.about-text {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 0 0 1.5rem 0;
+}
+
+.about-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Dark mode specific styles for mission and about */
+body[data-md-color-scheme="slate"] .mission-header {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 153, 204, 0.15) 100%) !important;
+  border-color: #222a3a !important;
+}
+
+body[data-md-color-scheme="slate"] .mission-title {
+  color: #00d4ff !important;
+}
+
+body[data-md-color-scheme="slate"] .mission-tagline {
+  color: #b0bec5 !important;
+}
+
+body[data-md-color-scheme="slate"] .about-section {
+  background: #232946 !important;
+  border-color: #222a3a !important;
+}
+
+body[data-md-color-scheme="slate"] .about-text {
+  color: #b0bec5 !important;
 } 

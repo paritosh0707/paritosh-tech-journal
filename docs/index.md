@@ -1,5 +1,10 @@
 # 🚀 Welcome to My Tech Universe
 
+<div class="mission-header">
+  <h2 class="mission-title">🎯 Mission Statement</h2>
+  <p class="mission-tagline">Turning advanced AI systems into deployable, understandable solutions—one concept at a time</p>
+</div>
+
 <div class="hero-section">
   <div class="hero-content">
     <div class="profile-section">
@@ -25,9 +30,16 @@
 
 ---
 
-## 🎯 Mission Statement
+## 📖 About This Journal
 
-I transform complex AI concepts into intuitive solutions and build scalable data products that drive real-world impact. My passion lies in bridging the gap between cutting-edge research and practical applications.
+<div class="about-section">
+  <p class="about-text">
+    Paritosh's Tech Universe exists to bridge the gap between theory and real-world implementation in the evolving world of AI and software engineering. Through concise, hands-on mini books and tutorials, this journal empowers engineers, researchers, and enthusiasts to build reliable, scalable, and intelligent systems—one concept at a time.
+  </p>
+  <p class="about-text">
+    From foundational Python and Kubernetes to advanced topics in Generative AI and LangGraph orchestration, the goal is to make complex systems not just understandable—but buildable.
+  </p>
+</div>
 
 ---
 
