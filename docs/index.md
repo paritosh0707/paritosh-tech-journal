@@ -70,14 +70,14 @@ I transform complex AI concepts into intuitive solutions and build scalable data
       <p>Comprehensive guides on cutting-edge technologies</p>
     </div>
     <div class="content-grid">
-      <a href="Mini Books/Pydantic/Introduction.md" class="content-card">
+      <a href="Mini Books/Pydantic/Introduction" class="content-card">
         <div class="card-icon">🐍</div>
         <h3>Pydantic Mastery</h3>
         <p>Data validation and settings management with Python's most powerful library</p>
         <span class="card-badge">Python</span>
       </a>
       
-      <a href="Mini Books/Transformers/Self Attention/Self Attention.md" class="content-card">
+      <a href="Mini Books/Transformers/Self Attention/Self Attention" class="content-card">
         <div class="card-icon">🤖</div>
         <h3>Transformer Architecture</h3>
         <p>Deep dive into self-attention mechanisms and modern NLP</p>
