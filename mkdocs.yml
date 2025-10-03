@@ -58,7 +58,13 @@ nav:
               - What is deployment: Mini Books/Kubernetes/What is deployment.md
               - Service: Mini Books/Kubernetes/Service.md
 
-          
+          - JavaScript:
+              - Immediately Invoked Function Expressions (IIFE): Mini Books/JavaScript/01. Immediately Invoked Function Expressions (IIFE).md
+              - Call Stack: Mini Books/JavaScript/02. Call Stack.md
+              - Control Flow: Mini Books/JavaScript/03. Control Flow.md
+              - For Loop: Mini Books/JavaScript/04. For Loop.md
+              - While and do-while Loops: Mini Books/JavaScript/05. while and do-while Loops.md
+              - Higher Order Loops: Mini Books/JavaScript/06. Higher Order Loops and Array Iteration.md
 
 markdown_extensions:
   - admonition
