@@ -1,0 +1,2520 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../05.%20while%20and%20do-while%20Loops/">
+      
+      
+        <link rel="next" href="../../MCP/JRPC%20-%20JSON%20Remote%20Procedure%20Call/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Higher Order Loops - Paritosh's Tech Universe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-to-higher-order-loops-and-array-iteration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paritosh&#39;s Tech Universe" class="md-header__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paritosh's Tech Universe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Higher Order Loops
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Pydantic/Introduction/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mini Books
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paritosh&#39;s Tech Universe" class="md-nav__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Paritosh's Tech Universe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mini Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pydantic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pydantic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Chapter%201/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Chapter%202/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Transformers
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Transformers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Transformers/Self%20Attention/Self%20Attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Why%20Kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Why Kubernetes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Pod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Kubernetes%20Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/What%20is%20deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    What is deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    JavaScript
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            JavaScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01.%20Immediately%20Invoked%20Function%20Expressions%20%28IIFE%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Immediately Invoked Function Expressions (IIFE)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02.%20Call%20Stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Call Stack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03.%20Control%20Flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Flow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04.%20For%20Loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    For Loop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05.%20while%20and%20do-while%20Loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    While and do-while Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Higher Order Loops
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Higher Order Loops
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-higher-order-loops-and-array-iteration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Higher Order Loops and Array Iteration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moving-beyond-basic-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moving Beyond Basic Loops
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-importance-of-iteration-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Importance of Iteration Context
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-forof-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      The for...of Loop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The for...of Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax-and-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax and Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicable-data-structures-iterables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applicable Data Structures (Iterables)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Applicable Data Structures (Iterables)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-iterables" class="md-nav__link">
+    <span class="md-ellipsis">
+      General Iterables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-flow-in-forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control Flow in for...of
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maps-and-iteration-with-forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maps and Iteration with for...of
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maps and Iteration with for...of">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction-to-map-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Map Data Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterating-maps-using-forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iterating Maps using for...of
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Iterating Maps using for...of">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-iteration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Iteration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destructuring-for-direct-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Destructuring for Direct Access
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-of-forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitation of for...of
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-forin-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      The for...in Loop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The for...in Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose-and-focus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purpose and Focus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-iteration-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Object Iteration Mechanics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-and-differences-on-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application and Differences on Arrays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitation Check
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-foreach-loop-a-higher-order-function-for-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      The forEach Loop: A Higher Order Function for Arrays
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The forEach Loop: A Higher Order Function for Arrays">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context and Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-higher-order-functions-and-callbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding Higher Order Functions and Callbacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntax-variations-for-the-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax Variations for the Callback
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Syntax Variations for the Callback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-traditional-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Traditional Function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-arrow-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Arrow Function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-function-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Function Reference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters-of-the-foreach-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters of the forEach Callback
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-application-iterating-arrays-of-objects-using-foreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Application: Iterating Arrays of Objects using forEach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Application: Iterating Arrays of Objects using forEach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-common-real-world-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Common Real-World Scenario
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-nested-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing Nested Properties
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-iteration-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Iteration Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#looking-ahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      Looking Ahead
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercises
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            MCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MCP/JRPC%20-%20JSON%20Remote%20Procedure%20Call/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JRPC - JSON Remote Procedure Call
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-higher-order-loops-and-array-iteration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Higher Order Loops and Array Iteration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moving-beyond-basic-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moving Beyond Basic Loops
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-importance-of-iteration-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Importance of Iteration Context
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-forof-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      The for...of Loop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The for...of Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax-and-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax and Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicable-data-structures-iterables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applicable Data Structures (Iterables)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Applicable Data Structures (Iterables)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-iterables" class="md-nav__link">
+    <span class="md-ellipsis">
+      General Iterables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-flow-in-forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control Flow in for...of
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maps-and-iteration-with-forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maps and Iteration with for...of
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maps and Iteration with for...of">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction-to-map-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Map Data Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterating-maps-using-forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iterating Maps using for...of
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Iterating Maps using for...of">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-iteration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Iteration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destructuring-for-direct-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Destructuring for Direct Access
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-of-forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitation of for...of
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-forin-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      The for...in Loop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The for...in Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose-and-focus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purpose and Focus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-iteration-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Object Iteration Mechanics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-and-differences-on-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application and Differences on Arrays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitation Check
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-foreach-loop-a-higher-order-function-for-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      The forEach Loop: A Higher Order Function for Arrays
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The forEach Loop: A Higher Order Function for Arrays">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Context and Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-higher-order-functions-and-callbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding Higher Order Functions and Callbacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntax-variations-for-the-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax Variations for the Callback
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Syntax Variations for the Callback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-traditional-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Traditional Function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-arrow-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Arrow Function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-function-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Function Reference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters-of-the-foreach-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters of the forEach Callback
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-application-iterating-arrays-of-objects-using-foreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Application: Iterating Arrays of Objects using forEach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Application: Iterating Arrays of Objects using forEach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-common-real-world-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Common Real-World Scenario
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-nested-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing Nested Properties
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-iteration-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Iteration Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#looking-ahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      Looking Ahead
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercises
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h2 id="introduction-to-higher-order-loops-and-array-iteration">Introduction to Higher Order Loops and Array Iteration<a class="headerlink" href="#introduction-to-higher-order-loops-and-array-iteration" title="Permanent link">&para;</a></h2>
+<p>Iteration is one of the most common operations in programming. Whether you are processing data from an API, traversing objects, or handling user inputs, loops play a central role. JavaScript provides several loop constructs, but modern workflows often benefit from <strong>higher order loops</strong> that make code cleaner, safer, and easier to maintain.</p>
+<h2 id="moving-beyond-basic-loops">Moving Beyond Basic Loops<a class="headerlink" href="#moving-beyond-basic-loops" title="Permanent link">&para;</a></h2>
+<p>Before we step into higher order constructs, let’s quickly recap the basic loops:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// for loop</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// while loop</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">count</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// do...while loop</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">score</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">score</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
+</code></pre></div>
+<p>These loops give you fine-grained control, but they also require manual handling of counters, conditions, and increments. As projects grow—especially when handling <strong>database calls, API responses, or data rendering in frameworks like React</strong>—this manual control becomes verbose and error-prone.</p>
+<p>That’s where <strong>higher order loops</strong> shine. They abstract away the repetitive mechanics, letting you focus on what you want to do with the data rather than how to iterate through it.</p>
+<p>In this chapter, we will explore three important iteration constructs:</p>
+<ul>
+<li>
+<p><code>for...in</code></p>
+</li>
+<li>
+<p><code>forEach</code></p>
+</li>
+<li>
+<p><code>for...of</code></p>
+</li>
+</ul>
+<p>Each of these addresses specific scenarios and comes with unique strengths.</p>
+<h2 id="the-importance-of-iteration-context">The Importance of Iteration Context<a class="headerlink" href="#the-importance-of-iteration-context" title="Permanent link">&para;</a></h2>
+<p>JavaScript offers two widely used data structures: <strong>Arrays</strong> and <strong>Objects</strong>. Mastery of iteration depends on understanding how these structures behave.</p>
+<ul>
+<li>
+<p><strong>Arrays</strong> are ordered collections. Iterating through them is often about accessing values, one after another.</p>
+</li>
+<li>
+<p><strong>Objects</strong> store data as key-value pairs. Iterating here typically means traversing through the keys to get to the values.</p>
+</li>
+</ul>
+<p>A very common real-world situation is working with <strong>arrays of objects</strong>. For example, fetching data from a database or an API often returns results in this format:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Paritosh&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Data Scientist&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Amit&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Frontend Developer&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Riya&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Backend Engineer&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">];</span>
+</code></pre></div>
+<p>Efficiently iterating over such structures—and extracting exactly what you need—is the key reason why higher order loops are so important.</p>
+<hr />
+<h1 id="the-forof-loop">The <code>for...of</code> Loop<a class="headerlink" href="#the-forof-loop" title="Permanent link">&para;</a></h1>
+<p>The <code>for...of</code> loop is one of the cleanest ways to iterate through iterable data structures in JavaScript. Unlike traditional loops, it eliminates the need to manage counters, conditions, and increments manually.</p>
+<h2 id="syntax-and-design">Syntax and Design<a class="headerlink" href="#syntax-and-design" title="Permanent link">&para;</a></h2>
+<p>The structure is straightforward:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">element</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">iterable_object</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// action on each element</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Key points:</p>
+<ul>
+<li>
+<p><code>element</code> acts as the iterator variable for each item in the collection.</p>
+</li>
+<li>
+<p>No counter or length management is required—the loop automatically takes care of traversal.</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">];</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">numbers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Output: 10, 20, 30</span>
+</code></pre></div>
+<p>Here, the loop directly yields the values <code>10</code>, <code>20</code>, and <code>30</code>.</p>
+<h2 id="applicable-data-structures-iterables">Applicable Data Structures (Iterables)<a class="headerlink" href="#applicable-data-structures-iterables" title="Permanent link">&para;</a></h2>
+<p>The <code>for...of</code> loop works on <strong>any iterable</strong>, which includes arrays, strings, maps, sets, and more.</p>
+<h3 id="arrays">Arrays<a class="headerlink" href="#arrays" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;banana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mango&quot;</span><span class="p">];</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">fruit</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">fruits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fruit</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Output: apple, banana, mango</span>
+</code></pre></div>
+<h3 id="strings">Strings<a class="headerlink" href="#strings" title="Permanent link">&para;</a></h3>
+<p>Strings are iterable, so you can use <code>for...of</code> to iterate over characters:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Loop&quot;</span><span class="p">;</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="kr">char</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">word</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">char</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Output: L, o, o, p</span>
+</code></pre></div>
+<h3 id="general-iterables">General Iterables<a class="headerlink" href="#general-iterables" title="Permanent link">&para;</a></h3>
+<p>Any structure that implements the iterable protocol can be used with <code>for...of</code>.<br />
+<em>(Important note: this does not include plain JavaScript objects, which are not iterable by default.)</em></p>
+<h2 id="control-flow-in-forof">Control Flow in <code>for...of</code><a class="headerlink" href="#control-flow-in-forof" title="Permanent link">&para;</a></h2>
+<p>The <code>for...of</code> loop supports the same control flow keywords as traditional loops:</p>
+<ul>
+<li>
+<p><strong><code>continue</code></strong>: Skip the current iteration.</p>
+</li>
+<li>
+<p><strong><code>break</code></strong>: Exit the loop entirely.</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">scores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">55</span><span class="p">,</span><span class="w"> </span><span class="mf">72</span><span class="p">,</span><span class="w"> </span><span class="mf">90</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">];</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">scores</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">60</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w">   </span><span class="c1">// skip failing scores</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w">   </span><span class="c1">// stop at perfect score</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">score</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Output: 72, 90</span>
+</code></pre></div>
+<hr />
+<p>This section establishes how <code>for...of</code> simplifies iteration when working with arrays, strings, and other iterable structures.</p>
+<hr />
+<h1 id="maps-and-iteration-with-forof">Maps and Iteration with <code>for...of</code><a class="headerlink" href="#maps-and-iteration-with-forof" title="Permanent link">&para;</a></h1>
+<h2 id="introduction-to-map-data-structure">Introduction to Map Data Structure<a class="headerlink" href="#introduction-to-map-data-structure" title="Permanent link">&para;</a></h2>
+<p>A <strong>Map</strong> in JavaScript is a collection of key-value pairs, much like an object. However, it comes with specific features that make it more predictable and powerful for certain use cases:</p>
+<ol>
+<li>
+<p><strong>Insertion Order Preserved</strong><br />
+    Keys in a Map maintain the order in which they were inserted. This is unlike regular objects, where key order is not guaranteed.</p>
+</li>
+<li>
+<p><strong>Unique Keys</strong><br />
+    Each key in a Map must be unique. If you insert a duplicate key, the new value simply overwrites the old one.</p>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">countryMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
+<span class="nx">countryMap</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;India&quot;</span><span class="p">);</span>
+<span class="nx">countryMap</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;US&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;United States&quot;</span><span class="p">);</span>
+<span class="nx">countryMap</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;FR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;France&quot;</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">countryMap</span><span class="p">);</span>
+<span class="c1">// Output: Map(3) { &#39;IN&#39; =&gt; &#39;India&#39;, &#39;US&#39; =&gt; &#39;United States&#39;, &#39;FR&#39; =&gt; &#39;France&#39; }</span>
+</code></pre></div>
+<h2 id="iterating-maps-using-forof">Iterating Maps using <code>for...of</code><a class="headerlink" href="#iterating-maps-using-forof" title="Permanent link">&para;</a></h2>
+<h3 id="basic-iteration">Basic Iteration<a class="headerlink" href="#basic-iteration" title="Permanent link">&para;</a></h3>
+<p>When you iterate over a Map with a single variable, each iteration yields an <strong>array containing both key and value</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">countryMap</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">entry</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Output:</span>
+<span class="c1">// [ &#39;IN&#39;, &#39;India&#39; ]</span>
+<span class="c1">// [ &#39;US&#39;, &#39;United States&#39; ]</span>
+<span class="c1">// [ &#39;FR&#39;, &#39;France&#39; ]</span>
+</code></pre></div>
+<h3 id="destructuring-for-direct-access">Destructuring for Direct Access<a class="headerlink" href="#destructuring-for-direct-access" title="Permanent link">&para;</a></h3>
+<p>A more convenient way is to destructure each key-value pair directly in the loop:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">code</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">countryMap</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">code</span><span class="si">}</span><span class="sb"> : </span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Output:</span>
+<span class="c1">// IN : India</span>
+<span class="c1">// US : United States</span>
+<span class="c1">// FR : France</span>
+</code></pre></div>
+<p>This approach makes iteration clean and readable.</p>
+<h2 id="limitation-of-forof">Limitation of <code>for...of</code><a class="headerlink" href="#limitation-of-forof" title="Permanent link">&para;</a></h2>
+<p>A key point to remember:</p>
+<ul>
+<li><strong>Standard Objects are not iterable.</strong><br />
+    You cannot directly use <code>for...of</code> on a plain object:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">myObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// ❌ This will throw an error</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">myObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Objects need to be converted into an iterable (e.g., using <code>Object.keys()</code>, <code>Object.values()</code>, or <code>Object.entries()</code>) before they can be looped with <code>for...of</code>.</p>
+<hr />
+<h1 id="the-forin-loop">The <code>for...in</code> Loop<a class="headerlink" href="#the-forin-loop" title="Permanent link">&para;</a></h1>
+<h2 id="purpose-and-focus">Purpose and Focus<a class="headerlink" href="#purpose-and-focus" title="Permanent link">&para;</a></h2>
+<p>The <code>for...in</code> loop is specifically designed for iterating over the <strong>properties (keys)</strong> of standard JavaScript objects. Unlike <code>for...of</code>, which deals with iterable values, <code>for...in</code> focuses on object keys.</p>
+<h2 id="object-iteration-mechanics">Object Iteration Mechanics<a class="headerlink" href="#object-iteration-mechanics" title="Permanent link">&para;</a></h2>
+<p>When applied to an object:</p>
+<ul>
+<li>
+<p>Each iteration gives you a <strong>key</strong> (property name).</p>
+</li>
+<li>
+<p>To access the corresponding <strong>value</strong>, you use bracket notation with the object name and the key.</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Paritosh&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Data Scientist&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">country</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;India&quot;</span>
+<span class="p">};</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb"> : </span><span class="si">${</span><span class="nx">user</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Output:</span>
+<span class="c1">// name : Paritosh</span>
+<span class="c1">// role : Data Scientist</span>
+<span class="c1">// country : India</span>
+</code></pre></div>
+<p>Here:</p>
+<ul>
+<li>
+<p><code>key</code> is the current property name (<code>name</code>, <code>role</code>, <code>country</code>).</p>
+</li>
+<li>
+<p><code>user[key]</code> retrieves the corresponding value.</p>
+</li>
+</ul>
+<h2 id="application-and-differences-on-arrays">Application and Differences on Arrays<a class="headerlink" href="#application-and-differences-on-arrays" title="Permanent link">&para;</a></h2>
+<p>When used on arrays, the <code>for...in</code> loop does <strong>not</strong> return values—it returns <strong>indices</strong> instead.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">languages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;JavaScript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C++&quot;</span><span class="p">];</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">languages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">index</span><span class="si">}</span><span class="sb"> : </span><span class="si">${</span><span class="nx">languages</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Output:</span>
+<span class="c1">// 0 : JavaScript</span>
+<span class="c1">// 1 : Python</span>
+<span class="c1">// 2 : C++</span>
+</code></pre></div>
+<p>Key difference:</p>
+<ul>
+<li>
+<p><code>for...in</code> → returns <strong>indices</strong> when applied to arrays.</p>
+</li>
+<li>
+<p><code>for...of</code> → returns the <strong>actual values</strong> from arrays.</p>
+</li>
+</ul>
+<h2 id="limitation-check">Limitation Check<a class="headerlink" href="#limitation-check" title="Permanent link">&para;</a></h2>
+<p>The <code>for...in</code> loop does not effectively work with Maps. Running it on a Map produces no usable result:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
+<span class="nx">map</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;India&quot;</span><span class="p">);</span>
+<span class="nx">map</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;US&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;United States&quot;</span><span class="p">);</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">map</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span><span class="w">  </span><span class="c1">// ❌ No output</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Maps require <code>for...of</code> (not <code>for...in</code>) for proper iteration.</p>
+<hr />
+<h1 id="the-foreach-loop-a-higher-order-function-for-arrays">The <code>forEach</code> Loop: A Higher Order Function for Arrays<a class="headerlink" href="#the-foreach-loop-a-higher-order-function-for-arrays" title="Permanent link">&para;</a></h1>
+<h2 id="context-and-usage">Context and Usage<a class="headerlink" href="#context-and-usage" title="Permanent link">&para;</a></h2>
+<p>The <code>forEach</code> loop is one of the most commonly used iteration methods when working with arrays in JavaScript.</p>
+<ul>
+<li>
+<p>It is <strong>not a standalone loop structure</strong> like <code>for</code> or <code>while</code>.</p>
+</li>
+<li>
+<p>Instead, it is a <strong>method</strong> available on every array through the Array prototype.</p>
+</li>
+</ul>
+<p>This makes it easy to iterate through arrays without worrying about counters, conditions, or increments.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">];</span>
+
+<span class="nx">numbers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// Output: 1, 2, 3</span>
+</code></pre></div>
+<h2 id="understanding-higher-order-functions-and-callbacks">Understanding Higher Order Functions and Callbacks<a class="headerlink" href="#understanding-higher-order-functions-and-callbacks" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><code>forEach</code> is a <strong>higher order function</strong>, meaning it expects another function (a <strong>callback</strong>) as its argument.</p>
+</li>
+<li>
+<p>This callback defines the action to be performed on each element.</p>
+</li>
+<li>
+<p>The <code>forEach</code> method itself takes care of the mechanics—starting at index 0, stopping at the last index, and moving through each element.</p>
+</li>
+</ul>
+<p>In short: <strong>you describe what to do</strong>, and <code>forEach</code> handles <strong>how to do it</strong>.</p>
+<h2 id="syntax-variations-for-the-callback">Syntax Variations for the Callback<a class="headerlink" href="#syntax-variations-for-the-callback" title="Permanent link">&para;</a></h2>
+<p>There are multiple ways to pass the callback function:</p>
+<h3 id="1-traditional-function">1. Traditional Function<a class="headerlink" href="#1-traditional-function" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;banana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mango&quot;</span><span class="p">];</span>
+
+<span class="nx">fruits</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// Output: apple, banana, mango</span>
+</code></pre></div>
+<h3 id="2-arrow-function">2. Arrow Function<a class="headerlink" href="#2-arrow-function" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">fruits</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// Output: apple, banana, mango</span>
+</code></pre></div>
+<h3 id="3-function-reference">3. Function Reference<a class="headerlink" href="#3-function-reference" title="Permanent link">&para;</a></h3>
+<p>You can also pass a reference to a pre-defined function:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">printItem</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">fruits</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">printItem</span><span class="p">);</span>
+<span class="c1">// Output: apple, banana, mango</span>
+</code></pre></div>
+<p>Notice that we pass the function name <strong>without parentheses</strong> (<code>printItem</code>, not <code>printItem()</code>), because <code>forEach</code> calls it internally for each element.</p>
+<h2 id="parameters-of-the-foreach-callback">Parameters of the <code>forEach</code> Callback<a class="headerlink" href="#parameters-of-the-foreach-callback" title="Permanent link">&para;</a></h2>
+<p>The callback function in <code>forEach</code> can receive up to <strong>three parameters</strong>, in this order:</p>
+<ol>
+<li>
+<p><strong>Item (value)</strong> – the element at the current iteration.</p>
+</li>
+<li>
+<p><strong>Index</strong> – the position of the element in the array.</p>
+</li>
+<li>
+<p><strong>Array</strong> – the full array itself.</p>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">languages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;JavaScript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C++&quot;</span><span class="p">];</span>
+
+<span class="nx">languages</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">lang</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">arr</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">index</span><span class="si">}</span><span class="sb"> → </span><span class="si">${</span><span class="nx">lang</span><span class="si">}</span><span class="sb"> (from [</span><span class="si">${</span><span class="nx">arr</span><span class="si">}</span><span class="sb">])`</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// Output:</span>
+<span class="c1">// 0 → JavaScript (from [JavaScript,Python,C++])</span>
+<span class="c1">// 1 → Python (from [JavaScript,Python,C++])</span>
+<span class="c1">// 2 → C++ (from [JavaScript,Python,C++])</span>
+</code></pre></div>
+<p>This flexibility makes <code>forEach</code> especially useful when you need both values and indices, or when debugging with access to the entire array.</p>
+<hr />
+<h1 id="advanced-application-iterating-arrays-of-objects-using-foreach">Advanced Application: Iterating Arrays of Objects using <code>forEach</code><a class="headerlink" href="#advanced-application-iterating-arrays-of-objects-using-foreach" title="Permanent link">&para;</a></h1>
+<h2 id="the-common-real-world-scenario">The Common Real-World Scenario<a class="headerlink" href="#the-common-real-world-scenario" title="Permanent link">&para;</a></h2>
+<p>In practice, data often comes from a <strong>database</strong> or an <strong>API</strong> in the form of an <strong>array of objects</strong>.<br />
+Each object represents a record, and the array groups multiple such records.</p>
+<p>Example: An array of mobile phone objects.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">mobiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">brand</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;iPhone 15&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="mf">80000</span><span class="p">,</span><span class="w"> </span><span class="nx">billing</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Monthly&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">brand</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Samsung&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Galaxy S23&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="mf">70000</span><span class="p">,</span><span class="w"> </span><span class="nx">billing</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;EMI&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">brand</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;OnePlus&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;11 Pro&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="mf">60000</span><span class="p">,</span><span class="w"> </span><span class="nx">billing</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Full Payment&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">];</span>
+</code></pre></div>
+<p>Here:</p>
+<ul>
+<li>
+<p>The array <code>mobiles</code> contains multiple objects.</p>
+</li>
+<li>
+<p>Each object has properties like <code>brand</code>, <code>model</code>, <code>price</code>, and <code>billing</code>.</p>
+</li>
+</ul>
+<h2 id="accessing-nested-properties">Accessing Nested Properties<a class="headerlink" href="#accessing-nested-properties" title="Permanent link">&para;</a></h2>
+<p>To process such data, <code>forEach</code> is particularly useful.</p>
+<ol>
+<li>
+<p>Apply <code>forEach</code> on the array.</p>
+</li>
+<li>
+<p>The callback function automatically receives each object (commonly named <code>item</code>).</p>
+</li>
+<li>
+<p>Access the required property using <strong>dot notation</strong>.</p>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">mobiles</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">brand</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">model</span><span class="si">}</span><span class="sb"> → ₹</span><span class="si">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">price</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">billing</span><span class="si">}</span><span class="sb">)`</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// Output:</span>
+<span class="c1">// Apple iPhone 15 → ₹80000 (Monthly)</span>
+<span class="c1">// Samsung Galaxy S23 → ₹70000 (EMI)</span>
+<span class="c1">// OnePlus 11 Pro → ₹60000 (Full Payment)</span>
+</code></pre></div>
+<p>This approach makes it simple to:</p>
+<ul>
+<li>
+<p>Extract specific fields.</p>
+</li>
+<li>
+<p>Format data for display.</p>
+</li>
+<li>
+<p>Traverse nested structures without writing additional loops or counters.</p>
+</li>
+</ul>
+<hr />
+<h1 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h1>
+<h2 id="summary-of-iteration-tools">Summary of Iteration Tools<a class="headerlink" href="#summary-of-iteration-tools" title="Permanent link">&para;</a></h2>
+<p>We’ve now explored the three higher order loop constructs in JavaScript and their applications:</p>
+<ul>
+<li>
+<p><strong><code>for...in</code></strong> → Best suited for iterating over the <strong>keys</strong> of an object.</p>
+</li>
+<li>
+<p><strong><code>for...of</code></strong> → Designed for <strong>iterables</strong> like arrays, strings, and maps, returning values directly.</p>
+</li>
+<li>
+<p><strong><code>forEach</code></strong> → A higher order function built into arrays, excellent for applying a callback to each element, with access to item, index, and the full array.</p>
+</li>
+</ul>
+<p>A very common real-world scenario is handling arrays of objects, especially when data is fetched from APIs or databases. In such cases, <code>forEach</code> provides a clean, declarative way to work with data, while <code>for...of</code> offers simplicity for values, and <code>for...in</code> ensures object keys are accessible.</p>
+<h2 id="looking-ahead">Looking Ahead<a class="headerlink" href="#looking-ahead" title="Permanent link">&para;</a></h2>
+<p>The natural next step is to explore <strong>array transformation methods</strong> such as <code>map()</code>, <code>filter()</code>, and <code>reduce()</code>. These not only iterate but also <strong>transform and produce new arrays or values</strong>, which makes them indispensable in modern JavaScript development.</p>
+<hr />
+<h1 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h1>
+<ol>
+<li>
+<p><strong>Iterating Values with <code>for...of</code></strong><br />
+    Write a <code>for...of</code> loop to print each character in the string <code>"JavaScript"</code>.</p>
+</li>
+<li>
+<p><strong>Object Traversal with <code>for...in</code></strong><br />
+    Given the object:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">brand</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Tesla&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Model 3&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">year</span><span class="o">:</span><span class="w"> </span><span class="mf">2024</span><span class="w"> </span><span class="p">};</span>
+</code></pre></div>
+<p>Use a <code>for...in</code> loop to print both keys and their corresponding values.</p>
+</li>
+<li>
+<p><strong>Map Iteration</strong><br />
+    Create a Map of three countries with their country codes. Use destructuring in a <code>for...of</code> loop to print them in the format: <code>Code → Country</code>.</p>
+</li>
+<li>
+<p><strong>Using <code>forEach</code> with Arrays</strong><br />
+    Given the array <code>[5, 10, 15]</code>, use <code>forEach</code> to print each value doubled.</p>
+</li>
+<li>
+<p><strong>Iterating an Array of Objects</strong><br />
+    Suppose you have:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">books</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Eloquent JavaScript&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Marijn Haverbeke&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;You Don’t Know JS&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Kyle Simpson&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">];</span>
+</code></pre></div>
+<p>Use <code>forEach</code> to print:<br />
+<code>"Eloquent JavaScript by Marijn Haverbeke"</code> and<br />
+<code>"You Don’t Know JS by Kyle Simpson"</code>.</p>
+</li>
+</ol>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../05.%20while%20and%20do-while%20Loops/" class="md-footer__link md-footer__link--prev" aria-label="Previous: While and do-while Loops">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                While and do-while Loops
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../MCP/JRPC%20-%20JSON%20Remote%20Procedure%20Call/" class="md-footer__link md-footer__link--next" aria-label="Next: JRPC - JSON Remote Procedure Call">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                JRPC - JSON Remote Procedure Call
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Paritosh Sharma
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.math", "search.highlight", "search.share", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.path", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../assets/collapsible-toc.js"></script>
+      
+    
+  </body>
+</html>

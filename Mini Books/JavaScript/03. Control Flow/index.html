@@ -1,0 +1,3036 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../02.%20Call%20Stack/">
+      
+      
+        <link rel="next" href="../04.%20For%20Loop/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Control Flow - Paritosh's Tech Universe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#control-flow-in-javascript" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paritosh&#39;s Tech Universe" class="md-header__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paritosh's Tech Universe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Control Flow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Pydantic/Introduction/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mini Books
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paritosh&#39;s Tech Universe" class="md-nav__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Paritosh's Tech Universe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mini Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pydantic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pydantic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Chapter%201/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Chapter%202/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Transformers
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Transformers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Transformers/Self%20Attention/Self%20Attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Why%20Kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Why Kubernetes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Pod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Kubernetes%20Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/What%20is%20deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    What is deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    JavaScript
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            JavaScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01.%20Immediately%20Invoked%20Function%20Expressions%20%28IIFE%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Immediately Invoked Function Expressions (IIFE)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02.%20Call%20Stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Call Stack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Control Flow
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Flow
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#foundation-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Foundation Context
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defining-logic-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Defining Logic Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Defining Logic Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-do-we-need-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Do We Need Control Flow?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-basic-conditional-statement-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Basic Conditional Statement: if
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Basic Conditional Statement: if">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-structure-and-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Structure and Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-operators-condition-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparison Operators (Condition Evaluation)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strict-type-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strict Type Checking
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope-management-and-structural-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope Management and Structural Expansion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scope Management and Structural Expansion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#block-scope-and-variable-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      Block Scope and Variable Safety
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expanding-logic-else-and-else-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expanding Logic: else and else if
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#short-hand-notation-and-anti-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Short-hand Notation and Anti-Patterns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combining-conditions-logical-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combining Conditions (Logical Operators)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combining Conditions (Logical Operators)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logical-and-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical AND Operator (&amp;&amp;)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-or-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical OR Operator (||)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-switch-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Switch Statement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Switch Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntax-and-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax and Mechanics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controlling-flow-break-and-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controlling Flow: break and default
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#truthy-and-falsy-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Truthy and Falsy Values
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Truthy and Falsy Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      Defining the Concept
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-of-falsy-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of Falsy Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-truthy-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Truthy Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loose-equality-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loose Equality Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safety-checks-for-complex-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety Checks for Complex Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Safety Checks for Complex Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checking-for-empty-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checking for Empty Arrays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-for-empty-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checking for Empty Objects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-control-operators-handling-missing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Control Operators (Handling Missing Values)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Control Operators (Handling Missing Values)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-nullish-coalescing-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Nullish Coalescing Operator (??)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-ternary-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Ternary Operator (? :)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-and-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion and Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conclusion and Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recap-of-control-flow-mastery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recap of Control Flow Mastery
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises-control-flow-in-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercises: Control Flow in JavaScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises: Control Flow in JavaScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-simple-if-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Simple if Check
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-strict-vs-loose-equality" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Strict vs. Loose Equality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-temperature-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Temperature Categories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-multi-factor-login-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Multi-Factor Login Check
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-switch-case-day-of-the-week" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Switch Case: Day of the Week
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-truthyfalsy-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Truthy/Falsy Quiz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-empty-data-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Empty Data Checks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-using-nullish-coalescing" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Using ?? (Nullish Coalescing)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-ternary-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Ternary Operator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-mini-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Mini Challenge
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04.%20For%20Loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    For Loop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05.%20while%20and%20do-while%20Loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    While and do-while Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06.%20Higher%20Order%20Loops%20and%20Array%20Iteration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Higher Order Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            MCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MCP/JRPC%20-%20JSON%20Remote%20Procedure%20Call/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JRPC - JSON Remote Procedure Call
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#foundation-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Foundation Context
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defining-logic-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Defining Logic Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Defining Logic Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-do-we-need-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Do We Need Control Flow?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-basic-conditional-statement-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Basic Conditional Statement: if
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Basic Conditional Statement: if">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-structure-and-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Structure and Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-operators-condition-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparison Operators (Condition Evaluation)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strict-type-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strict Type Checking
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope-management-and-structural-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope Management and Structural Expansion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scope Management and Structural Expansion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#block-scope-and-variable-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      Block Scope and Variable Safety
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expanding-logic-else-and-else-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expanding Logic: else and else if
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#short-hand-notation-and-anti-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Short-hand Notation and Anti-Patterns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combining-conditions-logical-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combining Conditions (Logical Operators)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combining Conditions (Logical Operators)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logical-and-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical AND Operator (&amp;&amp;)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-or-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical OR Operator (||)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-switch-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Switch Statement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Switch Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntax-and-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax and Mechanics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controlling-flow-break-and-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controlling Flow: break and default
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#truthy-and-falsy-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Truthy and Falsy Values
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Truthy and Falsy Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      Defining the Concept
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-of-falsy-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of Falsy Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-truthy-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Truthy Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loose-equality-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loose Equality Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safety-checks-for-complex-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safety Checks for Complex Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Safety Checks for Complex Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checking-for-empty-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checking for Empty Arrays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-for-empty-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checking for Empty Objects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-control-operators-handling-missing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Control Operators (Handling Missing Values)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Control Operators (Handling Missing Values)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-nullish-coalescing-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Nullish Coalescing Operator (??)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-ternary-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Ternary Operator (? :)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-and-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion and Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conclusion and Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recap-of-control-flow-mastery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recap of Control Flow Mastery
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises-control-flow-in-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercises: Control Flow in JavaScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises: Control Flow in JavaScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-simple-if-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Simple if Check
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-strict-vs-loose-equality" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Strict vs. Loose Equality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-temperature-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Temperature Categories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-multi-factor-login-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Multi-Factor Login Check
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-switch-case-day-of-the-week" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Switch Case: Day of the Week
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-truthyfalsy-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Truthy/Falsy Quiz
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-empty-data-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Empty Data Checks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-using-nullish-coalescing" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Using ?? (Nullish Coalescing)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-ternary-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Ternary Operator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-mini-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Mini Challenge
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<blockquote>
+<p>⏱️ Estimated reading time: 15 min</p>
+</blockquote>
+<h1 id="control-flow-in-javascript">Control Flow in JavaScript<a class="headerlink" href="#control-flow-in-javascript" title="Permanent link">&para;</a></h1>
+<h2 id="foundation-context">Foundation Context<a class="headerlink" href="#foundation-context" title="Permanent link">&para;</a></h2>
+<p>Up to this point, we have already built a strong foundation: we know how JavaScript handles its data types, variables, and basic execution behavior. With this understanding, we can now step into one of the most practical aspects of programming—<strong>control flow</strong>.</p>
+<p>Every program, no matter how complex, ultimately boils down to a set of instructions. But execution doesn’t always follow a straight line from top to bottom. At some point, the program needs to <strong>make decisions</strong>:</p>
+<ul>
+<li>
+<p>Should this piece of code run now?</p>
+</li>
+<li>
+<p>What happens if the condition is false?</p>
+</li>
+<li>
+<p>Should we repeat certain steps multiple times?</p>
+</li>
+</ul>
+<p>This decision-making ability is where control flow comes into play. And because we already understand the foundation of execution contexts and types, grasping control flow mechanisms will be straightforward.</p>
+<hr />
+<h2 id="defining-logic-control">Defining Logic Control<a class="headerlink" href="#defining-logic-control" title="Permanent link">&para;</a></h2>
+<p><strong>Control flow</strong> (sometimes called <em>logic control</em>) is the system that dictates <strong>which path a program takes during execution</strong>.</p>
+<p>Think of it like navigating a city. Instead of driving straight through every road, you stop at intersections. Based on conditions (traffic lights, signs, your destination), you either turn left, go straight, or stop. Similarly, in code, we often want different actions to happen depending on circumstances.</p>
+<h3 id="why-do-we-need-control-flow">Why Do We Need Control Flow?<a class="headerlink" href="#why-do-we-need-control-flow" title="Permanent link">&para;</a></h3>
+<p>Without control, a program would simply run every line from start to finish without discrimination. But in real-world scenarios:</p>
+<ul>
+<li>
+<p>If a user is logged in, we want to show their dashboard.</p>
+</li>
+<li>
+<p>If they are logged out, we want to show a login form.</p>
+</li>
+</ul>
+<p>This branching of logic ensures that programs behave dynamically, adapting to different inputs and situations.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">isLoggedIn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isLoggedIn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Welcome back, Paritosh!&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Please log in to continue.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In this short example, the output depends entirely on the value of <code>isLoggedIn</code>. This is the essence of control flow—<strong>decisions based on conditions</strong>.</p>
+<hr />
+<details class="info">
+<summary>Instructional Goal</summary>
+<p>The objective here is to cover <strong>all major control flow mechanisms in JavaScript</strong> in one continuous explanation—<code>if</code>, <code>else</code>, <code>else if</code>, logical operators, <code>switch</code>, truthy/falsy values, and advanced operators like <code>??</code> and the ternary operator.<br />
+This way, you’ll see the entire spectrum of logical controls without scattered repetition across multiple sections.</p>
+</details>
+<hr />
+<h2 id="the-basic-conditional-statement-if">The Basic Conditional Statement: <code>if</code><a class="headerlink" href="#the-basic-conditional-statement-if" title="Permanent link">&para;</a></h2>
+<h3 id="core-structure-and-execution">Core Structure and Execution<a class="headerlink" href="#core-structure-and-execution" title="Permanent link">&para;</a></h3>
+<p>The <code>if</code> statement is the most fundamental way to introduce <strong>decision-making</strong> into JavaScript. It acts as a simple gatekeeper: only when the specified condition is <code>true</code> will the code inside the block execute.</p>
+<p>The general structure looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// code inside this block executes only if condition is true</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p>The parentheses <code>( )</code> hold the <strong>condition</strong> to be evaluated.</p>
+</li>
+<li>
+<p>The curly braces <code>{ }</code> define the <strong>scope</strong> of code that will run when the condition passes.</p>
+</li>
+<li>
+<p>If the condition evaluates to <code>false</code>, the block is skipped entirely.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">temperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">45</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">temperature</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">50</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;It’s a pleasant day outside!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Here, because <code>temperature &lt; 50</code> evaluates to <code>true</code>, the message is printed. If <code>temperature</code> were <code>60</code>, nothing inside the block would execute.</p>
+<hr />
+<h3 id="comparison-operators-condition-evaluation">Comparison Operators (Condition Evaluation)<a class="headerlink" href="#comparison-operators-condition-evaluation" title="Permanent link">&para;</a></h3>
+<p>Every <code>if</code> condition must ultimately boil down to a Boolean value—<code>true</code> or <code>false</code>. To reach that decision, JavaScript uses <strong>comparison operators</strong>.</p>
+<h4 id="assignment-vs-comparison">Assignment vs. Comparison<a class="headerlink" href="#assignment-vs-comparison" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><code>=</code> is the <strong>assignment operator</strong>. It gives a value to a variable.</p>
+</li>
+<li>
+<p>To compare values, we use <strong>comparison operators</strong>, not <code>=</code>.</p>
+</li>
+</ul>
+<h4 id="core-comparison-operators">Core Comparison Operators<a class="headerlink" href="#core-comparison-operators" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Less than <code>&lt;</code></strong> and <strong>greater than <code>&gt;</code></strong></p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">5</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w">  </span><span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">12</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">20</span><span class="p">);</span><span class="w"> </span><span class="c1">// false</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Greater than or equal <code>&gt;=</code></strong> and <strong>less than or equal <code>&lt;=</code></strong><br />
+    These allow a combined check (e.g., in trading systems, verifying if a stock price is at least a threshold).</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">100</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">7</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w">    </span><span class="c1">// true</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Loose equality <code>==</code></strong><br />
+    Checks whether two values are equal, allowing type coercion.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// true (number and string considered equal)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Not equal <code>!=</code></strong><br />
+    Checks whether values are not equal.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">3</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+</code></pre></div>
+</li>
+</ul>
+<hr />
+<h3 id="strict-type-checking">Strict Type Checking<a class="headerlink" href="#strict-type-checking" title="Permanent link">&para;</a></h3>
+<p>JavaScript's flexibility can be both powerful and dangerous. Loose comparisons (<code>==</code>) sometimes give unexpected results because of <strong>type coercion</strong>. That's why strict operators exist.</p>
+<ul>
+<li>
+<p><strong>Strict equality <code>===</code></strong>: Compares both value <strong>and</strong> type.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">2</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// false (number vs. string)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">2</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">   </span><span class="c1">// true</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Strict inequality <code>!==</code></strong>: Ensures values and types are not the same.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">2</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span><span class="w">    </span><span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">2</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// true</span>
+</code></pre></div>
+</li>
+</ul>
+<p>Strict checks are the <strong>preferred practice</strong> in modern JavaScript, as they eliminate ambiguity.</p>
+<hr />
+<details class="tip">
+<summary>Best Practice</summary>
+<p>Always use <code>===</code> and <code>!==</code> instead of <code>==</code> and <code>!=</code> unless you specifically want JavaScript’s type coercion. It keeps logic clearer and avoids subtle bugs.</p>
+</details>
+<h2 id="scope-management-and-structural-expansion">Scope Management and Structural Expansion<a class="headerlink" href="#scope-management-and-structural-expansion" title="Permanent link">&para;</a></h2>
+<h3 id="block-scope-and-variable-safety">Block Scope and Variable Safety<a class="headerlink" href="#block-scope-and-variable-safety" title="Permanent link">&para;</a></h3>
+<p>In JavaScript, <strong>curly braces <code>{ }</code> do more than group code visually</strong>—they create a <strong>block scope</strong>. Variables declared with <code>let</code> or <code>const</code> inside this scope are <strong>restricted to it</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Jaipur&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">city</span><span class="p">);</span><span class="w"> </span><span class="c1">// Jaipur</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">city</span><span class="p">);</span><span class="w"> </span><span class="c1">// ❌ ReferenceError: city is not defined</span>
+</code></pre></div>
+<p>Here, the variable <code>city</code> exists only inside the <code>if</code> block. Attempting to access it outside leads to an error. Far from being a problem, this is a <em>feature</em>: it keeps our code safe and predictable by preventing accidental leaks of values into the global space.</p>
+<h4 id="the-problem-with-var">The Problem with <code>var</code><a class="headerlink" href="#the-problem-with-var" title="Permanent link">&para;</a></h4>
+<p>The older keyword <code>var</code> behaves differently. Variables declared with <code>var</code> are <strong>function-scoped</strong>, not block-scoped, meaning they "escape" from the curly braces:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;India&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">country</span><span class="p">);</span><span class="w"> </span><span class="c1">// India</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">country</span><span class="p">);</span><span class="w"> </span><span class="c1">// ✅ India (accessible outside the block)</span>
+</code></pre></div>
+<p>This behavior can cause bugs in larger programs because variables unintentionally overwrite or leak values. For this reason, <code>var</code> is generally <strong>avoided</strong> in modern JavaScript, replaced by <code>let</code> and <code>const</code>.</p>
+<hr />
+<h3 id="expanding-logic-else-and-else-if">Expanding Logic: <code>else</code> and <code>else if</code><a class="headerlink" href="#expanding-logic-else-and-else-if" title="Permanent link">&para;</a></h3>
+<p>Once you understand <code>if</code>, the next step is to make it more flexible. This is where <code>else</code> and <code>else if</code> come in.</p>
+<h4 id="ifelse"><code>if...else</code><a class="headerlink" href="#ifelse" title="Permanent link">&para;</a></h4>
+<p>With <code>if...else</code>, one block executes <em>only if the condition is true</em>, and the other executes <em>only if the condition is false</em>. Both blocks can never run together.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">temperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">60</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">temperature</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">50</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Temp is less than 50&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Temp is greater than or equal to 50&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This ensures mutual exclusivity: the program must choose one path.</p>
+<hr />
+<h4 id="else-if-nesting"><code>else if</code> (Nesting)<a class="headerlink" href="#else-if-nesting" title="Permanent link">&para;</a></h4>
+<p>Sometimes we need more than two options. That's where <code>else if</code> fits in—allowing <strong>multiple, mutually exclusive checks</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">800</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">500</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Low balance&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">750</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Average balance&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">900</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Good balance&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Excellent balance&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Here, only one block executes, even though multiple conditions are tested. The final <code>else</code> acts as the <strong>catch-all</strong> when none of the previous conditions are true.</p>
+<hr />
+<h3 id="short-hand-notation-and-anti-patterns">Short-hand Notation and Anti-Patterns<a class="headerlink" href="#short-hand-notation-and-anti-patterns" title="Permanent link">&para;</a></h3>
+<h4 id="implicit-scope-shorthand">Implicit Scope (Shorthand)<a class="headerlink" href="#implicit-scope-shorthand" title="Permanent link">&para;</a></h4>
+<p>If the conditional block contains <strong>only one statement</strong>, curly braces may be omitted:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">95</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">90</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Outstanding performance!&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>While this works, it should be used cautiously. For readability, braces <code>{}</code> are usually preferred, especially in collaborative codebases.</p>
+<hr />
+<h4 id="anti-pattern-warning">Anti-Pattern Warning<a class="headerlink" href="#anti-pattern-warning" title="Permanent link">&para;</a></h4>
+<p>Avoid writing multiple statements without braces, even if technically allowed:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ Bad practice</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">90</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;High score&quot;</span><span class="p">),</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Awarding bonus points&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>This kind of shorthand makes code <strong>confusing, unreadable, and error-prone</strong>. Professional developers consider it an <strong>immature style</strong>.</p>
+<hr />
+<details class="note">
+<summary>Key Takeaway</summary>
+<ul>
+<li>Use <code>let</code> and <code>const</code> for safe block scoping.  </li>
+<li>Prefer braces <code>{}</code> even when writing a single-line condition.  </li>
+<li><code>else if</code> helps chain conditions, while <code>else</code> provides a catch-all.  </li>
+<li>Avoid anti-pattern shorthand that sacrifices clarity for brevity.</li>
+</ul>
+</details>
+<hr />
+<h2 id="combining-conditions-logical-operators">Combining Conditions (Logical Operators)<a class="headerlink" href="#combining-conditions-logical-operators" title="Permanent link">&para;</a></h2>
+<p>So far, we've dealt with single conditions: <em>if this, then that.</em> But real-world scenarios often require <strong>multiple checks at the same time</strong>. JavaScript provides <strong>logical operators</strong> to combine conditions and make decisions more precise.</p>
+<hr />
+<h3 id="logical-and-operator">Logical AND Operator (<code>&amp;&amp;</code>)<a class="headerlink" href="#logical-and-operator" title="Permanent link">&para;</a></h3>
+<p>The <code>&amp;&amp;</code> operator ensures that <strong>all listed conditions must evaluate to <code>true</code></strong> before the code executes.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">isLoggedIn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">hasDebitCard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isLoggedIn</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">hasDebitCard</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Access granted: You can purchase the course.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p>If <code>isLoggedIn</code> is <code>true</code> <strong>and</strong> <code>hasDebitCard</code> is <code>true</code>, the block runs.</p>
+</li>
+<li>
+<p>If even one condition is <code>false</code>, the block is skipped.</p>
+</li>
+</ul>
+<p>This is especially useful in <strong>multi-factor checks</strong>, like granting course access only if a user has logged in <strong>and</strong> has a valid payment method.</p>
+<hr />
+<h3 id="logical-or-operator">Logical OR Operator (<code>||</code>)<a class="headerlink" href="#logical-or-operator" title="Permanent link">&para;</a></h3>
+<p>The <code>||</code> operator means that <strong>only one of the listed conditions needs to be <code>true</code></strong> for the block to execute.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">loginWithGoogle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">loginWithEmail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">loginWithGoogle</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">loginWithEmail</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;User can log in.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Here:</p>
+<ul>
+<li>
+<p>If either <code>loginWithGoogle</code> or <code>loginWithEmail</code> is true, the code runs.</p>
+</li>
+<li>
+<p>The block executes as long as <strong>at least one condition is satisfied</strong>.</p>
+</li>
+</ul>
+<p>This operator is often used for <strong>flexibility in access control</strong>, such as:</p>
+<ul>
+<li>
+<p>Logging in with Google <strong>or</strong> email.</p>
+</li>
+<li>
+<p>Showing a <strong>logout</strong> button if the user is logged in <strong>or</strong> has a valid token.</p>
+</li>
+</ul>
+<hr />
+<details class="info">
+<summary>Operator Recap</summary>
+</details>
+<ul>
+<li><code>&amp;&amp;</code> → All conditions must be true.  </li>
+<li><code>||</code> → At least one condition must be true.</li>
+</ul>
+<hr />
+<p>Here’s the <strong>MkDocs-ready content</strong> for <strong>Section V: The Switch Statement</strong>, written in a clear, teacher-like flow.</p>
+<hr />
+<h2 id="the-switch-statement">The Switch Statement<a class="headerlink" href="#the-switch-statement" title="Permanent link">&para;</a></h2>
+<h3 id="rationale">Rationale<a class="headerlink" href="#rationale" title="Permanent link">&para;</a></h3>
+<p>The <code>switch</code> statement provides an elegant alternative to <strong>long chains of <code>if...else if</code> conditions</strong>.</p>
+<p>It is best suited when you need to evaluate <strong>a single value</strong> (the <em>key</em>) against multiple possible cases. Instead of stacking comparisons line by line, <code>switch</code> organizes them neatly in one block.</p>
+<p>For example:</p>
+<ul>
+<li>
+<p>Checking a <strong>month number</strong> (1 → January, 2 → February, …).</p>
+</li>
+<li>
+<p>Mapping a <strong>user rating</strong> to a response.</p>
+</li>
+<li>
+<p>Handling <strong>action types</strong> in frameworks like Redux.</p>
+</li>
+</ul>
+<hr />
+<h3 id="syntax-and-mechanics">Syntax and Mechanics<a class="headerlink" href="#syntax-and-mechanics" title="Permanent link">&para;</a></h3>
+<p>The general structure of <code>switch</code> looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nx">value1</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// code to execute if key === value1</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nx">value2</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// code to execute if key === value2</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">default</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// code to execute if no case matches</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong><code>key</code></strong> → the variable being tested.</p>
+</li>
+<li>
+<p><strong><code>case</code></strong> → each possible match is written as a case.</p>
+</li>
+<li>
+<p><strong><code>break</code></strong> → stops further execution once a case matches.</p>
+</li>
+<li>
+<p><strong><code>default</code></strong> → executes if no case matches.</p>
+</li>
+</ul>
+<p>Example: Checking a month number.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">month</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">1</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;January&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">2</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;February&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">3</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;March&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">default</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Invalid month&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>March
+</code></pre></div>
+<p>Notice how much cleaner this looks compared to multiple <code>else if</code> statements.</p>
+<hr />
+<h3 id="controlling-flow-break-and-default">Controlling Flow: <code>break</code> and <code>default</code><a class="headerlink" href="#controlling-flow-break-and-default" title="Permanent link">&para;</a></h3>
+<h4 id="the-waterfall-effect">The Waterfall Effect<a class="headerlink" href="#the-waterfall-effect" title="Permanent link">&para;</a></h4>
+<p>In JavaScript, once a case matches, the program continues executing <strong>all subsequent cases</strong> unless explicitly stopped. This is called the <strong>waterfall effect</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">rating</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">1</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Poor&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">2</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Average&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">3</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Good&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">default</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Invalid rating&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Average
+Good
+Invalid rating
+</code></pre></div>
+<p>This happened because there were no <code>break</code> statements to stop execution after a match.</p>
+<hr />
+<h4 id="the-break-keyword">The <code>break</code> Keyword<a class="headerlink" href="#the-break-keyword" title="Permanent link">&para;</a></h4>
+<p>To avoid unwanted waterfalls, always use <code>break</code> after handling a case:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">rating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">rating</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">1</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Poor&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">2</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Average&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">3</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Good&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">default</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Invalid rating&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Average
+</code></pre></div>
+<p>Now only the intended case runs.</p>
+<hr />
+<h4 id="the-default-keyword">The <code>default</code> Keyword<a class="headerlink" href="#the-default-keyword" title="Permanent link">&para;</a></h4>
+<p>If none of the cases match, the <code>default</code> block runs. It acts as the <strong>catch-all</strong>, ensuring your program responds gracefully to unexpected values.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">13</span><span class="p">;</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">month</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">1</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;January&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mf">2</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;February&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="k">default</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Invalid month&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>Invalid month
+</code></pre></div>
+<p>Unlike cases, the <code>default</code> block executes only when no other case matches—it does not fall through.</p>
+<hr />
+<details class="tip">
+<summary>Best Practice</summary>
+<ul>
+<li>Use <code>switch</code> when comparing one variable against many options.  </li>
+<li>Always include <code>break</code> to prevent unintended execution.  </li>
+<li>Always provide a <code>default</code> case as a fallback.</li>
+</ul>
+</details>
+<hr />
+<h2 id="truthy-and-falsy-values">Truthy and Falsy Values<a class="headerlink" href="#truthy-and-falsy-values" title="Permanent link">&para;</a></h2>
+<h3 id="defining-the-concept">Defining the Concept<a class="headerlink" href="#defining-the-concept" title="Permanent link">&para;</a></h3>
+<p>Not all values in JavaScript are strictly <code>true</code> or <code>false</code>. Yet, when placed inside a <strong>conditional context</strong>—like an <code>if</code> statement—JavaScript automatically evaluates them as either <strong>truthy</strong> or <strong>falsy</strong>.</p>
+<p>Think of it this way: JavaScript tries to “guess” whether a value should count as <strong>something</strong> (<code>true</code>) or <strong>nothing</strong> (<code>false</code>).</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;Paritosh&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;This runs, because a non-empty string is truthy.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;This will not run, because an empty string is falsy.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="list-of-falsy-values">List of Falsy Values<a class="headerlink" href="#list-of-falsy-values" title="Permanent link">&para;</a></h3>
+<p>Only a handful of values are considered <strong>falsy</strong> in JavaScript. Everything else is truthy.</p>
+<ul>
+<li>
+<p><code>false</code> (literal Boolean)</p>
+</li>
+<li>
+<p><code>0</code> (zero)</p>
+</li>
+<li>
+<p><code>-0</code> (negative zero)</p>
+</li>
+<li>
+<p><code>0n</code> (BigInt zero)</p>
+</li>
+<li>
+<p><code>""</code> (empty string)</p>
+</li>
+<li>
+<p><code>null</code></p>
+</li>
+<li>
+<p><code>undefined</code></p>
+</li>
+<li>
+<p><code>NaN</code> (Not a Number)</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Will not run&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Will not run&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="key-truthy-values">Key Truthy Values<a class="headerlink" href="#key-truthy-values" title="Permanent link">&para;</a></h3>
+<p>Every other value not on the falsy list is <strong>truthy</strong>. But here's where JavaScript gets tricky—some values <em>look</em> falsy but are actually truthy. These often appear in <strong>interview questions</strong>:</p>
+<ul>
+<li>
+<p><code>"0"</code> → A string containing zero is truthy.</p>
+</li>
+<li>
+<p><code>"false"</code> → A string containing <code>"false"</code> is truthy (it’s still a non-empty string).</p>
+</li>
+<li>
+<p><code>" "</code> → A string with just a space is truthy.</p>
+</li>
+<li>
+<p><code>[]</code> → An empty array is truthy.</p>
+</li>
+<li>
+<p><code>{}</code> → An empty object is truthy.</p>
+</li>
+<li>
+<p><code>function() {}</code> → An empty function is also truthy.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Runs, because &#39;0&#39; (string) is truthy.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">([])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Runs, because [] is truthy.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="loose-equality-notes">Loose Equality Notes<a class="headerlink" href="#loose-equality-notes" title="Permanent link">&para;</a></h3>
+<p>Things get even more confusing with <strong>loose equality (<code>==</code>)</strong> because of type coercion:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w">   </span><span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// true</span>
+</code></pre></div>
+<p>This is why professional developers almost always prefer <strong>strict equality (<code>===</code>)</strong> to avoid such unexpected results.</p>
+<hr />
+<details class="note">
+<summary>Key Takeaway</summary>
+<ul>
+<li>Only 7 falsy values exist: <code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>.  </li>
+<li>Everything else is truthy—even empty arrays, empty objects, and non-empty strings like <code>"false"</code>.  </li>
+<li>Avoid loose equality traps; use <code>===</code> for reliability.</li>
+</ul>
+</details>
+<hr />
+<h2 id="safety-checks-for-complex-data">Safety Checks for Complex Data<a class="headerlink" href="#safety-checks-for-complex-data" title="Permanent link">&para;</a></h2>
+<h3 id="checking-for-empty-arrays">Checking for Empty Arrays<a class="headerlink" href="#checking-for-empty-arrays" title="Permanent link">&para;</a></h3>
+<p>One of the biggest surprises for beginners is that <strong>empty arrays are truthy</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">([])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;This runs, even though the array is empty!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This means that using an empty array directly in a condition is unreliable. Instead, we need to check whether the array contains any elements.</p>
+<h4 id="recommended-method">Recommended Method<a class="headerlink" href="#recommended-method" title="Permanent link">&para;</a></h4>
+<p>The safe way is to check the <strong><code>.length</code> property</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Array is empty.&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Array has elements.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p><code>.length</code> returns the number of elements in the array.</p>
+</li>
+<li>
+<p>Comparing it strictly with <code>0</code> gives a clear, reliable result.</p>
+</li>
+</ul>
+<hr />
+<h3 id="checking-for-empty-objects">Checking for Empty Objects<a class="headerlink" href="#checking-for-empty-objects" title="Permanent link">&para;</a></h3>
+<p>Similar to arrays, <strong>empty objects are also truthy</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">({})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;This runs, even though the object is empty!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A direct check won’t work. Instead, we must inspect the object’s keys.</p>
+<h4 id="recommended-method_1">Recommended Method<a class="headerlink" href="#recommended-method_1" title="Permanent link">&para;</a></h4>
+<p>Use <code>Object.keys()</code>, which returns an array of the object's keys. If that array is empty, the object has no properties.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">user</span><span class="p">).</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Object is empty.&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Object has properties.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This technique is reliable and widely used in real-world code, especially when validating API responses or checking database results.</p>
+<hr />
+<details class="tip">
+<summary>Best Practice</summary>
+<ul>
+<li><strong>For arrays:</strong> Always check <code>.length === 0</code>.  </li>
+<li><strong>For objects:</strong> Use <code>Object.keys(obj).length === 0</code>.  </li>
+<li>Never rely on direct <code>if (array)</code> or <code>if (object)</code> checks—they will always pass, even when empty.</li>
+</ul>
+</details>
+<hr />
+<p>Do you want me to now move on to <strong>Section VIII: Advanced Control Operators (Handling Missing Values)</strong>, or should I enrich this section with a <strong>practical applied example</strong> (like checking if a shopping cart or user profile is empty) before proceeding?</p>
+<p>Here’s the <strong>MkDocs-ready content</strong> for <strong>Section VIII: Advanced Control Operators (Handling Missing Values)</strong>, expanded with clear explanations and examples.</p>
+<hr />
+<h2 id="advanced-control-operators-handling-missing-values">Advanced Control Operators (Handling Missing Values)<a class="headerlink" href="#advanced-control-operators-handling-missing-values" title="Permanent link">&para;</a></h2>
+<p>As programs grow, we often need compact ways to handle <strong>missing values</strong> or write <strong>concise conditional logic</strong>. JavaScript provides two powerful operators for these scenarios: the <strong>Nullish Coalescing Operator (<code>??</code>)</strong> and the <strong>Ternary Operator (<code>? :</code>)</strong>.</p>
+<hr />
+<h3 id="the-nullish-coalescing-operator">The Nullish Coalescing Operator (<code>??</code>)<a class="headerlink" href="#the-nullish-coalescing-operator" title="Permanent link">&para;</a></h3>
+<h4 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h4>
+<p>The <code>??</code> operator is specifically designed to provide a <strong>fallback value</strong> when the primary value is either <strong><code>null</code> or <code>undefined</code></strong>.</p>
+<p>This makes it safer than the logical OR (<code>||</code>), which treats many falsy values (like <code>0</code> or <code>""</code>) as triggers for fallback.</p>
+<hr />
+<h4 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h4>
+<p>This operator is especially useful when working with:</p>
+<ul>
+<li>
+<p>Values returned from <strong>databases</strong>.</p>
+</li>
+<li>
+<p>Responses from <strong>third-party APIs</strong> (like Firebase or Appwrite).</p>
+</li>
+<li>
+<p>Functions that may return <code>null</code> or <code>undefined</code>.</p>
+</li>
+</ul>
+<hr />
+<h4 id="mechanism">Mechanism<a class="headerlink" href="#mechanism" title="Permanent link">&para;</a></h4>
+<p>If the value on the left side of <code>??</code> is <code>null</code> or <code>undefined</code>, the expression returns the right-hand value.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">defaultName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Guest&quot;</span><span class="p">;</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nx">displayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">userName</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="nx">defaultName</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">displayName</span><span class="p">);</span><span class="w"> </span><span class="c1">// Guest</span>
+</code></pre></div>
+<ul>
+<li>Because <code>userName</code> is <code>null</code>, the fallback <code>"Guest"</code> is used.</li>
+</ul>
+<p>Compare this with <code>||</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// 10 (treats 0 as falsy)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// 0 (respects 0 as valid)</span>
+</code></pre></div>
+<hr />
+<h4 id="best-practice">Best Practice<a class="headerlink" href="#best-practice" title="Permanent link">&para;</a></h4>
+<p>Whenever possible, assign a <strong>known fallback value</strong> instead of allowing <code>null</code> or <code>undefined</code> to propagate in your logic.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">isActive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">isActive</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</code></pre></div>
+<p>This ensures your program behaves predictably without unexpected “empty” states.</p>
+<hr />
+<h3 id="the-ternary-operator">The Ternary Operator (<code>? :</code>)<a class="headerlink" href="#the-ternary-operator" title="Permanent link">&para;</a></h3>
+<h4 id="goal_1">Goal<a class="headerlink" href="#goal_1" title="Permanent link">&para;</a></h4>
+<p>The ternary operator provides a <strong>compact, single-line syntax</strong> for simple <code>if...else</code> conditions. It’s often used for quick assignments or inline logic.</p>
+<hr />
+<h4 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">condition</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">true_statement</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">false_statement</span>
+</code></pre></div>
+<hr />
+<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">85</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">50</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;Pass&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Fail&quot;</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span><span class="w"> </span><span class="c1">// Pass</span>
+</code></pre></div>
+<p>Here:</p>
+<ul>
+<li>
+<p>If the condition (<code>score &gt;= 50</code>) is true, <code>"Pass"</code> is assigned.</p>
+</li>
+<li>
+<p>Otherwise, <code>"Fail"</code> is assigned.</p>
+</li>
+</ul>
+<hr />
+<h4 id="distinction-from">Distinction from <code>??</code><a class="headerlink" href="#distinction-from" title="Permanent link">&para;</a></h4>
+<p>It's important not to confuse the ternary operator with <code>??</code>.</p>
+<ul>
+<li>
+<p><strong><code>??</code></strong> checks specifically for <code>null</code> or <code>undefined</code>.</p>
+</li>
+<li>
+<p><strong><code>?:</code></strong> checks a condition and returns one of two values.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s2">&quot;Default&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// &quot;Default&quot; → nullish check</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;Yes&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;No&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// &quot;No&quot; → conditional check</span>
+</code></pre></div>
+<hr />
+<details class="note">
+<summary>Key Takeaway</summary>
+<ul>
+<li>Use <code>??</code> when you want <strong>safe fallbacks</strong> for <code>null</code> or <code>undefined</code>.  </li>
+<li>Use <code>?:</code> when you want <strong>concise conditional branching</strong>.  </li>
+<li>Do not confuse the two—they solve different problems.</li>
+</ul>
+</details>
+<hr />
+<p>Do you want me to proceed with <strong>Section IX: Conclusion and Summary</strong>, or would you like me to first add a <strong>real-world mini example</strong> (like user profile display with <code>??</code> and grading logic with <code>?:</code>) before wrapping up?</p>
+<p>Here’s the <strong>MkDocs-ready content</strong> for <strong>Section IX: Conclusion and Summary</strong>, wrapping up the chapter in a teacher-like tone.</p>
+<hr />
+<h2 id="conclusion-and-summary">Conclusion and Summary<a class="headerlink" href="#conclusion-and-summary" title="Permanent link">&para;</a></h2>
+<h3 id="recap-of-control-flow-mastery">Recap of Control Flow Mastery<a class="headerlink" href="#recap-of-control-flow-mastery" title="Permanent link">&para;</a></h3>
+<p>In this chapter, we explored the <strong>complete set of control flow mechanisms in JavaScript</strong>—the tools that let our programs make decisions, branch into different paths, and handle uncertainty gracefully.</p>
+<p>By now, you should be comfortable with:</p>
+<ul>
+<li>
+<p><strong>Conditional execution with <code>if</code></strong> → Running code only when a condition is true.</p>
+</li>
+<li>
+<p><strong>Comparison operators</strong> → Understanding the difference between <code>=</code>, <code>==</code>, and <code>===</code>, and why strict equality is safer.</p>
+</li>
+<li>
+<p><strong>Scope management</strong> → Using <code>let</code> and <code>const</code> to keep variables safe inside block scopes.</p>
+</li>
+<li>
+<p><strong>Logical operators (<code>&amp;&amp;</code>, <code>||</code>)</strong> → Combining conditions for multi-factor or flexible checks.</p>
+</li>
+<li>
+<p><strong>The <code>switch</code> statement</strong> → A cleaner alternative to long chains of <code>if...else if</code>.</p>
+</li>
+<li>
+<p><strong>Truthy and falsy values</strong> → Recognizing how JavaScript interprets non-Boolean values in conditionals.</p>
+</li>
+<li>
+<p><strong>Safety checks for arrays and objects</strong> → Ensuring reliability when working with potentially empty data.</p>
+</li>
+<li>
+<p><strong>Advanced operators (<code>??</code> and <code>?:</code>)</strong> → Handling missing values and writing concise inline conditions.</p>
+</li>
+</ul>
+<p>Together, these mechanisms form the backbone of <strong>logical control in JavaScript</strong>. They transform code from a rigid sequence of instructions into a dynamic system that responds to different inputs and states.</p>
+<hr />
+<details class="tip">
+<summary>Looking Ahead</summary>
+<p>Control flow is now fully in your toolkit. In the next sections of the book, we’ll build on this foundation by exploring <strong>loops and iterations</strong>, followed by more advanced JavaScript features. As we move into projects, you’ll see how these concepts directly power real-world workflows like authentication, data validation, and conditional rendering.</p>
+</details>
+<hr />
+<p>Do you want me to now create a <strong>set of practice exercises</strong> for this chapter (with small coding tasks and challenges), or should we directly move on to the next topic in your outline?</p>
+<p>Perfect — here’s the <strong>Exercises section</strong> for this chapter, written in MkDocs style with progressive difficulty.</p>
+<hr />
+<h2 id="exercises-control-flow-in-javascript">Exercises: Control Flow in JavaScript<a class="headerlink" href="#exercises-control-flow-in-javascript" title="Permanent link">&para;</a></h2>
+<p>Strengthening your understanding comes from practice. The following exercises will help you apply everything we covered in this chapter.</p>
+<hr />
+<h3 id="1-simple-if-check">1. Simple <code>if</code> Check<a class="headerlink" href="#1-simple-if-check" title="Permanent link">&para;</a></h3>
+<p>Write a program that checks if a number stored in the variable <code>age</code> is greater than or equal to 18.</p>
+<ul>
+<li>
+<p>If true, print <code>"Eligible to vote"</code>.</p>
+</li>
+<li>
+<p>Otherwise, print <code>"Not eligible"</code>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="2-strict-vs-loose-equality">2. Strict vs. Loose Equality<a class="headerlink" href="#2-strict-vs-loose-equality" title="Permanent link">&para;</a></h3>
+<p>Try the following comparisons in JavaScript:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">2</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>
+<p>Predict the output before running.</p>
+</li>
+<li>
+<p>Explain why the results differ.</p>
+</li>
+</ul>
+<hr />
+<h3 id="3-temperature-categories">3. Temperature Categories<a class="headerlink" href="#3-temperature-categories" title="Permanent link">&para;</a></h3>
+<p>Use <code>if...else if...else</code> to categorize a variable <code>temperature</code>:</p>
+<ul>
+<li>
+<p>Below 20 → <code>"Cold"</code></p>
+</li>
+<li>
+<p>20–30 → <code>"Moderate"</code></p>
+</li>
+<li>
+<p>Above 30 → <code>"Hot"</code></p>
+</li>
+</ul>
+<hr />
+<h3 id="4-multi-factor-login-check">4. Multi-Factor Login Check<a class="headerlink" href="#4-multi-factor-login-check" title="Permanent link">&para;</a></h3>
+<p>Simulate login validation with two variables:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">isLoggedIn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">hasToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>
+<p>Only print <code>"Access granted"</code> if both are true.</p>
+</li>
+<li>
+<p>If either is missing, print <code>"Access denied"</code>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="5-switch-case-day-of-the-week">5. Switch Case: Day of the Week<a class="headerlink" href="#5-switch-case-day-of-the-week" title="Permanent link">&para;</a></h3>
+<p>Create a <code>switch</code> statement that prints the day name (<code>Monday</code>, <code>Tuesday</code>, etc.) based on a number from 1 to 7.</p>
+<ul>
+<li>Use <code>default</code> to handle invalid numbers.</li>
+</ul>
+<hr />
+<h3 id="6-truthyfalsy-quiz">6. Truthy/Falsy Quiz<a class="headerlink" href="#6-truthyfalsy-quiz" title="Permanent link">&para;</a></h3>
+<p>Predict the output before running this code:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Case 1 runs&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">([])</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Case 2 runs&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Case 3 runs&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Case 4 runs&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Explain why each case does or does not run.</p>
+<hr />
+<h3 id="7-empty-data-checks">7. Empty Data Checks<a class="headerlink" href="#7-empty-data-checks" title="Permanent link">&para;</a></h3>
+<p>Write a function that:</p>
+<ul>
+<li>
+<p>Takes an array as input.</p>
+</li>
+<li>
+<p>Prints <code>"Empty array"</code> if it has no elements, otherwise <code>"Array has items"</code>.</p>
+</li>
+</ul>
+<p>Then, modify the function to handle objects using <code>Object.keys()</code>.</p>
+<hr />
+<h3 id="8-using-nullish-coalescing">8. Using <code>??</code> (Nullish Coalescing)<a class="headerlink" href="#8-using-nullish-coalescing" title="Permanent link">&para;</a></h3>
+<p>Create a variable <code>userName</code> that is <code>null</code>.</p>
+<ul>
+<li>
+<p>Use <code>??</code> to assign <code>"Guest"</code> as the fallback.</p>
+</li>
+<li>
+<p>Print the result.</p>
+</li>
+</ul>
+<p>Repeat the same with a variable set to <code>0</code> and see how <code>??</code> differs from <code>||</code>.</p>
+<hr />
+<h3 id="9-ternary-operator">9. Ternary Operator<a class="headerlink" href="#9-ternary-operator" title="Permanent link">&para;</a></h3>
+<p>Using a single line, assign <code>"Pass"</code> or <code>"Fail"</code> to a variable <code>result</code> based on whether a score (say <code>65</code>) is greater than or equal to 50.</p>
+<hr />
+<h3 id="10-mini-challenge">10. Mini Challenge<a class="headerlink" href="#10-mini-challenge" title="Permanent link">&para;</a></h3>
+<p>Simulate a shopping checkout flow:</p>
+<ul>
+<li>
+<p>A user can buy a course only if they are logged in <strong>and</strong> have payment enabled.</p>
+</li>
+<li>
+<p>If they are logged in but payment is missing, print <code>"Add payment method"</code>.</p>
+</li>
+<li>
+<p>If they are not logged in, print <code>"Please log in"</code>.</p>
+</li>
+</ul>
+<p>Use a combination of <code>if...else</code>, <code>&amp;&amp;</code>, and <code>||</code> to solve this.</p>
+<hr />
+<details class="tip">
+<summary>How to Practice</summary>
+<ul>
+<li>First, <strong>predict the output</strong> mentally before running the code.  </li>
+<li>Then, run it in Node.js or browser console.  </li>
+<li>Finally, <strong>explain the result</strong> in your own words—this step builds deep understanding.</li>
+</ul>
+</details>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../02.%20Call%20Stack/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Call Stack">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Call Stack
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../04.%20For%20Loop/" class="md-footer__link md-footer__link--next" aria-label="Next: For Loop">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                For Loop
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Paritosh Sharma
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.math", "search.highlight", "search.share", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.path", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../assets/collapsible-toc.js"></script>
+      
+    
+  </body>
+</html>

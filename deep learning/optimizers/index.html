@@ -1,0 +1,2961 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Optimizers - Paritosh's Tech Universe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-to-optimizers-in-deep-learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Paritosh&#39;s Tech Universe" class="md-header__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paritosh's Tech Universe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Optimizers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Mini%20Books/Pydantic/Introduction/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mini Books
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Paritosh&#39;s Tech Universe" class="md-nav__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Paritosh's Tech Universe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mini Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pydantic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pydantic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/Pydantic/Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/Pydantic/Chapter%201/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/Pydantic/Chapter%202/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Transformers
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Transformers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/Transformers/Self%20Attention/Self%20Attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/Kubernetes/Why%20Kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Why Kubernetes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/Kubernetes/Pod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/Kubernetes/Kubernetes%20Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/Kubernetes/What%20is%20deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    What is deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/Kubernetes/Service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    JavaScript
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            JavaScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/JavaScript/01.%20Immediately%20Invoked%20Function%20Expressions%20%28IIFE%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Immediately Invoked Function Expressions (IIFE)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/JavaScript/02.%20Call%20Stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Call Stack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/JavaScript/03.%20Control%20Flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Flow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/JavaScript/04.%20For%20Loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    For Loop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/JavaScript/05.%20while%20and%20do-while%20Loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    While and do-while Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/JavaScript/06.%20Higher%20Order%20Loops%20and%20Array%20Iteration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Higher Order Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            MCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mini%20Books/MCP/JRPC%20-%20JSON%20Remote%20Procedure%20Call/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JRPC - JSON Remote Procedure Call
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-optimizers-in-deep-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Optimizers in Deep Learning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-role-of-optimizers-in-a-neural-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Role of Optimizers in a Neural Network
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gradient-descent-the-foundational-optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gradient Descent: The Foundational Optimizer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gradient Descent: The Foundational Optimizer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-update-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Update Rule
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterative-process-over-epochs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iterative Process Over Epochs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior-across-the-loss-landscape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Behavior Across the Loss Landscape
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-gradient-descent-a-quick-recap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types of Gradient Descent (A Quick Recap)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#challenges-and-problems-with-conventional-gradient-descent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenges and Problems with Conventional Gradient Descent
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Challenges and Problems with Conventional Gradient Descent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-1-difficulty-setting-the-correct-learning-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 1: Difficulty Setting the Correct Learning Rate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-2-using-the-same-learning-rate-for-all-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 2: Using the Same Learning Rate for All Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-3-getting-stuck-in-local-minima" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 3: Getting Stuck in Local Minima
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-4-the-problem-of-saddle-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 4: The Problem of Saddle Points
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-need-for-advanced-optimizers" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Need for Advanced Optimizers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-optimizers-to-be-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Optimizers to Be Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exponentially-weighted-moving-average-ewma-a-foundational-concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exponentially Weighted Moving Average (EWMA): A Foundational Concept
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exponentially Weighted Moving Average (EWMA): A Foundational Concept">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-ewma-understanding-the-trend-beneath-the-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why EWMA? Understanding the Trend Beneath the Noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-formula-and-intuition" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Formula and Intuition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-ewma-matters-in-deep-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why EWMA Matters in Deep Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-principles-of-ewma" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Principles of EWMA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-formula-and-step-by-step-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Formula and Step-by-Step Calculation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotting-and-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plotting and Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-of-the-beta-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact of the Beta (β) Parameter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-proof-of-weight-distribution-in-ewma" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Proof of Weight Distribution in EWMA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation-of-ewma" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python Implementation of EWMA
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sgd-with-momentum-motivation-and-intuition" class="md-nav__link">
+    <span class="md-ellipsis">
+      SGD with Momentum: Motivation and Intuition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SGD with Momentum: Motivation and Intuition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-concepts-and-visualizations-prerequisites-for-understanding-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Concepts and Visualizations: Prerequisites for Understanding Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Concepts and Visualizations: Prerequisites for Understanding Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-deep-learning-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Deep Learning Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-visualizations-are-challenging-but-necessary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Visualizations Are Challenging but Necessary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-different-graphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the Different Graphs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convex-vs-non-convex-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convex vs. Non-Convex Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Convex vs. Non-Convex Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-convex-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Is Convex Optimization?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-convex-optimization-the-reality-of-deep-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Non-Convex Optimization: The Reality of Deep Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-non-convex-optimization-is-hard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Non-Convex Optimization Is Hard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations-of-standard-gradient-descent-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations of Standard Gradient Descent Variants
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Limitations of Standard Gradient Descent Variants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#demonstration-gradient-descent-variants-on-a-convex-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Demonstration: Gradient Descent Variants on a Convex Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#but-what-about-non-convex-surfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      But What About Non-Convex Surfaces?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-use-momentum-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Use Momentum Optimization?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Use Momentum Optimization?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-handling-gradual-slopes-small-gradients" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Handling Gradual Slopes (Small Gradients)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-escaping-local-minima" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Escaping Local Minima
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-navigating-high-curvature-sharp-valleys-and-ridges" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Navigating High Curvature (Sharp Valleys and Ridges)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#momentum-summarized" class="md-nav__link">
+    <span class="md-ellipsis">
+      Momentum Summarized
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-principle-and-intuition-of-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Principle and Intuition of Momentum
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Principle and Intuition of Momentum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#momentum-is-about-building-confidence-over-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Momentum Is About Building Confidence Over Time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#car-analogy-consensus-of-direction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Car Analogy: Consensus of Direction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physics-analogy-a-ball-rolling-downhill" class="md-nav__link">
+    <span class="md-ellipsis">
+      Physics Analogy: A Ball Rolling Downhill
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-momentum-is-faster-than-sgd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Momentum Is Faster Than SGD
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-implementation-of-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Implementation of Momentum
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mathematical Implementation of Momentum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standard-gradient-descent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Standard Gradient Descent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#momentum-adding-velocity-to-the-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Momentum: Adding Velocity to the Update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-it-down-whats-happening-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breaking It Down: What’s Happening Here?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-momentum-accelerates-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Momentum Accelerates Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-momentum-update-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Momentum Update Logic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impact-of-momentum-on-gradient-descent-navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact of Momentum on Gradient Descent Navigation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impact of Momentum on Gradient Descent Navigation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-scenario-a-narrow-valley-in-the-loss-surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Scenario: A Narrow Valley in the Loss Surface
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-standard-sgd-behaves" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Standard SGD Behaves
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-momentum-changes-the-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Momentum Changes the Dynamics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visual-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visual Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#role-of-beta-in-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Role of Beta (β) in Momentum
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Role of Beta (β) in Momentum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-does-beta-actually-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Does Beta Actually Do?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beta-as-an-ewma-window-approximation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beta as an EWMA Window Approximation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#effects-of-different-beta-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Effects of Different Beta Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practice
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-and-problems-of-momentum-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits and Problems of Momentum Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Benefits and Problems of Momentum Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Momentum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-of-momentum-overshooting-and-oscillation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitation of Momentum: Overshooting and Oscillation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h2 id="introduction-to-optimizers-in-deep-learning"><strong>Introduction to Optimizers in Deep Learning</strong><a class="headerlink" href="#introduction-to-optimizers-in-deep-learning" title="Permanent link">&para;</a></h2>
+<p>In the journey of building effective deep learning models, training is often where the real challenge begins. Once we’ve designed an architecture and chosen an appropriate loss function, the next step is to iteratively improve our model’s parameters—its weights and biases—so it can learn meaningful patterns from the data. But how exactly do we update these parameters efficiently?</p>
+<p>This is where <strong>optimizers</strong> come in. Their role is pivotal. Optimizers are algorithms or methods used to <strong>minimize (or maximize) a loss function by updating the model’s parameters</strong> during training. In essence, they guide the model toward better performance, one step at a time, using feedback from the loss function.</p>
+<p>As deep learning models grow in complexity and size, training them becomes not just a matter of mathematical correctness but also computational efficiency. Optimizers, alongside techniques like <strong>weight initialization</strong> and <strong>batch normalization</strong>, have become central to <strong>speeding up the training process</strong>, reducing the number of epochs required to converge, and stabilizing learning behavior.</p>
+<p>To understand the value of an optimizer, consider this: no matter how elegant your neural network architecture is, poor optimization can trap it in suboptimal local minima or slow down learning to a crawl. Conversely, a well-chosen optimizer can unlock the full potential of your model by navigating the loss landscape intelligently.</p>
+<p>In this chapter, we’ll walk through the conceptual underpinnings of optimizers, examine why they matter, and progressively build an understanding of different optimization techniques—from the classical ones to those designed for modern deep learning systems. Let’s begin by grounding ourselves in the most fundamental optimization technique of all: <strong>Gradient Descent</strong>.</p>
+<hr />
+<h2 id="the-role-of-optimizers-in-a-neural-network"><strong>The Role of Optimizers in a Neural Network</strong><a class="headerlink" href="#the-role-of-optimizers-in-a-neural-network" title="Permanent link">&para;</a></h2>
+<p>To appreciate the importance of optimizers, we first need to understand what a neural network really does under the hood. At its core, a neural network is a <strong>parameterized function</strong>—its parameters being the <strong>weights and biases</strong> spread across its layers. These parameters define how input data flows through the network and ultimately determines the predictions the model makes.</p>
+<p>However, a freshly initialized neural network knows nothing about the task at hand. Its initial predictions are random, stemming from weights and biases that were, by design, randomly assigned. This brings us to the essential problem: <strong>how do we tune these parameters so that the model's predictions become meaningful?</strong></p>
+<p>The answer lies in optimization. The <strong>goal of training</strong> a neural network is to <strong>find the optimal values</strong> for its parameters so that its predictions closely match the actual target values. This notion of "closeness" is mathematically captured by a <strong>loss function</strong>—a measure of how far the model’s predictions are from the ground truth. The <strong>lower</strong> the loss, the <strong>better</strong> the model is performing.</p>
+<p>But here’s the catch: the <strong>loss function is itself a function of the model parameters</strong>. That is, the value of the loss depends on the current weights and biases. To minimize the loss, we need to find the right combination of parameter values that lead to the smallest possible loss.</p>
+<p>This gives rise to a compelling visualization—imagine the loss function as a <strong>landscape</strong>, where each point on the surface represents a particular configuration of model parameters and the height at that point indicates the corresponding loss. In a simple case with only two parameters, we could plot this as a <strong>3D surface</strong> with valleys (low loss) and peaks (high loss). In reality, neural networks involve <strong>millions of parameters</strong>, so this landscape exists in a very high-dimensional space. Nevertheless, the intuition remains: <strong>our job is to descend this landscape to reach the bottom—a point of minimal loss.</strong></p>
+<p>However, we don’t know this landscape ahead of time, nor do we know where the valleys are. We must <strong>navigate it blindly</strong>, starting from some random point and taking small steps based on the slope of the terrain around us.</p>
+<p>This is precisely the role of an <strong>optimizer</strong>. It provides the <strong>strategy for updating the parameters</strong> based on the current slope of the loss surface (i.e., gradients), helping the model gradually move toward better performance. Without an optimizer, the model has no direction, no guide—just a vast parameter space and no way to improve.</p>
+<p>In the next section, we’ll begin our exploration of optimization techniques by introducing the simplest and most foundational one—<strong>Gradient Descent</strong>—which serves as the building block for nearly all modern optimizers.</p>
+<hr />
+<h2 id="gradient-descent-the-foundational-optimizer"><strong>Gradient Descent: The Foundational Optimizer</strong><a class="headerlink" href="#gradient-descent-the-foundational-optimizer" title="Permanent link">&para;</a></h2>
+<p>Now that we understand the need for an optimizer to navigate the loss landscape, let’s begin with the most fundamental technique in the deep learning toolkit: <strong>Gradient Descent</strong>. Despite the simplicity of its mechanics, Gradient Descent lies at the heart of nearly every modern optimization algorithm used in deep learning.</p>
+<p>At its core, Gradient Descent is built on a powerful idea from calculus: <strong>to minimize a function, follow the direction of steepest descent</strong>. In our case, the function we aim to minimize is the <strong>loss function</strong>, and the parameters we want to update—our weights and biases—sit on a high-dimensional surface defined by this function.</p>
+<h3 id="the-update-rule">The Update Rule<a class="headerlink" href="#the-update-rule" title="Permanent link">&para;</a></h3>
+<p>Gradient Descent proposes a simple iterative rule for updating each parameter:</p>
+<div class="arithmatex">\[\theta_{\text{new}} = \theta_{\text{old}} - \eta \cdot \nabla_{\theta} \mathcal{L}(\theta)\]</div>
+<p>Where:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(\theta\)</span> represents a model parameter (e.g., a weight),</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\eta\)</span> is the <strong>learning rate</strong>, a small positive constant,</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\nabla_{\theta} \mathcal{L}(\theta)\)</span> is the <strong>gradient of the loss function</strong> with respect to <span class="arithmatex">\(\theta\)</span>,</p>
+</li>
+<li>
+<p>The minus sign ensures we move <strong>in the direction that reduces the loss</strong>.</p>
+</li>
+</ul>
+<p>This update rule is deceptively simple. At every step (or iteration), we calculate the <strong>gradient</strong>—the slope of the loss surface at our current parameter values—and take a step in the <strong>opposite direction</strong> of this slope. Intuitively, if you’re standing on a hill and want to reach the valley, you walk downhill—that is, in the direction of the negative gradient.</p>
+<h3 id="iterative-process-over-epochs">Iterative Process Over Epochs<a class="headerlink" href="#iterative-process-over-epochs" title="Permanent link">&para;</a></h3>
+<p>This isn’t a one-time computation. The update rule is applied <strong>repeatedly over multiple epochs</strong>—each epoch representing a full pass over the training data. With each iteration, the parameters ideally move closer to values that minimize the loss function.</p>
+<h3 id="behavior-across-the-loss-landscape">Behavior Across the Loss Landscape<a class="headerlink" href="#behavior-across-the-loss-landscape" title="Permanent link">&para;</a></h3>
+<p>One elegant feature of Gradient Descent is its <strong>adaptive step sizes</strong> based on the geometry of the loss surface:</p>
+<ul>
+<li>
+<p><strong>Far from the minimum</strong>, the gradient is typically large, resulting in <strong>larger parameter updates</strong>—which helps the model make quick progress early in training.</p>
+</li>
+<li>
+<p><strong>Near the minimum</strong>, the gradient becomes smaller, leading to <strong>smaller, finer updates</strong>—allowing the model to converge more carefully without overshooting.</p>
+</li>
+</ul>
+<p>This dynamic behavior contributes to the efficiency and stability of Gradient Descent. However, despite its foundational importance, vanilla Gradient Descent is not without challenges. It struggles with complex loss surfaces—especially those with <strong>ravines, saddle points, or local minima</strong>. Additionally, it requires computing gradients over the <strong>entire training dataset</strong> before making an update, which can be computationally expensive.</p>
+<p>These limitations led to the development of more practical variants of Gradient Descent, such as <strong>Stochastic Gradient Descent (SGD)</strong> and <strong>Mini-Batch Gradient Descent</strong>, which we’ll explore next.</p>
+<hr />
+<h2 id="types-of-gradient-descent-a-quick-recap"><strong>Types of Gradient Descent (A Quick Recap)</strong><a class="headerlink" href="#types-of-gradient-descent-a-quick-recap" title="Permanent link">&para;</a></h2>
+<p>Before we move on to more advanced optimization techniques, it's helpful to quickly revisit the <strong>variants of Gradient Descent</strong>, as their behavior lays the groundwork for understanding later improvements.</p>
+<p>While the <strong>update rule</strong> remains the same across all types of Gradient Descent, what differentiates them is <strong>how much data is processed before each parameter update</strong>:</p>
+<ul>
+<li>
+<p><strong>Batch Gradient Descent</strong>: This is the classic form. It computes the gradient using the <strong>entire training dataset</strong> before performing a single update. While this approach ensures a stable and accurate gradient, it becomes <strong>computationally expensive</strong> for large datasets and slows down learning.</p>
+</li>
+<li>
+<p><strong>Stochastic Gradient Descent (SGD)</strong>: On the opposite end of the spectrum, SGD updates the model <strong>after every single data point</strong>. This makes it <strong>highly efficient and quick to learn</strong>, but the updates are noisy and may cause the loss to fluctuate during training.</p>
+</li>
+<li>
+<p><strong>Mini-Batch Gradient Descent</strong>: This strikes a balance between the two extremes. Instead of processing the full dataset or a single sample, it updates the weights after processing <strong>a small batch of samples</strong> (typically 32, 64, or 128). This provides a <strong>good trade-off between computational efficiency and gradient stability</strong>, and is the most widely used variant in modern deep learning workflows.</p>
+</li>
+</ul>
+<p>These variants are conceptually simple yet practically impactful. They lay the foundation upon which <strong>adaptive optimizers</strong> such as Momentum, RMSprop, and Adam build—by enhancing how gradients are used or remembered during training. Let’s now move beyond these basic techniques and see how optimization can be further accelerated.</p>
+<hr />
+<h2 id="challenges-and-problems-with-conventional-gradient-descent"><strong>Challenges and Problems with Conventional Gradient Descent</strong><a class="headerlink" href="#challenges-and-problems-with-conventional-gradient-descent" title="Permanent link">&para;</a></h2>
+<p>Although Gradient Descent forms the cornerstone of neural network optimization, it often struggles in practice, especially in large-scale, high-dimensional deep learning scenarios. These practical shortcomings have driven the development of more advanced and adaptive optimizers. Before we explore those, it’s important to understand <strong>why conventional Gradient Descent falls short</strong> and where it tends to break down.</p>
+<h3 id="problem-1-difficulty-setting-the-correct-learning-rate"><strong>Problem 1: Difficulty Setting the Correct Learning Rate</strong><a class="headerlink" href="#problem-1-difficulty-setting-the-correct-learning-rate" title="Permanent link">&para;</a></h3>
+<p>One of the most sensitive aspects of the gradient descent algorithm is the <strong>learning rate</strong>—the hyperparameter that determines the size of each update step.</p>
+<p>If the learning rate is <strong>too small</strong>, the model will inch forward slowly across the loss landscape, requiring many iterations and consuming excessive time to converge.</p>
+<p>Conversely, if the learning rate is <strong>too large</strong>, the model might <strong>overshoot the minimum</strong>, causing it to bounce around or even diverge altogether, leading to <strong>unstable training</strong>.</p>
+<p>This makes finding the “just right” learning rate an art in itself—one that’s often <strong>dataset-dependent and model-specific</strong>. Small changes in the problem space may require re-tuning this hyperparameter from scratch.</p>
+<blockquote>
+<p><strong>Related idea – Learning Rate Scheduling:</strong><br />
+A common workaround is <strong>learning rate scheduling</strong>, where the learning rate is gradually decreased over time according to a predefined schedule. While helpful, this approach introduces its own assumptions: it doesn’t <strong>adapt dynamically</strong> based on how the optimization is going and may not generalize well across different datasets or training scenarios.</p>
+</blockquote>
+<h3 id="problem-2-using-the-same-learning-rate-for-all-parameters"><strong>Problem 2: Using the Same Learning Rate for All Parameters</strong><a class="headerlink" href="#problem-2-using-the-same-learning-rate-for-all-parameters" title="Permanent link">&para;</a></h3>
+<p>In standard Gradient Descent, <strong>every parameter</strong>—whether it's in the first layer or the last—receives updates scaled by the <strong>same global learning rate</strong>. But not all parameters learn at the same pace.</p>
+<p>In reality, different regions of the loss landscape can vary significantly:</p>
+<ul>
+<li>
+<p>Some directions may be <strong>steep</strong>, requiring small steps to avoid overshooting.</p>
+</li>
+<li>
+<p>Others may be <strong>flat</strong>, demanding larger steps to make progress.</p>
+</li>
+</ul>
+<p>Using the <strong>same learning rate uniformly</strong> across all dimensions ignores these differences and can lead to <strong>inefficient learning</strong>—some weights stagnate while others oscillate or diverge.</p>
+<h3 id="problem-3-getting-stuck-in-local-minima"><strong>Problem 3: Getting Stuck in Local Minima</strong><a class="headerlink" href="#problem-3-getting-stuck-in-local-minima" title="Permanent link">&para;</a></h3>
+<p>Neural networks often operate in <strong>non-convex</strong> loss landscapes filled with <strong>local minima</strong>—points where the loss is lower than surrounding regions, but not the absolute lowest.</p>
+<p>Standard Gradient Descent may converge to such a local minimum and get <strong>stuck</strong>, especially if the gradients in the surrounding area do not provide enough directional change to escape.</p>
+<p>While <strong>Stochastic Gradient Descent</strong> (SGD) introduces some randomness into updates, offering occasional opportunities to escape these traps, it’s not a guaranteed solution—especially in high-dimensional settings where flat regions abound.</p>
+<h3 id="problem-4-the-problem-of-saddle-points"><strong>Problem 4: The Problem of Saddle Points</strong><a class="headerlink" href="#problem-4-the-problem-of-saddle-points" title="Permanent link">&para;</a></h3>
+<p>Saddle points pose an even more subtle challenge. A <strong>saddle point</strong> is a location in the loss surface where the gradient is near zero in all directions, but the point is <strong>neither a local minimum nor a maximum</strong>. It may be a valley in one direction and a peak in another.</p>
+<p>In such regions, conventional Gradient Descent <strong>misinterprets the vanishing gradient</strong> as a sign of having reached a minimum. As a result, it may <strong>stop updating</strong> or move extremely slowly—despite the fact that better solutions lie beyond.</p>
+<p>Saddle points are especially common in <strong>high-dimensional parameter spaces</strong>, making them a pervasive issue in deep learning. Since the update rule relies entirely on the gradient’s direction and magnitude, Gradient Descent can stagnate at these deceptive points.</p>
+<hr />
+<h2 id="the-need-for-advanced-optimizers"><strong>The Need for Advanced Optimizers</strong><a class="headerlink" href="#the-need-for-advanced-optimizers" title="Permanent link">&para;</a></h2>
+<p>As we've seen, while conventional Gradient Descent provides a foundational approach to training neural networks, it suffers from several critical limitations in real-world settings—ranging from the difficulty of setting an effective learning rate, to uniform updates across all parameters, and the inability to reliably escape local minima and saddle points.</p>
+<p>These challenges don’t just slow down learning—they can stall it altogether or lead the model toward suboptimal solutions.</p>
+<p>This is precisely why <strong>advanced optimizers</strong> are necessary. Rather than reinventing the wheel, most of these optimizers are <strong>built on top of the basic Gradient Descent algorithm</strong>, introducing subtle yet powerful enhancements:</p>
+<ul>
+<li>
+<p>Some adapt the learning rate <strong>individually per parameter</strong>.</p>
+</li>
+<li>
+<p>Others introduce <strong>momentum</strong> to help navigate valleys and escape flat regions.</p>
+</li>
+<li>
+<p>Many accumulate <strong>historical gradient information</strong> to better guide each update.</p>
+</li>
+</ul>
+<p>These improvements transform a simple optimizer into a far more <strong>robust and responsive learning mechanism</strong> that can handle the complexities of deep learning in practice.</p>
+<p>In the upcoming sections, we'll explore some of the most influential optimizers—starting with <strong>Momentum</strong>, and moving on to <strong>RMSprop</strong> and <strong>Adam</strong>, which combine multiple ideas into state-of-the-art performance for training deep neural networks.</p>
+<hr />
+<h2 id="advanced-optimizers-to-be-covered"><strong>Advanced Optimizers to Be Covered</strong><a class="headerlink" href="#advanced-optimizers-to-be-covered" title="Permanent link">&para;</a></h2>
+<p>Now that we've understood why standard Gradient Descent often falls short, it’s time to look at the <strong>family of advanced optimizers</strong> that have been developed to address these limitations. These optimizers build upon the same fundamental idea—using gradients to improve the model—but they add <strong>intelligent refinements</strong> that make training faster, more stable, and more effective across a wide variety of tasks.</p>
+<p>Each of the optimizers we’ll cover in the upcoming sections brings its own unique strengths to the table, often by solving one or more of the specific problems we encountered earlier:</p>
+<ul>
+<li>
+<p><strong>Momentum</strong> introduces a memory of past gradients to smooth the optimization path and avoid zig-zagging.</p>
+</li>
+<li>
+<p><strong>Nesterov Accelerated Gradient</strong> takes Momentum a step further by anticipating future positions, leading to more informed updates.</p>
+</li>
+<li>
+<p><strong>Adagrad</strong> adapts the learning rate per parameter based on historical gradients, making it suitable for sparse data problems.</p>
+</li>
+<li>
+<p><strong>RMSprop</strong> improves upon Adagrad by controlling how much past gradient information is retained, enabling it to perform well on non-stationary objectives.</p>
+</li>
+<li>
+<p><strong>Adam</strong>, arguably the most popular optimizer in deep learning today, combines the best ideas from both Momentum and RMSprop into a single, adaptive, and efficient optimization algorithm.</p>
+</li>
+</ul>
+<p>In the following sections, we’ll walk through each of these optimizers—starting with <strong>Momentum</strong>—to understand how they work, what problems they solve, and how to use them effectively in Python-based deep learning workflows.</p>
+<hr />
+<h2 id="exponentially-weighted-moving-average-ewma-a-foundational-concept"><strong>Exponentially Weighted Moving Average (EWMA): A Foundational Concept</strong><a class="headerlink" href="#exponentially-weighted-moving-average-ewma-a-foundational-concept" title="Permanent link">&para;</a></h2>
+<p>As we continue our exploration of deep learning optimizers, there’s one crucial idea we need to understand before diving deeper. This concept forms the mathematical backbone of several powerful optimization techniques—including Momentum, RMSprop, and Adam. It's called the <strong>Exponentially Weighted Moving Average (EWMA)</strong>, sometimes also referred to as the <strong>Exponential Moving Average (EMA)</strong>.</p>
+<p>Although EWMA originates in fields like <strong>time series analysis</strong>, <strong>forecasting</strong>, and <strong>signal processing</strong>, it plays a surprisingly central role in how we train modern neural networks. Let’s build an intuitive understanding of it first.</p>
+<h3 id="why-ewma-understanding-the-trend-beneath-the-noise"><strong>Why EWMA? Understanding the Trend Beneath the Noise</strong><a class="headerlink" href="#why-ewma-understanding-the-trend-beneath-the-noise" title="Permanent link">&para;</a></h3>
+<p>Imagine tracking daily temperatures over a month. Each day's temperature might fluctuate due to local weather patterns, but overall, you might notice a seasonal trend—perhaps it's gradually getting warmer. That <strong>underlying trend</strong> is what EWMA helps us extract from noisy, fluctuating data.</p>
+<p>EWMA gives <strong>more importance to recent values</strong> and gradually reduces the influence of older ones. This creates a <strong>smoother curve</strong> that filters out short-term variations and highlights the long-term pattern. For instance, in a graph of daily temperatures, the original data (in blue) might show sharp ups and downs, while the EWMA (in black) would appear as a smooth curve capturing the overall progression.</p>
+<h3 id="the-formula-and-intuition"><strong>The Formula and Intuition</strong><a class="headerlink" href="#the-formula-and-intuition" title="Permanent link">&para;</a></h3>
+<p>Mathematically, the EWMA at time tt, denoted vtv_t, is calculated as:</p>
+<p>vt=β⋅vt−1+(1−β)⋅xtv_t = \beta \cdot v_{t-1} + (1 - \beta) \cdot x_t</p>
+<p>Where:</p>
+<ul>
+<li>
+<p>xtx_t is the new data point (e.g., today's temperature or gradient),</p>
+</li>
+<li>
+<p>vt−1v_{t-1} is the previous moving average,</p>
+</li>
+<li>
+<p>β\beta is a smoothing parameter between 0 and 1 (e.g., 0.9 or 0.99).</p>
+</li>
+</ul>
+<p>The key idea is that:</p>
+<ul>
+<li>
+<p>A <strong>larger β\beta</strong> (closer to 1) puts <strong>more emphasis on older data</strong>—resulting in <strong>smoother but slower-to-react</strong> curves.</p>
+</li>
+<li>
+<p>A <strong>smaller β\beta</strong> emphasizes <strong>newer data more</strong>—producing <strong>quicker but more jittery</strong> reactions.</p>
+</li>
+</ul>
+<p>This mechanism is not just for temperature or stock prices. It’s used in <strong>company revenue predictions</strong>, <strong>sensor signal filtering</strong>, and—most relevant to us—<strong>gradient tracking in deep learning</strong>.</p>
+<h3 id="why-ewma-matters-in-deep-learning"><strong>Why EWMA Matters in Deep Learning</strong><a class="headerlink" href="#why-ewma-matters-in-deep-learning" title="Permanent link">&para;</a></h3>
+<p>In deep learning, especially when training large models, gradients can be noisy—changing sharply from one iteration to the next. Simply following the raw gradient at each step can lead to <strong>jittery or unstable learning</strong>. EWMA provides a way to <strong>smooth out these updates</strong>, helping the model follow a more consistent trajectory toward the optimum.</p>
+<p>This is the exact principle behind the <strong>Momentum optimizer</strong>, which we'll explore next. Momentum uses EWMA to retain a “memory” of past gradients, so the model doesn’t get distracted by noisy or contradictory directions.</p>
+<p>In short, EWMA gives us a way to move more intelligently—<strong>not just reacting to the latest input, but learning from a weighted history of the journey so far</strong>.</p>
+<hr />
+<h3 id="core-principles-of-ewma"><strong>Core Principles of EWMA</strong><a class="headerlink" href="#core-principles-of-ewma" title="Permanent link">&para;</a></h3>
+<p>Now that we’ve introduced the concept of Exponentially Weighted Moving Average (EWMA), let’s pause and highlight its two <strong>core principles</strong>. Despite its wide applicability and deep utility in optimizers, EWMA remains <strong>remarkably simple</strong> in how it functions. Understanding these two key ideas will make it easier to grasp how optimizers like Momentum and Adam build upon this foundation.</p>
+<h4 id="1-newer-values-are-given-more-weight"><strong>1. Newer Values Are Given More Weight</strong><a class="headerlink" href="#1-newer-values-are-given-more-weight" title="Permanent link">&para;</a></h4>
+<p>In EWMA, <strong>recent data points influence the average more heavily than older ones</strong>. This is a defining characteristic of the method.</p>
+<p>For example, if we’re averaging daily temperatures, the temperature on <strong>Day 3 will have more impact</strong> on the current moving average than the temperature on <strong>Day 1</strong>. The underlying logic is that <strong>newer data reflects more recent trends</strong>, which we typically care about more in both forecasting and optimization contexts.</p>
+<p>This property is encoded directly in the formula:</p>
+<p>vt=β⋅vt−1+(1−β)⋅xtv_t = \beta \cdot v_{t-1} + (1 - \beta) \cdot x_t</p>
+<p>Here, the term (1−β)⋅xt(1 - \beta) \cdot x_t ensures that the <strong>current value xtx_t</strong> gets a higher weight than the older average vt−1v_{t-1}, especially when β\beta is close to 1.</p>
+<h4 id="2-the-influence-of-any-individual-point-fades-over-time"><strong>2. The Influence of Any Individual Point Fades Over Time</strong><a class="headerlink" href="#2-the-influence-of-any-individual-point-fades-over-time" title="Permanent link">&para;</a></h4>
+<p>As more data points are processed, the <strong>weight of any single data point decreases exponentially</strong>. While every past observation continues to contribute to the moving average in some small way, its impact <strong>shrinks with time</strong>.</p>
+<p>This fading memory effect allows EWMA to be <strong>both stable and responsive</strong>:</p>
+<ul>
+<li>
+<p>Stable, because it retains historical context.</p>
+</li>
+<li>
+<p>Responsive, because it adjusts quickly to new trends, especially if the recent values start changing sharply.</p>
+</li>
+</ul>
+<p>Together, these two principles enable EWMA to maintain a <strong>balanced view of the past and the present</strong>, which is exactly what deep learning optimizers need when navigating complex, noisy loss surfaces.</p>
+<hr />
+<h3 id="mathematical-formula-and-step-by-step-calculation"><strong>Mathematical Formula and Step-by-Step Calculation</strong><a class="headerlink" href="#mathematical-formula-and-step-by-step-calculation" title="Permanent link">&para;</a></h3>
+<p>Now that we’ve understood the intuition behind the Exponentially Weighted Moving Average (EWMA), let’s translate that understanding into concrete computations. This not only reinforces the concept but also prepares us to see <strong>how EWMA is used within deep learning optimizers</strong>, where gradients change with each training iteration.</p>
+<p>The formula for EWMA is:</p>
+<p>Vt=β⋅Vt−1+(1−β)⋅TtV_t = \beta \cdot V_{t-1} + (1 - \beta) \cdot T_t</p>
+<p>Where:</p>
+<ul>
+<li>
+<p>VtV_t: EWMA at time step tt,</p>
+</li>
+<li>
+<p>Vt−1V_{t-1}: EWMA at the previous time step,</p>
+</li>
+<li>
+<p>TtT_t: New data point at time tt (e.g., temperature, gradient, etc.),</p>
+</li>
+<li>
+<p>β\beta: Smoothing factor or decay rate, with 0≤β≤10 \leq \beta \leq 1.</p>
+</li>
+</ul>
+<p>Let’s walk through this with an example.</p>
+<hr />
+<h4 id="step-by-step-calculation-a-simple-temperature-dataset"><strong>Step-by-Step Calculation: A Simple Temperature Dataset</strong><a class="headerlink" href="#step-by-step-calculation-a-simple-temperature-dataset" title="Permanent link">&para;</a></h4>
+<p>Suppose we are tracking daily temperatures, and we have the following data points:</p>
+<table>
+<thead>
+<tr>
+<th>Day</th>
+<th>Temperature (TtT_t)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>30°C</td>
+</tr>
+<tr>
+<td>2</td>
+<td>32°C</td>
+</tr>
+<tr>
+<td>3</td>
+<td>31°C</td>
+</tr>
+<tr>
+<td>4</td>
+<td>35°C</td>
+</tr>
+<tr>
+<td>5</td>
+<td>33°C</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s compute the EWMA for this dataset using β=0.9\beta = 0.9, a typical value used in deep learning applications. But before we begin, we need to decide on an <strong>initial value</strong> V0V_0.</p>
+<h4 id="choosing-the-initial-value-v0v_0"><strong>Choosing the Initial Value V0V_0</strong><a class="headerlink" href="#choosing-the-initial-value-v0v_0" title="Permanent link">&para;</a></h4>
+<p>There’s no strict rule for choosing V0V_0, and in practice:</p>
+<ul>
+<li>
+<p>Some approaches set V0=0V_0 = 0,</p>
+</li>
+<li>
+<p>Others initialize V0=T0V_0 = T_0, i.e., the first data point.</p>
+</li>
+</ul>
+<p>For smoother and more intuitive convergence, we’ll <strong>set V0=T1=30°CV_0 = T_1 = 30°C</strong>.</p>
+<hr />
+<h4 id="compute-v1v_1"><strong>Compute V1V_1</strong><a class="headerlink" href="#compute-v1v_1" title="Permanent link">&para;</a></h4>
+<p>V1=0.9⋅V0+0.1⋅T2=0.9⋅30+0.1⋅32=27+3.2=30.2V_1 = 0.9 \cdot V_0 + 0.1 \cdot T_2 = 0.9 \cdot 30 + 0.1 \cdot 32 = 27 + 3.2 = 30.2</p>
+<h4 id="compute-v2v_2"><strong>Compute V2V_2</strong><a class="headerlink" href="#compute-v2v_2" title="Permanent link">&para;</a></h4>
+<p>V2=0.9⋅V1+0.1⋅T3=0.9⋅30.2+0.1⋅31=27.18+3.1=30.28V_2 = 0.9 \cdot V_1 + 0.1 \cdot T_3 = 0.9 \cdot 30.2 + 0.1 \cdot 31 = 27.18 + 3.1 = 30.28</p>
+<h4 id="compute-v3v_3"><strong>Compute V3V_3</strong><a class="headerlink" href="#compute-v3v_3" title="Permanent link">&para;</a></h4>
+<p>V3=0.9⋅V2+0.1⋅T4=0.9⋅30.28+0.1⋅35=27.252+3.5=30.752V_3 = 0.9 \cdot V_2 + 0.1 \cdot T_4 = 0.9 \cdot 30.28 + 0.1 \cdot 35 = 27.252 + 3.5 = 30.752</p>
+<h4 id="compute-v4v_4"><strong>Compute V4V_4</strong><a class="headerlink" href="#compute-v4v_4" title="Permanent link">&para;</a></h4>
+<p>V4=0.9⋅V3+0.1⋅T5=0.9⋅30.752+0.1⋅33=27.6768+3.3=30.9768V_4 = 0.9 \cdot V_3 + 0.1 \cdot T_5 = 0.9 \cdot 30.752 + 0.1 \cdot 33 = 27.6768 + 3.3 = 30.9768</p>
+<hr />
+<h3 id="plotting-and-interpretation"><strong>Plotting and Interpretation</strong><a class="headerlink" href="#plotting-and-interpretation" title="Permanent link">&para;</a></h3>
+<p>If we plot the original temperature values against the calculated VtV_t values, we’ll notice a smooth curve that follows the overall trend but filters out day-to-day fluctuations. This smoothed sequence—your EWMA—can now serve as a <strong>trend line</strong> or, in the context of deep learning, a <strong>smoothed estimate of gradients or squared gradients</strong> across iterations.</p>
+<hr />
+<h3 id="impact-of-the-beta-parameter"><strong>Impact of the Beta (β) Parameter</strong><a class="headerlink" href="#impact-of-the-beta-parameter" title="Permanent link">&para;</a></h3>
+<p>Now that we’ve seen how EWMA is calculated, let’s examine the role of the <strong>β (beta)</strong> parameter more closely. Beta is not just a constant in the formula—it fundamentally shapes the <strong>behavior</strong> of the moving average, controlling how <strong>quickly</strong> it reacts to new data and how much it “remembers” from the past.</p>
+<p>Vt=β⋅Vt−1+(1−β)⋅TtV_t = \beta \cdot V_{t-1} + (1 - \beta) \cdot T_t</p>
+<p>Recall that:</p>
+<ul>
+<li>
+<p>A <strong>higher β</strong> gives <strong>more weight to past values</strong> (i.e., stronger memory),</p>
+</li>
+<li>
+<p>A <strong>lower β</strong> gives <strong>more weight to the current value</strong> (i.e., quicker reaction).</p>
+</li>
+</ul>
+<hr />
+<h4 id="intuitive-rule-of-thumb-1-1-"><strong>Intuitive Rule of Thumb: 1 / (1 - β)</strong><a class="headerlink" href="#intuitive-rule-of-thumb-1-1-" title="Permanent link">&para;</a></h4>
+<p>There’s a useful way to <strong>approximate</strong> how many past data points the EWMA is effectively averaging:</p>
+<p>Effective Window Size≈11−β\text{Effective Window Size} \approx \frac{1}{1 - \beta}</p>
+<p>This gives an intuition for how much history is retained in the moving average:</p>
+<ul>
+<li>
+<p>If β=0.9\beta = 0.9,</p>
+<p>11−0.9=10\frac{1}{1 - 0.9} = 10</p>
+<p>The EWMA behaves roughly like a <strong>10-point average</strong>. It's smooth, stable, and slower to react.</p>
+</li>
+<li>
+<p>If β=0.5\beta = 0.5,</p>
+<p>11−0.5=2\frac{1}{1 - 0.5} = 2</p>
+<p>The EWMA reacts quickly, behaving like a <strong>2-point average</strong>. It follows the data more closely but fluctuates more.</p>
+</li>
+</ul>
+<hr />
+<h4 id="effect-on-the-ewma-graph"><strong>Effect on the EWMA Graph</strong><a class="headerlink" href="#effect-on-the-ewma-graph" title="Permanent link">&para;</a></h4>
+<p>Let’s consider what this means visually. Suppose we’re plotting the EWMA of temperature readings:</p>
+<ul>
+<li>
+<p><strong>High β values</strong> (e.g., 0.98, 0.9):</p>
+<ul>
+<li>
+<p>Result in a <strong>smooth, stable curve</strong> that filters out short-term noise.</p>
+</li>
+<li>
+<p>The curve reacts slowly to sudden spikes or dips.</p>
+</li>
+<li>
+<p>Useful when we want to emphasize long-term trends and ignore volatility.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Low β values</strong> (e.g., 0.5, 0.1):</p>
+<ul>
+<li>
+<p>Result in a <strong>spiky, reactive graph</strong> that closely follows the most recent data.</p>
+</li>
+<li>
+<p>The curve is sensitive to sudden changes, responding almost immediately.</p>
+</li>
+<li>
+<p>Useful when we want to track rapid changes but are okay with more noise.</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="choosing-the-right-beta"><strong>Choosing the Right Beta</strong><a class="headerlink" href="#choosing-the-right-beta" title="Permanent link">&para;</a></h4>
+<p>There’s no one-size-fits-all value for β. The choice depends on the <strong>desired trade-off between stability and responsiveness</strong>:</p>
+<ul>
+<li>
+<p><strong>Too high</strong>, and the EWMA may ignore recent important changes.</p>
+</li>
+<li>
+<p><strong>Too low</strong>, and the EWMA may become overly reactive and noisy.</p>
+</li>
+</ul>
+<p>In deep learning, a <strong>β of 0.9 is a commonly used default</strong>, striking a good balance for many tasks. For example:</p>
+<ul>
+<li>
+<p>In <strong>Momentum</strong>, β controls how much past gradient influence is retained.</p>
+</li>
+<li>
+<p>In <strong>Adam</strong>, β governs the decay rate for both the first and second moment estimates.</p>
+</li>
+</ul>
+<p>Understanding the behavior of β is key to tuning optimizers effectively.</p>
+<hr />
+<h3 id="mathematical-proof-of-weight-distribution-in-ewma"><strong>Mathematical Proof of Weight Distribution in EWMA</strong><a class="headerlink" href="#mathematical-proof-of-weight-distribution-in-ewma" title="Permanent link">&para;</a></h3>
+<p>So far, we’ve described the behavior of the Exponentially Weighted Moving Average (EWMA) intuitively, observed it through examples, and explored how the <strong>β</strong> parameter controls its responsiveness. But to fully appreciate its mathematical elegance, let’s now look at a <strong>formal expansion</strong> of the EWMA formula. This will show exactly <strong>how past data points contribute</strong> to the current value, and why newer values exert more influence than older ones.</p>
+<hr />
+<h4 id="starting-with-the-recursive-formula"><strong>Starting with the Recursive Formula</strong><a class="headerlink" href="#starting-with-the-recursive-formula" title="Permanent link">&para;</a></h4>
+<p>Recall the standard EWMA update equation:</p>
+<p>Vt=β⋅Vt−1+(1−β)⋅TtV_t = \beta \cdot V_{t-1} + (1 - \beta) \cdot T_t</p>
+<p>We’ll now expand this equation recursively to understand the structure of VtV_t in terms of all previous data points.</p>
+<hr />
+<h4 id="step-by-step-expansion"><strong>Step-by-Step Expansion</strong><a class="headerlink" href="#step-by-step-expansion" title="Permanent link">&para;</a></h4>
+<p>Let’s take a concrete example by expanding V4V_4. Starting from the base formula:</p>
+<p>V4=β⋅V3+(1−β)⋅T4V_4 = \beta \cdot V_3 + (1 - \beta) \cdot T_4</p>
+<p>Substitute V3V_3:</p>
+<p>V3=β⋅V2+(1−β)⋅T3⇒V4=β(βV2+(1−β)T3)+(1−β)T4V_3 = \beta \cdot V_2 + (1 - \beta) \cdot T_3 \Rightarrow V_4 = \beta (\beta V_2 + (1 - \beta) T_3) + (1 - \beta) T_4</p>
+<p>Now substitute V2V_2:</p>
+<p>V2=βV1+(1−β)T2⇒V4=β2(βV1+(1−β)T2)+β(1−β)T3+(1−β)T4V_2 = \beta V_1 + (1 - \beta) T_2 \Rightarrow V_4 = \beta^2 (\beta V_1 + (1 - \beta) T_2) + \beta (1 - \beta) T_3 + (1 - \beta) T_4</p>
+<p>One more expansion using V1V_1:</p>
+<p>V1=βV0+(1−β)T1⇒V4=β3V0+β2(1−β)T1+β(1−β)T2+(1−β)T3+(1−β)T4V_1 = \beta V_0 + (1 - \beta) T_1 \Rightarrow V_4 = \beta^3 V_0 + \beta^2 (1 - \beta) T_1 + \beta (1 - \beta) T_2 + (1 - \beta) T_3 + (1 - \beta) T_4</p>
+<hr />
+<h4 id="general-pattern-decaying-weights"><strong>General Pattern: Decaying Weights</strong><a class="headerlink" href="#general-pattern-decaying-weights" title="Permanent link">&para;</a></h4>
+<p>We can now observe a clear <strong>weighting pattern</strong>:</p>
+<p><span class="arithmatex">\(V_4 = (1 - \beta) \cdot \left[T_4 + \beta T_3 + \beta^2 T_2 + \beta^3 T_1\right] + \beta^4 V_0\)</span></p>
+<p>This generalizes to:</p>
+<p><span class="arithmatex">\(V_t = (1 - \beta) \cdot \sum_{k=0}^{t-1} \beta^k T_{t-k} + \beta^t V_0\)</span></p>
+<p>Each previous data point <span class="arithmatex">\(T_{t-k}\)</span> is <strong>multiplied by <span class="arithmatex">\(\beta^k (1 - \beta)\)</span></strong>, where:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(k = 0\)</span> gives us the most recent point: weight = <span class="arithmatex">\((1 - \beta)\)</span></p>
+</li>
+<li>
+<p><span class="arithmatex">\(k = 1\)</span>: weight = <span class="arithmatex">\(\beta (1 - \beta)\)</span></p>
+</li>
+<li>
+<p><span class="arithmatex">\(k = 2\)</span>: weight = <span class="arithmatex">\(\beta^2 (1 - \beta)\)</span></p>
+</li>
+<li>
+<p>And so on...</p>
+</li>
+</ul>
+<p>Because <span class="arithmatex">\(\beta \in (0, 1)\)</span>, we know:</p>
+<p><span class="arithmatex">\(\beta^3 &lt; \beta^2 &lt; \beta &lt; 1\)</span></p>
+<p>Thus, <strong>older values receive exponentially smaller weights</strong>, while the most recent data contributes the most. This <strong>mathematically proves</strong> our earlier intuition that EWMA favors newer points while gradually "forgetting" the older ones.</p>
+<p>The final term, βtV0\beta^t V_0, also becomes negligible over time if V0V_0 is not set carefully. This is the reason why some optimizers, like Adam, <strong>use bias correction</strong> to remove the impact of this term early in training—something we’ll revisit shortly.</p>
+<hr />
+<h3 id="python-implementation-of-ewma"><strong>Python Implementation of EWMA</strong><a class="headerlink" href="#python-implementation-of-ewma" title="Permanent link">&para;</a></h3>
+<p>After exploring the theory and mathematics behind Exponentially Weighted Moving Averages (EWMA), let’s now turn to its implementation in Python. The goal here is to see how easily we can compute and visualize EWMA using real or synthetic data, and understand how different <strong>β</strong> values affect the resulting trend.</p>
+<p>The <strong>Pandas</strong> library offers a built-in function called <code>ewm()</code> that simplifies the computation of EWMA for time series data. This function is highly flexible and well-optimized.</p>
+<hr />
+<h4 id="understanding-the-alpha-parameter"><strong>Understanding the <code>alpha</code> Parameter</strong><a class="headerlink" href="#understanding-the-alpha-parameter" title="Permanent link">&para;</a></h4>
+<p>Before we dive into code, there's one small detail to note:<br />
+Pandas uses <strong>alpha</strong> as its parameter instead of beta.</p>
+<p><span class="arithmatex">\(\alpha = 1 - \beta\)</span></p>
+<p>So, if your desired <strong>β = 0.9</strong>, you would pass <strong>α = 0.1</strong> to the function.</p>
+<hr />
+<h4 id="example-ewma-on-temperature-data"><strong>Example: EWMA on Temperature Data</strong><a class="headerlink" href="#example-ewma-on-temperature-data" title="Permanent link">&para;</a></h4>
+<p>Let’s walk through a simple example using synthetic temperature data:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Sample temperature data (in °C)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Day&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Day 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Day 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Day 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Day 4&#39;</span><span class="p">,</span> <span class="s1">&#39;Day 5&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">33</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Convert day labels to numerical index for plotting</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Desired Beta value</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">beta</span>  <span class="c1"># Pandas expects alpha</span>
+
+<span class="c1"># Calculate EWMA using pandas</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;EWMA (Beta=0.9)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ewm</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original Temperature&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;EWMA (Beta=0.9)&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;EWMA (Beta=0.9)&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Day&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Exponentially Weighted Moving Average (EWMA)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h4 id="output-and-interpretation"><strong>Output and Interpretation</strong><a class="headerlink" href="#output-and-interpretation" title="Permanent link">&para;</a></h4>
+<p>This simple code:</p>
+<ul>
+<li>
+<p>Creates a small DataFrame with daily temperatures,</p>
+</li>
+<li>
+<p>Calculates the EWMA using the <code>ewm()</code> function,</p>
+</li>
+<li>
+<p>Plots both the original and smoothed curves.</p>
+</li>
+</ul>
+<p>You’ll notice that the EWMA line is smoother and lags slightly behind the original values—exactly what we expect from exponential averaging.</p>
+<hr />
+<h4 id="hands-on-exercises"><strong>Hands-On Exercises</strong><a class="headerlink" href="#hands-on-exercises" title="Permanent link">&para;</a></h4>
+<p>To reinforce your understanding, try the following:</p>
+<ol>
+<li>
+<p><strong>Vary the beta value</strong> (e.g., 0.5, 0.1, 0.98) and observe how the curve changes.</p>
+</li>
+<li>
+<p><strong>Implement EWMA manually</strong> using a loop and the recursive formula:</p>
+<p><span class="arithmatex">\(V_t = \beta \cdot V_{t-1} + (1 - \beta) \cdot T_t\)</span>
+3. <strong>Use a larger dataset</strong>, such as stock prices or weather records, and apply the same technique.</p>
+</li>
+</ol>
+<hr />
+<h1 id="sgd-with-momentum-motivation-and-intuition"><strong>SGD with Momentum: Motivation and Intuition</strong><a class="headerlink" href="#sgd-with-momentum-motivation-and-intuition" title="Permanent link">&para;</a></h1>
+<p>As we continue our deep learning journey into optimization, we now shift from foundational concepts—like Gradient Descent and EWMA—into <strong>powerful enhancements</strong> that make neural network training faster, more stable, and more efficient.</p>
+<p>The first technique we’ll explore is <strong>Stochastic Gradient Descent with Momentum</strong>—commonly known as <strong>SGD with Momentum</strong>. It is one of the most <strong>widely used and influential optimizers</strong> in practice and a key stepping stone toward even more advanced methods like RMSprop and Adam.</p>
+<p>At its core, SGD with Momentum is not a reinvention of gradient descent, but rather an <strong>elegant improvement</strong>. It uses the concept of <strong>Momentum</strong>, which we now understand as an application of <strong>Exponentially Weighted Moving Averages (EWMA)</strong>—but instead of smoothing temperature or price data, we smooth the <strong>gradients</strong> over time.</p>
+<p>This technique doesn't just accelerate training; it also helps <strong>stabilize</strong> the learning process, especially in regions of the loss surface where <strong>naive SGD might zig-zag or get stuck</strong>. By accumulating past gradient directions, Momentum gives the optimizer <strong>inertia</strong>—the ability to push through flat regions and dampen sharp turns.</p>
+<p>You’ll find that <strong>Momentum is not unique to SGD</strong>. It serves as a <strong>building block for many other optimizers</strong> we’ll study later, including Nesterov Accelerated Gradient and Adam. That’s why it’s essential to deeply understand both the <strong>intuition</strong> and the <strong>mechanics</strong> of Momentum.</p>
+<p>In the sections that follow, we’ll start by revisiting SGD, identify where it struggles, and then explore how adding Momentum resolves many of those issues. Our goal is to not just understand the mathematics but to <strong>build intuition</strong>—something that’s often more challenging and more valuable in the long run.</p>
+<p>Let’s begin by briefly recapping how <strong>standard SGD works</strong>, so we can appreciate what Momentum brings to the table.</p>
+<hr />
+<h2 id="basic-concepts-and-visualizations-prerequisites-for-understanding-optimization"><strong>Basic Concepts and Visualizations: Prerequisites for Understanding Optimization</strong><a class="headerlink" href="#basic-concepts-and-visualizations-prerequisites-for-understanding-optimization" title="Permanent link">&para;</a></h2>
+<p>Before diving into the mechanics of <strong>SGD with Momentum</strong>, it’s important to establish a shared visual vocabulary. Optimization in deep learning often takes place in <strong>high-dimensional spaces</strong>—but the tools we use to understand and teach it are necessarily <strong>2D or 3D simplifications</strong>. To fully grasp the intuition behind optimizers like Momentum, RMSprop, or Adam, we need to be comfortable reading and interpreting <strong>loss landscapes</strong> and <strong>gradient flows</strong>.</p>
+<p>Let’s begin with the basics.</p>
+<hr />
+<h3 id="the-deep-learning-context"><strong>The Deep Learning Context</strong><a class="headerlink" href="#the-deep-learning-context" title="Permanent link">&para;</a></h3>
+<p>At the heart of any deep learning model is the goal of minimizing a <strong>loss function</strong>. The model receives some <strong>input features</strong>, applies transformations through layers (governed by <strong>weights and biases</strong>), and outputs a prediction y^\hat{y}. This prediction is compared to the actual target value yy, and the <strong>loss function</strong> quantifies the difference between them.</p>
+<p>A common loss function in regression tasks is <strong>Mean Squared Error</strong>:</p>
+<p>Loss=(y−y^)2\text{Loss} = (y - \hat{y})^2</p>
+<p>Crucially, this loss is not just a number—it’s a function of the model’s <strong>parameters</strong> (weights and biases). Our task in optimization is to adjust these parameters such that the loss reaches its <strong>minimum</strong>.</p>
+<hr />
+<h3 id="why-visualizations-are-challenging-but-necessary"><strong>Why Visualizations Are Challenging but Necessary</strong><a class="headerlink" href="#why-visualizations-are-challenging-but-necessary" title="Permanent link">&para;</a></h3>
+<p>In practice, neural networks may have <strong>thousands or even millions of parameters</strong>, which means the loss function exists in an equally high-dimensional space. Unfortunately, humans can't visualize functions over 100 dimensions, let alone a million.</p>
+<p>So we simplify. We use <strong>reduced visualizations</strong> to illustrate how the loss changes with respect to <strong>one or two parameters</strong> at a time, helping us intuitively understand what optimization looks like.</p>
+<hr />
+<h3 id="understanding-the-different-graphs"><strong>Understanding the Different Graphs</strong><a class="headerlink" href="#understanding-the-different-graphs" title="Permanent link">&para;</a></h3>
+<p>To interpret optimizer behavior, we’ll use three core types of visualizations:</p>
+<h4 id="1-2d-loss-graphs-single-parameter-view"><strong>1. 2D Loss Graphs (Single-Parameter View)</strong><a class="headerlink" href="#1-2d-loss-graphs-single-parameter-view" title="Permanent link">&para;</a></h4>
+<p>In this graph, we plot the <strong>loss</strong> on the Y-axis and a <strong>single parameter</strong> (like a weight WW) on the X-axis. This shows how the loss changes as one weight changes—ideal for illustrating gradient descent along a simple curve. The <strong>slope of the curve</strong> corresponds to the gradient, and optimization is visualized as sliding down the curve toward the minimum.</p>
+<h4 id="2-3d-loss-surface-two-parameter-view"><strong>2. 3D Loss Surface (Two-Parameter View)</strong><a class="headerlink" href="#2-3d-loss-surface-two-parameter-view" title="Permanent link">&para;</a></h4>
+<p>Here, we plot <strong>loss as a surface</strong> over two parameters—often a weight WW and a bias BB. This 3D bowl-shaped surface helps us visualize <strong>gradient directions</strong> and how the optimizer moves across this surface. It becomes particularly useful when explaining <strong>oscillations, curvature, and momentum-based acceleration</strong>.</p>
+<h4 id="3-contour-plot-2d-projection-of-3d-surface"><strong>3. Contour Plot (2D Projection of 3D Surface)</strong><a class="headerlink" href="#3-contour-plot-2d-projection-of-3d-surface" title="Permanent link">&para;</a></h4>
+<p>Contour plots are perhaps the most <strong>intuitive and information-dense</strong> visual tool for optimizers. They’re a top-down projection of the 3D surface, showing <strong>lines of constant loss</strong>—like elevation lines on a map. These plots help us:</p>
+<ul>
+<li>
+<p>Visualize <strong>direction and steepness</strong> of the gradient,</p>
+</li>
+<li>
+<p>Interpret <strong>optimizer trajectories</strong>,</p>
+</li>
+<li>
+<p>Identify <strong>valleys, plateaus, and saddle points</strong>.</p>
+</li>
+</ul>
+<p>Closely packed contours mean a <strong>steep slope</strong> (sharp gradient), while widely spaced contours represent <strong>flat regions</strong> where gradients are small. These plots are often color-coded to represent the third dimension (loss), with darker regions indicating lower loss.</p>
+<hr />
+<p>By familiarizing ourselves with these visual representations, we gain an intuitive feel for how optimizers "navigate" the loss landscape. This understanding will be essential as we explore <strong>SGD with Momentum</strong>, where gradients not only guide movement, but accumulate over time like physical momentum rolling through a valley.</p>
+<p>In the next section, we’ll begin by revisiting <strong>SGD</strong> to identify the core challenge it faces—and how Momentum elegantly solves it.</p>
+<hr />
+<h2 id="convex-vs-non-convex-optimization"><strong>Convex vs. Non-Convex Optimization</strong><a class="headerlink" href="#convex-vs-non-convex-optimization" title="Permanent link">&para;</a></h2>
+<p>As we continue to build intuition around optimization in deep learning, it's important to take a moment to understand the <strong>nature of the loss surfaces</strong> we deal with—specifically, whether they are <strong>convex</strong> or <strong>non-convex</strong>. This distinction plays a central role in how difficult it is to train neural networks, and why optimizers need to do more than just follow gradients.</p>
+<hr />
+<h3 id="what-is-convex-optimization"><strong>What Is Convex Optimization?</strong><a class="headerlink" href="#what-is-convex-optimization" title="Permanent link">&para;</a></h3>
+<p>In convex optimization problems, the <strong>loss surface has a single global minimum</strong>. Imagine a perfect U-shaped bowl—no matter where you start on the curve, moving downhill via gradient descent will always take you to the lowest point.</p>
+<p>Mathematically, a function is convex if the line segment between any two points on its graph lies <strong>above or on the graph itself</strong>. For convex functions, <strong>local minima are guaranteed to be global minima</strong>.</p>
+<p>Convex optimization is <strong>well-understood</strong>, <strong>efficient</strong>, and <strong>reliable</strong>—which is why it's often assumed in classical optimization theory.</p>
+<hr />
+<h3 id="non-convex-optimization-the-reality-of-deep-learning"><strong>Non-Convex Optimization: The Reality of Deep Learning</strong><a class="headerlink" href="#non-convex-optimization-the-reality-of-deep-learning" title="Permanent link">&para;</a></h3>
+<p>Unfortunately, deep learning doesn't live in that simple world.</p>
+<p>As soon as we introduce <strong>multiple layers, nonlinear activations, and large parameter spaces</strong>, the resulting loss functions become <strong>non-convex</strong>. These surfaces resemble a chaotic landscape of <strong>valleys, hills, plateaus, ridges, and ravines</strong>—which makes finding the true minimum far more challenging.</p>
+<p>In this landscape, optimizers must navigate a terrain full of traps and complications. Let’s look at the main ones.</p>
+<hr />
+<h3 id="why-non-convex-optimization-is-hard"><strong>Why Non-Convex Optimization Is Hard</strong><a class="headerlink" href="#why-non-convex-optimization-is-hard" title="Permanent link">&para;</a></h3>
+<h4 id="1-local-minima"><strong>1. Local Minima</strong><a class="headerlink" href="#1-local-minima" title="Permanent link">&para;</a></h4>
+<p>These are points where the gradient is zero, but the loss is <strong>not</strong> the lowest possible value.</p>
+<ul>
+<li>
+<p>An optimizer that lands here may <strong>get stuck</strong> and never reach the global minimum.</p>
+</li>
+<li>
+<p>In high-dimensional deep learning settings, local minima are less of a concern than they were once thought to be—but they still represent <strong>suboptimal convergence</strong>.</p>
+</li>
+</ul>
+<h4 id="2-saddle-points"><strong>2. Saddle Points</strong><a class="headerlink" href="#2-saddle-points" title="Permanent link">&para;</a></h4>
+<p>These are <strong>even trickier</strong> than local minima. A saddle point is a position where:</p>
+<ul>
+<li>
+<p>The gradient is zero (or very close),</p>
+</li>
+<li>
+<p>The surface <strong>curves upward in one direction and downward in another</strong>.</p>
+</li>
+</ul>
+<p>An optimizer may misinterpret a saddle point as a minimum and <strong>slow to a crawl</strong>, wasting iterations in a region that isn’t productive. In deep networks with thousands of parameters, <strong>saddle points are far more common than local minima</strong>, and represent a major challenge for gradient-based methods.</p>
+<h4 id="3-high-curvature"><strong>3. High Curvature</strong><a class="headerlink" href="#3-high-curvature" title="Permanent link">&para;</a></h4>
+<p>Some regions of the loss surface may have <strong>sharp changes in slope</strong>—a phenomenon called <strong>high curvature</strong>.</p>
+<ul>
+<li>
+<p>In such areas, small changes in direction can cause <strong>overshooting</strong>, <strong>oscillations</strong>, or <strong>unstable learning</strong>.</p>
+</li>
+<li>
+<p>Optimizers like vanilla SGD often suffer from zig-zagging in these regions, especially along narrow valleys or ridges.</p>
+</li>
+</ul>
+<hr />
+<p>These challenges make deep learning optimization more than just a downhill walk—it’s a problem of navigating complex terrain, avoiding traps, and maintaining steady progress.</p>
+<p>This is exactly where <strong>Momentum</strong> comes in. As we’ll see next, Momentum helps optimizers <strong>push through saddle points</strong>, <strong>dampen oscillations</strong>, and <strong>accelerate in consistent directions</strong>—all by leveraging the simple yet powerful idea of <strong>exponentially weighted gradient accumulation</strong>.</p>
+<hr />
+<h2 id="limitations-of-standard-gradient-descent-variants"><strong>Limitations of Standard Gradient Descent Variants</strong><a class="headerlink" href="#limitations-of-standard-gradient-descent-variants" title="Permanent link">&para;</a></h2>
+<p>Now that we've explored the challenges of <strong>non-convex optimization</strong> in deep learning—such as <strong>local minima</strong>, <strong>saddle points</strong>, and <strong>regions of high curvature</strong>—it becomes clear why we need more sophisticated optimization techniques. But before we introduce those enhancements, it's important to evaluate <strong>how well the basic variants of Gradient Descent perform</strong> in practice.</p>
+<p>Let’s briefly revisit the three classical forms of Gradient Descent: <strong>Vanilla Gradient Descent (Batch GD)</strong>, <strong>Stochastic Gradient Descent (SGD)</strong>, and <strong>Mini-batch Gradient Descent</strong>—and assess how they behave in a relatively simple scenario: a <strong>convex loss surface</strong>.</p>
+<hr />
+<h3 id="demonstration-gradient-descent-variants-on-a-convex-problem"><strong>Demonstration: Gradient Descent Variants on a Convex Problem</strong><a class="headerlink" href="#demonstration-gradient-descent-variants-on-a-convex-problem" title="Permanent link">&para;</a></h3>
+<p>Imagine optimizing a simple <strong>3D paraboloid loss surface</strong>, shaped like a bowl. This is a <strong>convex function</strong>, so any descent method should eventually reach the global minimum. Here’s how each variant behaves:</p>
+<h4 id="1-batch-gradient-descent-vanilla-gd"><strong>1. Batch Gradient Descent (Vanilla GD)</strong><a class="headerlink" href="#1-batch-gradient-descent-vanilla-gd" title="Permanent link">&para;</a></h4>
+<p>This variant calculates the gradient using the <strong>entire training dataset</strong> before taking a single update step.</p>
+<ul>
+<li>
+<p>On a convex surface, it <strong>moves smoothly and directly</strong> toward the minimum.</p>
+</li>
+<li>
+<p>It is <strong>stable</strong> and <strong>accurate</strong>, but computationally expensive for large datasets.</p>
+</li>
+</ul>
+<h4 id="2-stochastic-gradient-descent-sgd"><strong>2. Stochastic Gradient Descent (SGD)</strong><a class="headerlink" href="#2-stochastic-gradient-descent-sgd" title="Permanent link">&para;</a></h4>
+<p>SGD updates weights <strong>after every single data point</strong>.</p>
+<ul>
+<li>
+<p>Its trajectory is <strong>noisy and erratic</strong>, jumping around due to variance in the gradients.</p>
+</li>
+<li>
+<p>While it does eventually find the minimum, it often <strong>oscillates</strong> around it and takes <strong>longer to converge</strong>.</p>
+</li>
+<li>
+<p>On a convex surface, this jittery behavior is tolerable—but on complex, non-convex surfaces, it becomes a liability.</p>
+</li>
+</ul>
+<h4 id="3-mini-batch-gradient-descent"><strong>3. Mini-Batch Gradient Descent</strong><a class="headerlink" href="#3-mini-batch-gradient-descent" title="Permanent link">&para;</a></h4>
+<p>This strikes a balance by updating weights after seeing <strong>a small batch of examples</strong> (e.g., 32 or 64 samples).</p>
+<ul>
+<li>
+<p>It provides a <strong>middle ground</strong>—less noisy than SGD, more efficient than full-batch GD.</p>
+</li>
+<li>
+<p>It performs reliably on convex problems, reaching the minimum with <strong>moderate smoothness</strong>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="but-what-about-non-convex-surfaces"><strong>But What About Non-Convex Surfaces?</strong><a class="headerlink" href="#but-what-about-non-convex-surfaces" title="Permanent link">&para;</a></h3>
+<p>Unfortunately, once we move to <strong>non-convex loss landscapes</strong>, all three of these variants struggle. None of them:</p>
+<ul>
+<li>
+<p>Address the <strong>inertia needed to escape saddle points</strong>,</p>
+</li>
+<li>
+<p>Handle <strong>sharp curvatures</strong> efficiently,</p>
+</li>
+<li>
+<p>Or <strong>adaptively accelerate</strong> in promising directions.</p>
+</li>
+</ul>
+<p>SGD in particular may wander erratically in flat regions or get trapped near saddle points. Mini-batch GD suffers from similar issues—just slightly dampened.</p>
+<p>This is why we turn to smarter strategies—like <strong>Momentum</strong>—which can remember the direction of movement, smooth out noise, and push through unproductive regions of the landscape.</p>
+<p>In the next section, we’ll see how Momentum modifies SGD to overcome these very limitations, using the foundational idea of <strong>Exponentially Weighted Moving Averages</strong>—now applied to gradients.</p>
+<hr />
+<h2 id="why-use-momentum-optimization"><strong>Why Use Momentum Optimization?</strong><a class="headerlink" href="#why-use-momentum-optimization" title="Permanent link">&para;</a></h2>
+<p>As we’ve seen so far, traditional gradient-based optimization techniques—like SGD and its variants—can struggle in the complex, high-dimensional landscapes typical of deep learning. These methods are particularly vulnerable to <strong>slow progress in flat regions</strong>, <strong>erratic movement in noisy gradients</strong>, and <strong>difficulty escaping traps like local minima or saddle points</strong>.</p>
+<p>This is precisely where <strong>Momentum optimization</strong> comes in.</p>
+<p>Inspired by physics, the idea behind Momentum is to <strong>simulate the motion of a ball rolling down a slope</strong>. In classical SGD, the optimizer takes one step at a time based only on the current gradient. But with Momentum, the optimizer retains a <strong>velocity vector</strong>—a memory of past gradients—which helps it continue moving in productive directions and dampens unnecessary oscillations.</p>
+<p>Let’s explore the three core reasons why <strong>Momentum is not just helpful, but essential</strong> in many deep learning scenarios:</p>
+<hr />
+<h3 id="1-handling-gradual-slopes-small-gradients"><strong>1. Handling Gradual Slopes (Small Gradients)</strong><a class="headerlink" href="#1-handling-gradual-slopes-small-gradients" title="Permanent link">&para;</a></h3>
+<p>In some regions of the loss surface, the slope is nearly flat—meaning the gradients are very small.</p>
+<ul>
+<li>
+<p>Without momentum, the optimizer moves slowly and can take many iterations to make meaningful progress.</p>
+</li>
+<li>
+<p><strong>Momentum accumulates gradient information</strong>, allowing the optimizer to <strong>accelerate through flat regions</strong>, even when the slope is weak.</p>
+</li>
+</ul>
+<p>This makes it especially valuable in deep networks, where plateaus and slow zones are common.</p>
+<hr />
+<h3 id="2-escaping-local-minima"><strong>2. Escaping Local Minima</strong><a class="headerlink" href="#2-escaping-local-minima" title="Permanent link">&para;</a></h3>
+<p>Local minima can trap a standard optimizer because once the gradient becomes zero, it has no direction to move.</p>
+<ul>
+<li>
+<p>Momentum gives the optimizer <strong>inertia</strong>—it can carry enough "velocity" from previous steps to <strong>push through</strong> shallow local minima and continue exploring the loss surface.</p>
+</li>
+<li>
+<p>This dynamic often results in <strong>better final convergence</strong> and avoids settling too early on suboptimal solutions.</p>
+</li>
+</ul>
+<hr />
+<h3 id="3-navigating-high-curvature-sharp-valleys-and-ridges"><strong>3. Navigating High Curvature (Sharp Valleys and Ridges)</strong><a class="headerlink" href="#3-navigating-high-curvature-sharp-valleys-and-ridges" title="Permanent link">&para;</a></h3>
+<p>In regions of high curvature—where the slope changes steeply in one direction and gradually in another—vanilla SGD tends to <strong>zig-zag</strong>, especially if the learning rate isn’t carefully tuned.</p>
+<ul>
+<li>
+<p>Momentum reduces these oscillations by <strong>averaging out abrupt gradient changes</strong>, leading to <strong>smoother and more stable updates</strong>.</p>
+</li>
+<li>
+<p>The result is a trajectory that cuts <strong>efficiently through narrow valleys</strong>, without bouncing from one side to the other.</p>
+</li>
+</ul>
+<hr />
+<h3 id="momentum-summarized"><strong>Momentum Summarized</strong><a class="headerlink" href="#momentum-summarized" title="Permanent link">&para;</a></h3>
+<p>So, why use Momentum?</p>
+<p>Because it tackles three major roadblocks that standard gradient descent methods can’t handle well:</p>
+<ul>
+<li>
+<p><strong>Slow training in flat regions,</strong></p>
+</li>
+<li>
+<p><strong>Trap-prone behavior around local minima,</strong></p>
+</li>
+<li>
+<p><strong>Inefficient movement in high-curvature zones.</strong></p>
+</li>
+</ul>
+<p>It’s a remarkably <strong>simple enhancement</strong>, but its impact is profound—especially when training deep neural networks.</p>
+<p>Now that we understand why Momentum is valuable, let’s break down exactly <strong>how it works</strong>, how it <strong>modifies the gradient update rule</strong>, and how it builds on the Exponentially Weighted Moving Average we’ve already studied.</p>
+<hr />
+<h2 id="core-principle-and-intuition-of-momentum"><strong>Core Principle and Intuition of Momentum</strong><a class="headerlink" href="#core-principle-and-intuition-of-momentum" title="Permanent link">&para;</a></h2>
+<p>Now that we've seen <strong>why Momentum is useful</strong>, let’s build a deep <strong>intuitive understanding</strong> of how it works. While the math is relatively straightforward, it's the <strong>idea behind it</strong> that gives Momentum its power—and once grasped, it makes later optimizers (like Nesterov and Adam) far easier to comprehend.</p>
+<hr />
+<h3 id="momentum-is-about-building-confidence-over-time"><strong>Momentum Is About Building Confidence Over Time</strong><a class="headerlink" href="#momentum-is-about-building-confidence-over-time" title="Permanent link">&para;</a></h3>
+<p>Imagine you're trying to optimize a function and you repeatedly see gradients pointing in the <strong>same general direction</strong>. Instead of cautiously taking equal-sized steps every time (as vanilla SGD does), you start to <strong>trust this direction</strong> and move <strong>faster and more decisively</strong>.</p>
+<p>Momentum embodies this exact behavior:</p>
+<blockquote>
+<p>If gradients are consistent across iterations, the optimizer builds up <strong>velocity</strong> in that direction and moves more quickly.</p>
+</blockquote>
+<p>This helps the model:</p>
+<ul>
+<li>
+<p>Traverse flat or shallow regions more rapidly,</p>
+</li>
+<li>
+<p>Maintain stability in noisy updates,</p>
+</li>
+<li>
+<p>Push through local minima instead of getting stuck.</p>
+</li>
+</ul>
+<hr />
+<h3 id="car-analogy-consensus-of-direction"><strong>Car Analogy: Consensus of Direction</strong><a class="headerlink" href="#car-analogy-consensus-of-direction" title="Permanent link">&para;</a></h3>
+<p>Think of it like driving a car.<br />
+You're unsure where to go, so you ask people on the street for directions:</p>
+<ul>
+<li>
+<p>If <strong>everyone points in the same direction</strong>, you drive confidently and pick up speed.</p>
+</li>
+<li>
+<p>If <strong>directions are mixed</strong>, you move more hesitantly—maybe still forward, but slower.</p>
+</li>
+</ul>
+<p>Momentum uses this principle with gradients:</p>
+<ul>
+<li>
+<p><strong>Consistent gradients? → Faster movement.</strong></p>
+</li>
+<li>
+<p><strong>Inconsistent gradients? → Slower, cautious movement.</strong></p>
+</li>
+</ul>
+<hr />
+<h3 id="physics-analogy-a-ball-rolling-downhill"><strong>Physics Analogy: A Ball Rolling Downhill</strong><a class="headerlink" href="#physics-analogy-a-ball-rolling-downhill" title="Permanent link">&para;</a></h3>
+<p>The term <strong>"momentum"</strong> comes from classical mechanics—where momentum is the product of <strong>mass and velocity</strong>. In our case, we don’t simulate mass, but we <strong>track velocity</strong> using the <strong>history of gradients</strong>.</p>
+<p>Imagine a ball rolling down a hill:</p>
+<ul>
+<li>
+<p>As it rolls, it gains <strong>speed and direction</strong> from the slope (gradient).</p>
+</li>
+<li>
+<p>Even if the slope flattens out briefly, the ball keeps moving forward—<strong>inertia</strong> carries it on.</p>
+</li>
+<li>
+<p>If the hill turns sharply or curves around, the ball might wobble or slow—but it won’t instantly stop.</p>
+</li>
+</ul>
+<p>This is precisely how Momentum helps an optimizer:</p>
+<ul>
+<li>
+<p>It adds <strong>inertia</strong> to the gradient updates.</p>
+</li>
+<li>
+<p>It reduces jerky, abrupt changes.</p>
+</li>
+<li>
+<p>It smooths out the learning path and <strong>accelerates convergence</strong>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="why-momentum-is-faster-than-sgd"><strong>Why Momentum Is Faster Than SGD</strong><a class="headerlink" href="#why-momentum-is-faster-than-sgd" title="Permanent link">&para;</a></h3>
+<p>The most important advantage of using Momentum? <strong>Speed.</strong></p>
+<p>By leveraging the accumulated direction of past gradients, Momentum:</p>
+<ul>
+<li>
+<p>Avoids re-evaluating the same directions repeatedly,</p>
+</li>
+<li>
+<p>Pushes through slow zones and small slopes,</p>
+</li>
+<li>
+<p>Learns faster and more efficiently in practice.</p>
+</li>
+</ul>
+<p>In fact, in most real-world deep learning scenarios, <strong>Momentum outperforms vanilla SGD</strong> in both speed and stability—making it a default choice in many frameworks and architectures.</p>
+<hr />
+<p>In the next section, we’ll look at how this intuition translates into an actual <strong>update rule</strong>, using the same EWMA principle we covered earlier—now applied to gradients rather than temperature or time series data.</p>
+<hr />
+<h2 id="mathematical-implementation-of-momentum"><strong>Mathematical Implementation of Momentum</strong><a class="headerlink" href="#mathematical-implementation-of-momentum" title="Permanent link">&para;</a></h2>
+<p>We now arrive at the <strong>formal definition</strong> of how Momentum optimization works. Building on our earlier discussion of <strong>Exponentially Weighted Moving Averages (EWMA)</strong>, Momentum introduces a new quantity—<strong>velocity</strong>—that accumulates past gradients and injects <strong>inertia</strong> into the optimization process.</p>
+<p>Let’s begin by reviewing how standard gradient descent works and then see how Momentum modifies this routine.</p>
+<hr />
+<h3 id="standard-gradient-descent"><strong>Standard Gradient Descent</strong><a class="headerlink" href="#standard-gradient-descent" title="Permanent link">&para;</a></h3>
+<p>The weight update rule in vanilla Gradient Descent is simple:</p>
+<p>Wt+1=Wt−η⋅∇L(Wt)W_{t+1} = W_t - \eta \cdot \nabla L(W_t)</p>
+<p>Where:</p>
+<ul>
+<li>
+<p>WtW_t is the weight vector at step tt,</p>
+</li>
+<li>
+<p>η\eta is the learning rate,</p>
+</li>
+<li>
+<p>∇L(Wt)\nabla L(W_t) is the gradient of the loss function with respect to the weights.</p>
+</li>
+</ul>
+<p>This update rule only uses <strong>the current gradient</strong>, which makes it sensitive to noise and local surface geometry. There's no concept of memory or accumulated direction.</p>
+<hr />
+<h3 id="momentum-adding-velocity-to-the-update"><strong>Momentum: Adding Velocity to the Update</strong><a class="headerlink" href="#momentum-adding-velocity-to-the-update" title="Permanent link">&para;</a></h3>
+<p>Momentum introduces a new term: <strong>velocity</strong>, denoted VtV_t, which behaves like a running average of gradients:</p>
+<p>Vt=β⋅Vt−1+η⋅∇L(Wt)V_t = \beta \cdot V_{t-1} + \eta \cdot \nabla L(W_t)</p>
+<p>Then, instead of updating the weight using the raw gradient, we update it using the <strong>velocity</strong>:</p>
+<p>Wt+1=Wt−VtW_{t+1} = W_t - V_t</p>
+<p>Where:</p>
+<ul>
+<li>
+<p>VtV_t: Velocity at step tt—an <strong>EWMA of past gradients</strong>, scaled by learning rate.</p>
+</li>
+<li>
+<p>β∈[0,1)\beta \in [0, 1): Decay factor (typically 0.9), controlling how much past gradients influence the current step.</p>
+</li>
+<li>
+<p>η\eta: Learning rate, just as in standard SGD.</p>
+</li>
+<li>
+<p>∇L(Wt)\nabla L(W_t): Current gradient.</p>
+</li>
+</ul>
+<hr />
+<h3 id="breaking-it-down-whats-happening-here"><strong>Breaking It Down: What’s Happening Here?</strong><a class="headerlink" href="#breaking-it-down-whats-happening-here" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>β⋅Vt−1\beta \cdot V_{t-1}</strong><br />
+    This term incorporates the <strong>history</strong> of previous updates. The higher the beta, the more previous gradients affect the current velocity.</p>
+</li>
+<li>
+<p><strong>η⋅∇L(Wt)\eta \cdot \nabla L(W_t)</strong><br />
+    This is the <strong>current gradient</strong>, scaled by the learning rate.</p>
+</li>
+<li>
+<p><strong>Subtraction from WtW_t</strong><br />
+    Once the velocity is computed, it's subtracted from the current weights. This step is what moves the model in the direction of the <strong>cumulative gradient</strong>, not just the most recent one.</p>
+</li>
+</ol>
+<hr />
+<h3 id="how-momentum-accelerates-learning"><strong>How Momentum Accelerates Learning</strong><a class="headerlink" href="#how-momentum-accelerates-learning" title="Permanent link">&para;</a></h3>
+<p>The power of Momentum lies in the fact that <strong>repeated gradients in the same direction cause velocity to build up</strong>, leading to <strong>larger, faster steps</strong> in that direction. On the other hand, if gradients start changing direction, the accumulated velocity dampens this effect—<strong>smoothing out noise</strong>.</p>
+<p>In flat regions, where gradients are tiny, the velocity carries forward, helping the optimizer escape stagnation. In steep curved valleys, Momentum reduces zig-zagging and allows the optimizer to move along the more relevant direction.</p>
+<hr />
+<h3 id="summary-of-momentum-update-logic"><strong>Summary of Momentum Update Logic</strong><a class="headerlink" href="#summary-of-momentum-update-logic" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compute Velocity</td>
+<td>Vt=β⋅Vt−1+η⋅∇L(Wt)V_t = \beta \cdot V_{t-1} + \eta \cdot \nabla L(W_t)</td>
+</tr>
+<tr>
+<td>Update Weights</td>
+<td>Wt+1=Wt−VtW_{t+1} = W_t - V_t</td>
+</tr>
+</tbody>
+</table>
+<p>This is the <strong>complete implementation of Momentum</strong> in its simplest and most widely used form. Most modern deep learning frameworks (like PyTorch, TensorFlow, and Keras) implement this exact logic under the hood.</p>
+<hr />
+<h2 id="impact-of-momentum-on-gradient-descent-navigation"><strong>Impact of Momentum on Gradient Descent Navigation</strong><a class="headerlink" href="#impact-of-momentum-on-gradient-descent-navigation" title="Permanent link">&para;</a></h2>
+<p>Now that we’ve seen the mathematical foundation of Momentum, let’s explore how it changes the <strong>actual path</strong> an optimizer takes when minimizing a loss function.</p>
+<p>To do this, we’ll use one of the most powerful tools for visualizing optimization behavior: the <strong>contour plot</strong>.</p>
+<hr />
+<h3 id="the-scenario-a-narrow-valley-in-the-loss-surface"><strong>The Scenario: A Narrow Valley in the Loss Surface</strong><a class="headerlink" href="#the-scenario-a-narrow-valley-in-the-loss-surface" title="Permanent link">&para;</a></h3>
+<p>Imagine optimizing a loss function that resembles a <strong>long, narrow valley</strong>.</p>
+<ul>
+<li>
+<p>The valley is shallow in the <strong>horizontal direction</strong> (think: weight W1W_1),</p>
+</li>
+<li>
+<p>But steep in the <strong>vertical direction</strong> (think: weight ( W_2  )).</p>
+</li>
+</ul>
+<p>This kind of landscape is very common in deep learning, where different parameters have different sensitivities.</p>
+<hr />
+<h3 id="how-standard-sgd-behaves"><strong>How Standard SGD Behaves</strong><a class="headerlink" href="#how-standard-sgd-behaves" title="Permanent link">&para;</a></h3>
+<p>In this setting, <strong>standard SGD</strong>—which updates parameters based only on the current gradient—tends to behave inefficiently:</p>
+<ul>
+<li>
+<p>It takes <strong>large steps up and down across the steep (vertical) walls</strong> of the valley,</p>
+</li>
+<li>
+<p>While making <strong>slow progress along the shallow (horizontal) valley floor</strong>.</p>
+</li>
+</ul>
+<p>As a result, its path <strong>zig-zags</strong> heavily and wastes many steps bouncing from side to side, rather than progressing directly toward the minimum.</p>
+<p>This <strong>oscillatory behavior</strong> delays convergence and makes training less efficient.</p>
+<hr />
+<h3 id="how-momentum-changes-the-dynamics"><strong>How Momentum Changes the Dynamics</strong><a class="headerlink" href="#how-momentum-changes-the-dynamics" title="Permanent link">&para;</a></h3>
+<p>Now introduce <strong>Momentum</strong>. Since it <strong>accumulates velocity over time</strong>, its behavior changes significantly:</p>
+<ul>
+<li>
+<p>In the <strong>horizontal direction</strong> (along the valley), gradients are <strong>consistent</strong> over time. So velocity builds up, and the optimizer moves <strong>faster and smoother</strong> in that direction.</p>
+</li>
+<li>
+<p>In the <strong>vertical direction</strong>, gradients <strong>flip back and forth</strong>—one step it's up, the next it's down. As a result, the accumulated velocity cancels out and Momentum <strong>dampens these oscillations</strong>.</p>
+</li>
+</ul>
+<p>The result?<br />
+Momentum <strong>naturally aligns the update direction with the axis of consistent descent</strong>—the valley floor—allowing the optimizer to:</p>
+<ul>
+<li>
+<p><strong>Minimize wasteful vertical movement,</strong></p>
+</li>
+<li>
+<p><strong>Accelerate along the true path to the minimum</strong>, and</p>
+</li>
+<li>
+<p><strong>Converge much faster</strong> than standard SGD.</p>
+</li>
+</ul>
+<hr />
+<h3 id="visual-summary"><strong>Visual Summary</strong><a class="headerlink" href="#visual-summary" title="Permanent link">&para;</a></h3>
+<p>On a contour plot:</p>
+<ul>
+<li>
+<p>The <strong>SGD path</strong> appears as a zig-zag trajectory across contour lines, slowly inching toward the center.</p>
+</li>
+<li>
+<p>The <strong>Momentum path</strong> follows a smoother, more diagonal route—<strong>closely hugging the valley floor</strong>, minimizing energy wasted in the perpendicular direction.</p>
+</li>
+</ul>
+<p>This is one of Momentum’s greatest strengths: it doesn’t just follow the gradient—it <strong>learns the geometry of the surface over time</strong> and adapts its movement accordingly.</p>
+<hr />
+<h2 id="role-of-beta-in-momentum"><strong>Role of Beta (β) in Momentum</strong><a class="headerlink" href="#role-of-beta-in-momentum" title="Permanent link">&para;</a></h2>
+<p>At the heart of the Momentum optimizer lies the <strong>beta parameter (β)</strong>—also known as the <strong>decay factor</strong>. This single number plays a critical role in determining <strong>how much past gradients influence the present update</strong>.</p>
+<p>Understanding how β affects the Momentum update is essential not just for theoretical clarity, but also for practical tuning when training deep learning models.</p>
+<hr />
+<h3 id="what-does-beta-actually-do"><strong>What Does Beta Actually Do?</strong><a class="headerlink" href="#what-does-beta-actually-do" title="Permanent link">&para;</a></h3>
+<p>Recall the Momentum update formula:</p>
+<p>Vt=β⋅Vt−1+η⋅∇L(Wt)V_t = \beta \cdot V_{t-1} + \eta \cdot \nabla L(W_t) Wt+1=Wt−VtW_{t+1} = W_t - V_t</p>
+<p>Here, VtV_t is a <strong>velocity vector</strong>, which combines:</p>
+<ul>
+<li>
+<p>The <strong>previous velocity</strong> (Vt−1V_{t-1}) scaled by β, and</p>
+</li>
+<li>
+<p>The <strong>current gradient</strong>, scaled by the learning rate η\eta.</p>
+</li>
+</ul>
+<p>The beta parameter β∈[0,1)\beta \in [0, 1) determines <strong>how much of the past velocity carries forward</strong> into the next update. A <strong>larger β</strong> means <strong>more memory</strong>, while a <strong>smaller β</strong> results in <strong>faster decay</strong> of past influence.</p>
+<hr />
+<h3 id="beta-as-an-ewma-window-approximation"><strong>Beta as an EWMA Window Approximation</strong><a class="headerlink" href="#beta-as-an-ewma-window-approximation" title="Permanent link">&para;</a></h3>
+<p>Just like in Exponentially Weighted Moving Averages (EWMA), we can approximate the effective memory of the velocity as:</p>
+<p>Effective window size≈11−β\text{Effective window size} \approx \frac{1}{1 - \beta}</p>
+<p>For example:</p>
+<ul>
+<li>
+<p>If β=0.9\beta = 0.9, it’s roughly like averaging over the last <strong>10 iterations</strong>.</p>
+</li>
+<li>
+<p>If β=0.99\beta = 0.99, it’s like averaging over the last <strong>100 steps</strong>.</p>
+</li>
+</ul>
+<p>This means that higher beta values produce <strong>smoother</strong>, <strong>more stable</strong> velocities that average out noise, but they <strong>react more slowly</strong> to sudden changes in gradient direction.</p>
+<hr />
+<h3 id="effects-of-different-beta-values"><strong>Effects of Different Beta Values</strong><a class="headerlink" href="#effects-of-different-beta-values" title="Permanent link">&para;</a></h3>
+<p>Let’s explore how the choice of β changes the behavior of Momentum:</p>
+<h4 id="1-0"><strong>1. β = 0</strong><a class="headerlink" href="#1-0" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>The momentum term β⋅Vt−1\beta \cdot V_{t-1} becomes zero.</p>
+</li>
+<li>
+<p>The update simplifies to:</p>
+<p>Vt=η⋅∇L(Wt)V_t = \eta \cdot \nabla L(W_t)
+- This is simply <strong>standard SGD</strong>. No memory, no acceleration—Momentum is effectively disabled.</p>
+</li>
+</ul>
+<h4 id="2-close-to-1-eg-099"><strong>2. β Close to 1 (e.g., 0.99)</strong><a class="headerlink" href="#2-close-to-1-eg-099" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Past velocities decay <strong>very slowly</strong>.</p>
+</li>
+<li>
+<p>Momentum accumulates over a <strong>longer history</strong>.</p>
+</li>
+<li>
+<p>The optimizer becomes <strong>very stable</strong>, but may take time to adapt to sudden gradient shifts.</p>
+</li>
+<li>
+<p>Best used in settings where gradient noise is high, and long-term directional consistency is valuable.</p>
+</li>
+</ul>
+<h4 id="3-1"><strong>3. β = 1</strong><a class="headerlink" href="#3-1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>There is <strong>no decay at all</strong>—old velocities are preserved forever.</p>
+</li>
+<li>
+<p>This can lead to a form of <strong>dynamic equilibrium</strong>, where the velocity dominates the gradient and the optimizer <strong>fails to converge</strong>.</p>
+</li>
+<li>
+<p>Such a setting is <strong>not practical</strong> and generally avoided.</p>
+</li>
+</ul>
+<hr />
+<h3 id="best-practice"><strong>Best Practice</strong><a class="headerlink" href="#best-practice" title="Permanent link">&para;</a></h3>
+<p>In most deep learning applications, a value of:</p>
+<ul>
+<li>
+<p>β=0.9\beta = 0.9 offers a <strong>good balance</strong> of smoothing and responsiveness.</p>
+</li>
+<li>
+<p>β=0.99\beta = 0.99 may be preferred for <strong>noisier gradients</strong> or large-batch training.</p>
+</li>
+</ul>
+<p>Ultimately, β is a <strong>hyperparameter</strong>—and while these defaults work well in many settings, it's important to consider tuning it when convergence is too slow or too unstable.</p>
+<hr />
+<h2 id="benefits-and-problems-of-momentum-optimization"><strong>Benefits and Problems of Momentum Optimization</strong><a class="headerlink" href="#benefits-and-problems-of-momentum-optimization" title="Permanent link">&para;</a></h2>
+<p>Momentum optimization is a widely adopted enhancement to standard gradient descent methods, known for its ability to accelerate convergence and provide greater stability during training. However, like all optimization techniques, it presents both advantages and trade-offs. This section examines the strengths of Momentum and its principal drawback, laying the groundwork for understanding more advanced optimizers that build upon it.</p>
+<hr />
+<h3 id="benefits-of-momentum"><strong>Benefits of Momentum</strong><a class="headerlink" href="#benefits-of-momentum" title="Permanent link">&para;</a></h3>
+<h4 id="1-faster-training-through-accumulated-gradients"><strong>1. Faster Training through Accumulated Gradients</strong><a class="headerlink" href="#1-faster-training-through-accumulated-gradients" title="Permanent link">&para;</a></h4>
+<p>One of the most significant advantages of Momentum is its ability to accelerate learning. By incorporating a running average of past gradients, the optimizer builds up "velocity" in directions that consistently reduce the loss. This enables the optimizer to take longer steps in the right direction, leading to faster progress—particularly in areas where the gradient remains steady.</p>
+<p>This mechanism is often compared to a ball rolling downhill: as it continues to move, it gains speed due to the slope and previous motion. Momentum mimics this behavior by reinforcing gradient directions that are stable over time.</p>
+<h4 id="2-ability-to-escape-local-minima"><strong>2. Ability to Escape Local Minima</strong><a class="headerlink" href="#2-ability-to-escape-local-minima" title="Permanent link">&para;</a></h4>
+<p>In non-convex optimization landscapes, shallow local minima can trap standard gradient descent methods, especially when gradients vanish. Momentum provides the optimizer with enough accumulated energy to overcome such local minima and continue searching the parameter space. This allows it to avoid getting stuck prematurely and improves the likelihood of reaching a better overall solution.</p>
+<h4 id="3-improved-stability-in-high-curvature-and-noisy-regions"><strong>3. Improved Stability in High-Curvature and Noisy Regions</strong><a class="headerlink" href="#3-improved-stability-in-high-curvature-and-noisy-regions" title="Permanent link">&para;</a></h4>
+<p>Momentum also performs well in challenging regions of the loss surface, such as:</p>
+<ul>
+<li>
+<p><strong>High-curvature regions</strong>, where gradients change sharply in one dimension but remain shallow in another,</p>
+</li>
+<li>
+<p><strong>Noisy regions</strong>, where gradients fluctuate due to mini-batch sampling or inherent variability.</p>
+</li>
+</ul>
+<p>By smoothing the update direction through exponential averaging, Momentum reduces erratic steps and prevents the optimizer from zig-zagging excessively. This leads to a more stable and efficient path toward convergence.</p>
+<hr />
+<h3 id="limitation-of-momentum-overshooting-and-oscillation"><strong>Limitation of Momentum: Overshooting and Oscillation</strong><a class="headerlink" href="#limitation-of-momentum-overshooting-and-oscillation" title="Permanent link">&para;</a></h3>
+<p>The primary drawback of Momentum arises from the very property that enables its acceleration—accumulated velocity. As the optimizer approaches a minimum, the continued momentum may cause it to:</p>
+<ul>
+<li>
+<p>Overshoot the optimal point,</p>
+</li>
+<li>
+<p>Oscillate around the minimum before settling,</p>
+</li>
+<li>
+<p>Require more iterations to stabilize near the solution.</p>
+</li>
+</ul>
+<p>This overshooting is particularly pronounced if the learning rate or beta value is too high, causing the optimizer to repeatedly cross over the optimal point. The resulting oscillation can delay convergence, especially in the final stages of training where precise steps are needed.</p>
+<hr />
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Faster convergence</td>
+<td>Builds velocity in consistent gradient directions to accelerate learning</td>
+</tr>
+<tr>
+<td>Escapes local minima</td>
+<td>Retains momentum to push through shallow loss regions</td>
+</tr>
+<tr>
+<td>Stabilizes updates</td>
+<td>Averages past gradients to smooth out noisy or high-curvature updates</td>
+</tr>
+<tr>
+<td>Potential overshooting</td>
+<td>May oscillate near the minimum if velocity is not controlled</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>This analysis highlights why Momentum is widely used in practice and also why more advanced optimizers—such as <strong>Nesterov Accelerated Gradient</strong> and <strong>Adam</strong>—were developed to preserve its strengths while mitigating its limitations.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Paritosh Sharma
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.math", "search.highlight", "search.share", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.path", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../assets/collapsible-toc.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3443 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../Pydantic/Chapter%202/">
+      
+      
+        <link rel="next" href="../../../Kubernetes/Why%20Kubernetes/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Self Attention - Paritosh's Tech Universe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-word-to-number-the-foundation-step-in-nlp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Paritosh&#39;s Tech Universe" class="md-header__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paritosh's Tech Universe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Self Attention
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../Pydantic/Introduction/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mini Books
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Paritosh&#39;s Tech Universe" class="md-nav__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Paritosh's Tech Universe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mini Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pydantic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pydantic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Pydantic/Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Pydantic/Chapter%201/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Pydantic/Chapter%202/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Transformers
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Transformers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Self Attention
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self Attention
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-word-to-number-the-foundation-step-in-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Word to Number: The Foundation Step in NLP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Word to Number: The Foundation Step in NLP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-one-hot-encoding-ohe" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 One-Hot Encoding (OHE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-bag-of-words-bow" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Bag of Words (BoW)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-tf-idf-term-frequency-inverse-document-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 TF-IDF (Term Frequency-Inverse Document Frequency)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-word-embeddings-a-smarter-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Word Embeddings: A Smarter Way
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-problem-with-static-word-embeddings-average-meaning" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The Problem with Static Word Embeddings: "Average Meaning"
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Problem with Static Word Embeddings: &#34;Average Meaning&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Result:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-visualizing-the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Visualizing the Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-the-solution-contextual-embeddings" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 The Solution: Contextual Embeddings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-summary-evolution-of-word-representations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Summary: Evolution of Word Representations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Summary: Evolution of Word Representations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-evolution-of-word-representations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Evolution of Word Representations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 TL;DR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-from-static-embeddings-to-context-aware-understanding" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. From Static Embeddings to Context-Aware Understanding
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. From Static Embeddings to Context-Aware Understanding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-starting-with-a-thought-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Starting With a Thought Experiment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-visualizing-dynamic-embeddings" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Visualizing Dynamic Embeddings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-deriving-the-weights-self-attention-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Deriving the Weights: Self-Attention Equation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-why-context-matters-explanation-with-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Why Context Matters: Explanation with Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-from-intuition-to-mechanism-the-self-attention-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 From Intuition to Mechanism: The Self-Attention Insight
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-section-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6 Section Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-formalizing-self-attention-from-intuition-to-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Formalizing Self-Attention: From Intuition to Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Formalizing Self-Attention: From Intuition to Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-step-by-step-turning-the-idea-into-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Step-by-Step: Turning the Idea into Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-scaling-with-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Scaling with Linear Algebra
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-advantages-of-this-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Advantages of This Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-two-key-problems-identified" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 Two Key Problems Identified
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-why-learnable-parameters-are-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5 Why Learnable Parameters Are Needed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-introducing-learnable-parameters-in-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Introducing Learnable Parameters in Self-Attention
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Introducing Learnable Parameters in Self-Attention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-queries-keys-and-values-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Queries, Keys, and Values Explained
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-a-problem-one-embedding-three-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 A Problem: One Embedding, Three Roles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-solution-projecting-into-separate-spaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Solution: Projecting into Separate Spaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-intuitive-benefits-of-qkv-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.4 Intuitive Benefits of Q/K/V Separation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.5 Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-building-the-query-key-and-value-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Building the Query, Key, and Value Vectors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Building the Query, Key, and Value Vectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-visualizing-the-goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Visualizing the Goal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-how-do-we-transform-a-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 How Do We Transform a Vector?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-linear-transformations-with-weight-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Linear Transformations with Weight Matrices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-end-to-end-flow-for-a-single-word" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4 End-to-End Flow for a Single Word
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-extending-to-the-whole-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5 Extending to the Whole Sequence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-full-matrix-level-self-attention-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6 Full Matrix-Level Self-Attention Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-section-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.7 Section Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-why-do-we-need-a-scaling-factor-in-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Why Do We Need a Scaling Factor in Attention?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Why Do We Need a Scaling Factor in Attention?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-nature-of-dot-product-in-high-dimensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 Nature of Dot Product in High Dimensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-why-high-variance-is-a-problem-in-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 Why High Variance Is a Problem in Attention?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-how-to-fix-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 How to Fix It?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-how-to-choose-the-right-scaling-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. How to Choose the Right Scaling Factor?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. How to Choose the Right Scaling Factor?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-theoretical-foundation-variance-and-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 Theoretical Foundation: Variance and Scaling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-experimental-observation-dimensionality-and-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 Experimental Observation: Dimensionality and Variance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-keeping-variance-constant" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 Keeping Variance Constant
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-final-derivation-of-scaling-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4 Final Derivation of Scaling Factor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-final-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Final Conclusion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Final Conclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-why-scaling-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.1 Why Scaling Matters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-final-attention-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.2 Final Attention Equation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3 Key Takeaways
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Kubernetes/Why%20Kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Why Kubernetes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Kubernetes/Pod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Kubernetes/Kubernetes%20Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Kubernetes/What%20is%20deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    What is deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Kubernetes/Service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    JavaScript
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            JavaScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../JavaScript/01.%20Immediately%20Invoked%20Function%20Expressions%20%28IIFE%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Immediately Invoked Function Expressions (IIFE)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../JavaScript/02.%20Call%20Stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Call Stack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../JavaScript/03.%20Control%20Flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Flow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../JavaScript/04.%20For%20Loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    For Loop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../JavaScript/05.%20while%20and%20do-while%20Loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    While and do-while Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../JavaScript/06.%20Higher%20Order%20Loops%20and%20Array%20Iteration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Higher Order Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            MCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MCP/JRPC%20-%20JSON%20Remote%20Procedure%20Call/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JRPC - JSON Remote Procedure Call
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-word-to-number-the-foundation-step-in-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Word to Number: The Foundation Step in NLP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Word to Number: The Foundation Step in NLP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-one-hot-encoding-ohe" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 One-Hot Encoding (OHE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-bag-of-words-bow" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Bag of Words (BoW)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-tf-idf-term-frequency-inverse-document-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 TF-IDF (Term Frequency-Inverse Document Frequency)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-word-embeddings-a-smarter-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Word Embeddings: A Smarter Way
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-problem-with-static-word-embeddings-average-meaning" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The Problem with Static Word Embeddings: "Average Meaning"
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Problem with Static Word Embeddings: &#34;Average Meaning&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Result:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-visualizing-the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Visualizing the Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-the-solution-contextual-embeddings" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 The Solution: Contextual Embeddings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-summary-evolution-of-word-representations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Summary: Evolution of Word Representations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Summary: Evolution of Word Representations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-evolution-of-word-representations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Evolution of Word Representations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 TL;DR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-from-static-embeddings-to-context-aware-understanding" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. From Static Embeddings to Context-Aware Understanding
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. From Static Embeddings to Context-Aware Understanding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-starting-with-a-thought-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Starting With a Thought Experiment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-visualizing-dynamic-embeddings" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Visualizing Dynamic Embeddings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-deriving-the-weights-self-attention-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Deriving the Weights: Self-Attention Equation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-why-context-matters-explanation-with-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Why Context Matters: Explanation with Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-from-intuition-to-mechanism-the-self-attention-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 From Intuition to Mechanism: The Self-Attention Insight
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-section-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6 Section Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-formalizing-self-attention-from-intuition-to-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Formalizing Self-Attention: From Intuition to Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Formalizing Self-Attention: From Intuition to Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-step-by-step-turning-the-idea-into-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Step-by-Step: Turning the Idea into Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-scaling-with-linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Scaling with Linear Algebra
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-advantages-of-this-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Advantages of This Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-two-key-problems-identified" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 Two Key Problems Identified
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-why-learnable-parameters-are-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5 Why Learnable Parameters Are Needed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-introducing-learnable-parameters-in-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Introducing Learnable Parameters in Self-Attention
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Introducing Learnable Parameters in Self-Attention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-queries-keys-and-values-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Queries, Keys, and Values Explained
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-a-problem-one-embedding-three-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 A Problem: One Embedding, Three Roles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-solution-projecting-into-separate-spaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Solution: Projecting into Separate Spaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-intuitive-benefits-of-qkv-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.4 Intuitive Benefits of Q/K/V Separation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.5 Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-building-the-query-key-and-value-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Building the Query, Key, and Value Vectors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Building the Query, Key, and Value Vectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-visualizing-the-goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Visualizing the Goal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-how-do-we-transform-a-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 How Do We Transform a Vector?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-linear-transformations-with-weight-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Linear Transformations with Weight Matrices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-end-to-end-flow-for-a-single-word" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4 End-to-End Flow for a Single Word
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-extending-to-the-whole-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5 Extending to the Whole Sequence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-full-matrix-level-self-attention-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6 Full Matrix-Level Self-Attention Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-section-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.7 Section Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-why-do-we-need-a-scaling-factor-in-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Why Do We Need a Scaling Factor in Attention?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Why Do We Need a Scaling Factor in Attention?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-nature-of-dot-product-in-high-dimensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 Nature of Dot Product in High Dimensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-why-high-variance-is-a-problem-in-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 Why High Variance Is a Problem in Attention?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-how-to-fix-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 How to Fix It?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-how-to-choose-the-right-scaling-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. How to Choose the Right Scaling Factor?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. How to Choose the Right Scaling Factor?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-theoretical-foundation-variance-and-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 Theoretical Foundation: Variance and Scaling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-experimental-observation-dimensionality-and-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 Experimental Observation: Dimensionality and Variance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-keeping-variance-constant" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 Keeping Variance Constant
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-final-derivation-of-scaling-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4 Final Derivation of Scaling Factor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-final-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Final Conclusion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Final Conclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-why-scaling-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.1 Why Scaling Matters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-final-attention-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.2 Final Attention Equation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3 Key Takeaways
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Self Attention</h1>
+
+<blockquote>
+<p>⏱️ Estimated reading time: 25 min</p>
+</blockquote>
+<p><img alt="Self Attention Banner" src="../images/cover.png" style="width: 100%; border-radius: 8px;" /></p>
+<details class="info">
+<summary>What is Self Attention?</summary>
+<p>Self-attention is a mechanism that allows a model to weigh the importance of each word in a sentence with respect to others. It's the core building block of transformer models, enabling them to capture contextual relationships between words.</p>
+</details>
+<hr />
+<h2 id="1-word-to-number-the-foundation-step-in-nlp">1. Word to Number: The Foundation Step in NLP<a class="headerlink" href="#1-word-to-number-the-foundation-step-in-nlp" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>Why convert words to numbers?</summary>
+<p>In NLP, converting words to numbers is essential because machines can only process numerical data. This conversion enables mathematical operations and pattern recognition in text.</p>
+</details>
+<p>In any NLP use-case—be it sentiment analysis, machine translation, or chatbot development—the very first step is to convert <strong>words into numbers</strong>^[numerical representations that machines can process]. Why? Because machines don't understand text, they only understand numbers.</p>
+<p>Over time, several techniques were developed to represent words as vectors (i.e., sequences of numbers). These techniques slowly evolved from simple to smarter methods.</p>
+<hr />
+<h3 id="11-one-hot-encoding-ohe">1.1 One-Hot Encoding (OHE)<a class="headerlink" href="#11-one-hot-encoding-ohe" title="Permanent link">&para;</a></h3>
+<p>This is the most basic method.</p>
+<p>Let's say our vocabulary has only 4 words: <code>["apple", "banana", "cat", "dog"]</code>.</p>
+<p>Now if we want to represent the word <code>"cat"</code>, we do:</p>
+<div class="highlight"><pre><span></span><code><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">]</span>
+<span class="n">ohe</span> <span class="o">=</span> <span class="p">{</span>
+<span class="hll">    <span class="s2">&quot;apple&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+</span>    <span class="s2">&quot;banana&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="s2">&quot;cat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="s2">&quot;dog&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Key issue</strong>: All words are equally distant from each other. <code>"cat"</code> is no more similar to <code>"dog"</code> than it is to <code>"banana"</code>. There is no sense of <strong>semantic similarity</strong>.</p>
+<hr />
+<h3 id="12-bag-of-words-bow">1.2 Bag of Words (BoW)<a class="headerlink" href="#12-bag-of-words-bow" title="Permanent link">&para;</a></h3>
+<p>BoW moves ahead by considering how often words appear in a sentence or document.</p>
+<p>Let's take two sentences:</p>
+<ul>
+<li>
+<p>Sentence 1: <code>"I love apple and banana"</code></p>
+</li>
+<li>
+<p>Sentence 2: <code>"banana is tasty"</code></p>
+</li>
+</ul>
+<p>Vocabulary: <code>["I", "love", "apple", "and", "banana", "is", "tasty"]</code></p>
+<p>Now we can represent these two as count vectors:</p>
+<div class="highlight"><pre><span></span><code><span class="n">vocab</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;love&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;and&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="s2">&quot;tasty&quot;</span><span class="p">]</span>
+<span class="hll"><span class="n">s1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># &quot;I love apple and banana&quot;</span>
+</span><span class="hll"><span class="n">s2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># &quot;banana is tasty&quot;</span>
+</span></code></pre></div>
+<p><strong>Problem</strong>: It only captures frequency, not <strong>importance</strong> of a word. Also, it loses the <strong>word order</strong>.</p>
+<hr />
+<h3 id="13-tf-idf-term-frequency-inverse-document-frequency">1.3 TF-IDF (Term Frequency-Inverse Document Frequency)<a class="headerlink" href="#13-tf-idf-term-frequency-inverse-document-frequency" title="Permanent link">&para;</a></h3>
+<p>TF-IDF tries to fix the BoW issues by lowering the weight of <strong>common</strong> words and boosting the weight of <strong>rare but important</strong> ones.</p>
+<p>For example, if <code>"banana"</code> appears in almost every document but <code>"tasty"</code> appears in just a few, then:</p>
+<ul>
+<li>
+<p><code>"banana"</code> will get <strong>low score</strong></p>
+</li>
+<li>
+<p><code>"tasty"</code> will get <strong>high score</strong></p>
+</li>
+</ul>
+<p>This helps highlight the <em>uniqueness</em> of terms in each document.</p>
+<p>Still, even with TF-IDF, <strong>semantic meaning and context are missing</strong>.</p>
+<hr />
+<h3 id="14-word-embeddings-a-smarter-way">1.4 Word Embeddings: A Smarter Way<a class="headerlink" href="#14-word-embeddings-a-smarter-way" title="Permanent link">&para;</a></h3>
+<p>To go beyond counting, <strong>Word Embeddings</strong>^[dense vector representations that capture semantic meaning] like <strong>Word2Vec</strong>, <strong>GloVe</strong>, and <strong>FastText</strong> came into play.</p>
+<p>These methods map words into <strong>dense vectors</strong>, where words with similar meanings are placed close to each other in the vector space.</p>
+<p>So:</p>
+<div class="highlight"><pre><span></span><code>vector(&quot;king&quot;) - vector(&quot;man&quot;) + vector(&quot;woman&quot;) ≈ vector(&quot;queen&quot;)
+</code></pre></div>
+<p>This is <em>magical</em>. It means embeddings capture not just meaning but also <strong>relationships</strong> between words.</p>
+<p>But there's a catch.</p>
+<hr />
+<h2 id="2-the-problem-with-static-word-embeddings-average-meaning">2. The Problem with Static Word Embeddings: "Average Meaning"<a class="headerlink" href="#2-the-problem-with-static-word-embeddings-average-meaning" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>The Problem with Static Embeddings</summary>
+<p>Static embeddings assign the same vector to a word regardless of its context, leading to the "average meaning" problem where a word like "bank" gets the same representation whether it refers to a financial institution or a river bank.</p>
+</details>
+<p>Let's say we train Word2Vec on the following example:</p>
+<ul>
+<li>
+<p>Our dataset has 1000 sentences.</p>
+</li>
+<li>
+<p>In 900 of them, <code>"apple"</code> is used as a fruit.</p>
+</li>
+<li>
+<p>In 100, <code>"apple"</code> refers to the tech company.</p>
+</li>
+</ul>
+<p>Assume our word embeddings are in 2D:</p>
+<ul>
+<li>
+<p>Dimension 1 = <strong>Technology</strong></p>
+</li>
+<li>
+<p>Dimension 2 = <strong>Taste</strong></p>
+</li>
+</ul>
+<h3 id="21-result">2.1 Result:<a class="headerlink" href="#21-result" title="Permanent link">&para;</a></h3>
+<p>Because <code>"apple"</code> was mostly used as a fruit, its final embedding will lean <strong>heavily toward the taste axis</strong>.</p>
+<hr />
+<h3 id="22-visualizing-the-problem">2.2 Visualizing the Problem<a class="headerlink" href="#22-visualizing-the-problem" title="Permanent link">&para;</a></h3>
+<p>Let's plot it to understand better:
+<div class="highlight"><pre><span></span><code>          ↑
+          |
+   (Taste)|        *apple*  ← closer to taste axis
+          |       /
+          |      /
+          |     /
+          |    /
+          |   /
+          |  /
+          | /
+          |/_______________________→
+              (Technology)
+</code></pre></div></p>
+<p>Now, if we use this embedding in a machine translation task and encounter a sentence like:</p>
+<blockquote>
+<p>"He bought an Apple at the store."</p>
+</blockquote>
+<p>The model might translate it as if it's referring to the <strong>fruit</strong>, not the <strong>tech brand</strong>, because the embedding was <strong>static</strong> and trained on mostly fruit context.</p>
+<p>This is the problem of <strong>"average meaning"</strong>.</p>
+<hr />
+<h3 id="23-the-solution-contextual-embeddings">2.3 The Solution: Contextual Embeddings<a class="headerlink" href="#23-the-solution-contextual-embeddings" title="Permanent link">&para;</a></h3>
+<p>What we really want is <strong>context-aware embeddings</strong>.</p>
+<p>That is:</p>
+<ul>
+<li>
+<p>In "He bought an Apple phone" → "Apple" should be close to <em>Samsung</em>, <em>iPhone</em></p>
+</li>
+<li>
+<p>In "He ate an Apple" → "Apple" should be close to <em>banana</em>, <em>mango</em></p>
+</li>
+</ul>
+<p>This is where <strong>Self-Attention</strong> and models like <strong>BERT</strong> come in.</p>
+<p>They take static embeddings and <strong>dynamically adjust them</strong> based on the surrounding words—creating <strong>contextual embeddings</strong>.</p>
+<p>So now:</p>
+<blockquote>
+<p><code>"Apple"</code> in a tech context looks different from <code>"Apple"</code> in a fruit context.</p>
+</blockquote>
+<p>These embeddings are no longer <em>one size fits all</em>—they're <strong>personalized per sentence</strong>, per word.</p>
+<p>That's the game-changer!</p>
+<hr />
+<h2 id="3-summary-evolution-of-word-representations">3. Summary: Evolution of Word Representations<a class="headerlink" href="#3-summary-evolution-of-word-representations" title="Permanent link">&para;</a></h2>
+<p>In the journey of Natural Language Processing, representing words as numbers is the first and most critical step. Over time, this transformation has matured—from naive methods to highly intelligent contextual models.</p>
+<h3 id="31-evolution-of-word-representations">3.1 Evolution of Word Representations<a class="headerlink" href="#31-evolution-of-word-representations" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Type</th>
+<th>Captures Frequency</th>
+<th>Captures Meaning</th>
+<th>Handles Context</th>
+<th>Key Limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-Hot Encoding (OHE)</td>
+<td>Sparse &amp; Static</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>All words equally distant. No semantic link.</td>
+</tr>
+<tr>
+<td>Bag of Words (BoW)</td>
+<td>Sparse &amp; Static</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>Ignores word order &amp; meaning.</td>
+</tr>
+<tr>
+<td>TF-IDF</td>
+<td>Sparse &amp; Static</td>
+<td>✅ (weighted)</td>
+<td>✅ (importance)</td>
+<td>❌</td>
+<td>Still no semantics or context.</td>
+</tr>
+<tr>
+<td>Word Embeddings (Word2Vec, GloVe)</td>
+<td>Dense &amp; Static</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>One meaning per word: <strong>average meaning</strong> issue</td>
+</tr>
+<tr>
+<td>Contextual Embeddings (BERT, etc.)</td>
+<td>Dense &amp; Dynamic</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅ Handles multiple meanings per word</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-tldr">3.2 TL;DR<a class="headerlink" href="#32-tldr" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Static embeddings</strong> give us an "average meaning" of a word.<br />
+But <strong>language is dynamic</strong>.<br />
+To truly understand it, we need <strong>contextual embeddings</strong>—and that's what modern transformer models deliver.</p>
+</blockquote>
+<hr />
+<h2 id="4-from-static-embeddings-to-context-aware-understanding">4. From Static Embeddings to Context-Aware Understanding<a class="headerlink" href="#4-from-static-embeddings-to-context-aware-understanding" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>The Need for Context</summary>
+<p>Context is crucial in language understanding. The same word can have different meanings based on its surrounding words, which static embeddings fail to capture.</p>
+</details>
+<p>In the previous section, we saw how static word embeddings—no matter how powerful—struggle when a single word has multiple meanings. Our example of the word <em>"apple"</em> highlighted the problem of <strong>average meaning</strong>: static embeddings simply collapse all usages of a word into one vector, ignoring context entirely.</p>
+<p>This realization naturally leads us to ask:</p>
+<blockquote>
+<p><strong>Can we create different embeddings for the same word, based on its context?</strong></p>
+</blockquote>
+<p>Let's explore this idea from scratch—as if we are inventing it ourselves.</p>
+<hr />
+<h3 id="41-starting-with-a-thought-experiment">4.1 Starting With a Thought Experiment<a class="headerlink" href="#41-starting-with-a-thought-experiment" title="Permanent link">&para;</a></h3>
+<p>Take the following two short sentences:</p>
+<ul>
+<li>
+<p>Sentence 1: <em>Money bank grows</em></p>
+</li>
+<li>
+<p>Sentence 2: <em>River bank flows</em></p>
+</li>
+</ul>
+<p>Clearly, the word <strong>bank</strong> has two distinct meanings here:</p>
+<ul>
+<li>
+<p>A <strong>financial institution</strong> in Sentence 1.</p>
+</li>
+<li>
+<p>The <strong>side of a river</strong> in Sentence 2.</p>
+</li>
+</ul>
+<p>Yet, static embeddings would give "bank" the same vector in both sentences. That's a problem.</p>
+<p>Now imagine this: instead of keeping the embedding of "bank" fixed, what if we adjusted it dynamically based on its neighboring words?</p>
+<p>That is, instead of treating <code>e(bank)</code> as a standalone vector, we define a <strong>new embedding</strong> like this:</p>
+<div class="highlight"><pre><span></span><code>e(bank)^new = α * e(money) + β * e(bank) + γ * e(grows)
+</code></pre></div>
+<p>and similarly for Sentence 2:</p>
+<div class="highlight"><pre><span></span><code>e(bank)^new = α&#39; * e(river) + β&#39; * e(bank) + γ&#39; * e(flows)
+</code></pre></div>
+<p>Here, the new representation of "bank" is influenced by the <em>context</em> in which it appears.</p>
+<p>When we do this, something powerful happens:</p>
+<blockquote>
+<p>"Bank" now carries the meaning it was meant to carry—in that sentence, in that moment.</p>
+</blockquote>
+<hr />
+<h3 id="42-visualizing-dynamic-embeddings">4.2 Visualizing Dynamic Embeddings<a class="headerlink" href="#42-visualizing-dynamic-embeddings" title="Permanent link">&para;</a></h3>
+<p>Below is a representation showing how weights (α, β, γ) can differ across contexts:</p>
+<hr />
+<p>Context 1: "money bank grows"</p>
+<div class="highlight"><pre><span></span><code>money = 0.7 * money + 0.2 * bank + 0.1 * grows
+bank  = 0.25 * money + 0.7 * bank + 0.05 * grows
+grows = 0.1 * money + 0.2 * bank + 0.7 * grows
+</code></pre></div>
+<p>Context 2: "river bank flows"</p>
+<div class="highlight"><pre><span></span><code>river = 0.8 * river + 0.15 * bank + 0.05 * flows
+bank  = 0.2 * river + 0.78 * bank + 0.02 * flows
+flows = 0.4 * river + 0.01 * bank + 0.59 * flows
+</code></pre></div>
+<p>These weights control how much attention each neighboring word should get when building a word's new embedding.</p>
+<hr />
+<h3 id="43-deriving-the-weights-self-attention-equation">4.3 Deriving the Weights: Self-Attention Equation<a class="headerlink" href="#43-deriving-the-weights-self-attention-equation" title="Permanent link">&para;</a></h3>
+<p>So far we've assumed weights like 0.7, 0.2, and 0.1 magically appear. Let's go deeper.</p>
+<p>We realize these weights should come from <strong>how similar</strong> the surrounding words are to the word we're updating. The more relevant a word is, the more it should contribute.</p>
+<p>How do we measure similarity between vectors?<br />
+Using the <strong>dot product</strong>.</p>
+<p>Mathematically:</p>
+<div class="highlight"><pre><span></span><code>e(bank)^new = 
+  (e_bank · e_money) * e_money 
++ (e_bank · e_bank) * e_bank 
++ (e_bank · e_grows) * e_grows
+</code></pre></div>
+<p>This is illustrated below:</p>
+<h4 id="self-attention-equation-dot-product-form">Self-Attention Equation (Dot Product Form)<a class="headerlink" href="#self-attention-equation-dot-product-form" title="Permanent link">&para;</a></h4>
+<p><span class="arithmatex">\(\mathbf{e}_{\text{bank}}^{(\text{new})} = \left( \mathbf{e}_{\text{bank}} \cdot \mathbf{e}_{\text{money}}^\top \right) \mathbf{e}_{\text{money}} + \left( \mathbf{e}_{\text{bank}} \cdot \mathbf{e}_{\text{bank}}^\top \right) \mathbf{e}_{\text{bank}} + \left( \mathbf{e}_{\text{bank}} \cdot \mathbf{e}_{\text{grows}}^\top \right) \mathbf{e}_{\text{grows}}\)</span></p>
+<h4 id="explanation">Explanation<a class="headerlink" href="#explanation" title="Permanent link">&para;</a></h4>
+<p>Each term computes a <strong>similarity score</strong> (via dot product) between the target word <code>bank</code> and a context word (<code>money</code>, <code>bank</code>, or <code>grows</code>). That score is then used to weight the corresponding word vector, forming a <strong>contextual embedding</strong> for <code>bank</code>.</p>
+<p>These dot products reflect how much one word relates to another. But raw dot products can be large or skewed. So we <strong>normalize</strong> them—using a softmax function. This ensures:</p>
+<ul>
+<li>
+<p>All weights add up to 1</p>
+</li>
+<li>
+<p>The final vector remains stable and interpretable</p>
+</li>
+</ul>
+<hr />
+<h3 id="44-why-context-matters-explanation-with-examples">4.4 Why Context Matters: Explanation with Examples<a class="headerlink" href="#44-why-context-matters-explanation-with-examples" title="Permanent link">&para;</a></h3>
+<p>Let's take a few examples to illustrate the concept of contextual embeddings:</p>
+<ol>
+<li>
+<p><strong>"He bought an Apple phone"</strong>:</p>
+<ul>
+<li>"Apple" should be close to <em>Samsung</em>, <em>iPhone</em></li>
+</ul>
+</li>
+<li>
+<p><strong>"He ate an Apple"</strong>:</p>
+<ul>
+<li>"Apple" should be close to <em>banana</em>, <em>mango</em></li>
+</ul>
+</li>
+</ol>
+<p>These examples show how contextual embeddings adapt the meaning of a word based on its surrounding words.</p>
+<hr />
+<h3 id="45-from-intuition-to-mechanism-the-self-attention-insight">4.5 From Intuition to Mechanism: The Self-Attention Insight<a class="headerlink" href="#45-from-intuition-to-mechanism-the-self-attention-insight" title="Permanent link">&para;</a></h3>
+<p>What we just derived by reasoning—that each word's representation should depend on others—is exactly what the <strong>self-attention</strong> mechanism does.</p>
+<p>Each word:</p>
+<ul>
+<li>
+<p>Starts with a static embedding (from Word2Vec, GloVe, etc.)</p>
+</li>
+<li>
+<p>Passes through a layer that calculates similarity with all other words</p>
+</li>
+<li>
+<p>Gets updated into a new, context-sensitive embedding</p>
+</li>
+</ul>
+<p>The figure below shows this in action:</p>
+<p><img alt="1" src="../images/1.png" /></p>
+<p>As shown:</p>
+<ul>
+<li>
+<p>Words like "Humans", "Love", and "Smartphones" begin with their static embeddings (pink)</p>
+</li>
+<li>
+<p>Self-attention computes inter-word relationships</p>
+</li>
+<li>
+<p>The output is a <strong>contextualized representation</strong> for each word (green)</p>
+</li>
+</ul>
+<p>"Smartphones" may mean different things in different contexts—but now, its embedding reflects that.</p>
+<hr />
+<h3 id="46-section-summary">4.6 Section Summary<a class="headerlink" href="#46-section-summary" title="Permanent link">&para;</a></h3>
+<p>We started with the challenge of <strong>static embeddings</strong> failing to distinguish meaning based on context.<br />
+By thinking deeply and modeling interactions between words as <strong>weighted combinations</strong>, we found a dynamic way to re-compute word vectors.</p>
+<p>This insight forms the basis of <strong>self-attention</strong>, a cornerstone of modern NLP systems.<br />
+It's the key that unlocks contextual understanding—and sets the stage for models like BERT and GPT.</p>
+<p>Next, we'll examine how this mechanism works internally: through <strong>queries</strong>, <strong>keys</strong>, and <strong>values</strong>. That's where the full design of attention comes to life.</p>
+<hr />
+<h2 id="5-formalizing-self-attention-from-intuition-to-architecture">5. Formalizing Self-Attention: From Intuition to Architecture<a class="headerlink" href="#5-formalizing-self-attention-from-intuition-to-architecture" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>The Architecture of Self-Attention</summary>
+<p>Self-attention formalizes the intuitive idea of contextual embeddings into a mathematical architecture that can be efficiently computed and learned.</p>
+</details>
+<p>Previously, we discovered that a word's embedding can be made <strong>contextual</strong> by computing a weighted sum of all other word embeddings in a sentence. This was our first-principles approach—derived from basic reasoning about meaning and similarity.</p>
+<p>But we now want to <strong>scale this</strong> beyond a few hand-crafted sentences.</p>
+<hr />
+<h3 id="51-step-by-step-turning-the-idea-into-architecture">5.1 Step-by-Step: Turning the Idea into Architecture<a class="headerlink" href="#51-step-by-step-turning-the-idea-into-architecture" title="Permanent link">&para;</a></h3>
+<p>Let's revisit our example sentence:</p>
+<p><strong>money bank grows</strong></p>
+<p>We want to compute a new embedding for each word based on its similarity with all other words.</p>
+<p>Below is the <strong>architectural breakdown</strong> of this process for each word:</p>
+<p><img alt="2" src="../images/2.png" /></p>
+<p>Here's what's happening:</p>
+<ul>
+<li>
+<p>Each word is compared with every other word (using dot product) → similarity scores (sᵢⱼ)</p>
+</li>
+<li>
+<p>These scores are passed through a softmax to get attention weights (wᵢⱼ)</p>
+</li>
+<li>
+<p>A weighted sum of all word embeddings is computed → contextual output (yᵢ)</p>
+</li>
+</ul>
+<p>This process is repeated <strong>for every word</strong> in parallel.</p>
+<hr />
+<h3 id="52-scaling-with-linear-algebra">5.2 Scaling with Linear Algebra<a class="headerlink" href="#52-scaling-with-linear-algebra" title="Permanent link">&para;</a></h3>
+<p>Since each word needs to attend to all other words, we can compute this efficiently using <strong>matrix multiplication</strong>.</p>
+<p>Here's how the entire process looks in matrix form:</p>
+<p><img alt="3" src="../images/3.png" /></p>
+<p>Explanation:</p>
+<ul>
+<li>
+<p>We start with a matrix of all word embeddings (shape: 3 × <em>n</em>)</p>
+</li>
+<li>
+<p>Compute similarity scores (dot product) → 3 × 3 matrix</p>
+</li>
+<li>
+<p>Apply softmax row-wise → attention weights</p>
+</li>
+<li>
+<p>Multiply with original embeddings → new embeddings for each word</p>
+</li>
+</ul>
+<p>This turns our manually defined weighted sum into a <strong>vectorized operation</strong>, allowing for fast and parallel computation even for large sequences.</p>
+<hr />
+<h3 id="53-advantages-of-this-architecture">5.3 Advantages of This Architecture<a class="headerlink" href="#53-advantages-of-this-architecture" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Parallelism</strong>:<br />
+    All operations—dot products, softmax, weighted sums—can be computed <strong>simultaneously</strong> for all words.<br />
+    This makes the method <strong>highly scalable</strong> and ideal for large datasets and long sequences.</p>
+</li>
+<li>
+<p><strong>Contextual Embeddings</strong>:<br />
+    Each word now gets an embedding that is influenced by every other word in the sentence—capturing nuanced meaning.</p>
+</li>
+</ol>
+<hr />
+<h3 id="54-two-key-problems-identified">5.4 Two Key Problems Identified<a class="headerlink" href="#54-two-key-problems-identified" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Loss of Order Information</strong><br />
+    Because all words are processed in parallel, the model doesn't know which word came first or second.<br />
+    It treats the sentence as a bag of words.</p>
+<p>We will address this later using <strong>positional encoding</strong>.</p>
+</li>
+<li>
+<p><strong>No Learnable Parameters</strong><br />
+    Right now, all similarity computations are purely based on input embeddings.<br />
+    There are <strong>no weights, no biases</strong>, and therefore <strong>no learning</strong>.<br />
+    The contextual embeddings produced are <strong>generic</strong>—they reflect context, but not the task.</p>
+</li>
+</ol>
+<hr />
+<h3 id="55-why-learnable-parameters-are-needed">5.5 Why Learnable Parameters Are Needed<a class="headerlink" href="#55-why-learnable-parameters-are-needed" title="Permanent link">&para;</a></h3>
+<p>Let's take an example to clarify.</p>
+<p>Suppose we're doing <strong>sentiment analysis</strong> on these two sentences:</p>
+<ul>
+<li>
+<p><em>"I like this bank"</em></p>
+</li>
+<li>
+<p><em>"I dislike this bank"</em></p>
+</li>
+</ul>
+<p>In both cases, "bank" appears in a similar context, but the <strong>task-specific requirement</strong> is to <strong>focus on sentiment</strong>—"like" vs. "dislike".</p>
+<p>Without learnable parameters, the system will not learn that:</p>
+<ul>
+<li>
+<p>In sentence 1, "bank" is viewed positively.</p>
+</li>
+<li>
+<p>In sentence 2, "bank" is viewed negatively.</p>
+</li>
+</ul>
+<p>In short:</p>
+<blockquote>
+<p>We need the model to <strong>learn from data</strong> and adapt its embeddings depending on the <strong>task objective</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="6-introducing-learnable-parameters-in-self-attention">6. Introducing Learnable Parameters in Self-Attention<a class="headerlink" href="#6-introducing-learnable-parameters-in-self-attention" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>Learnable Parameters in Attention</summary>
+<p>Learnable parameters allow the attention mechanism to adapt to specific tasks and learn which words to focus on in different contexts.</p>
+</details>
+<p>In our last step, we derived the self-attention operation using basic matrix algebra. The entire operation was composed of three core parts:</p>
+<ol>
+<li>
+<p>A <strong>dot product</strong> to calculate similarity between words</p>
+</li>
+<li>
+<p>A <strong>softmax</strong> to normalize these similarities into attention weights</p>
+</li>
+<li>
+<p>A <strong>weighted sum</strong> to generate new contextual embeddings</p>
+</li>
+</ol>
+<p>This is summarized below:</p>
+<p><img alt="4" src="../images/4.png" /></p>
+<p>However, one important limitation still remains:</p>
+<blockquote>
+<p>The model has <strong>no learnable parameters</strong>. That means it cannot learn from data or adapt based on the task.</p>
+</blockquote>
+<p>So the natural question becomes—<strong>where</strong> in this architecture can we introduce trainable weights?</p>
+<p>If we look closely, only two operations involve actual vector interactions:</p>
+<ul>
+<li>
+<p>The <strong>first dot product</strong> between embeddings → where we compute similarity</p>
+</li>
+<li>
+<p>The <strong>final weighted sum</strong> to produce the contextual output</p>
+</li>
+</ul>
+<p>These are the points where we can inject learnable parameters.</p>
+<hr />
+<h3 id="61-queries-keys-and-values-explained">6.1 Queries, Keys, and Values Explained<a class="headerlink" href="#61-queries-keys-and-values-explained" title="Permanent link">&para;</a></h3>
+<p>Let's revisit the self-attention diagram, but now highlight three distinct roles each embedding plays:</p>
+<p><img alt="5" src="../images/5.png" /></p>
+<p>We can now name the roles as follows:</p>
+<ul>
+<li>
+<p><strong>Query</strong>^[used to determine relevance]: The word for which we are calculating context</p>
+</li>
+<li>
+<p><strong>Key</strong>^[used for comparison]: The words we are comparing the query to (to compute similarity)</p>
+</li>
+<li>
+<p><strong>Value</strong>^[used for final representation]: The content we will use to compute the final representation, based on attention weights</p>
+</li>
+</ul>
+<p>These terms might seem new in the NLP context, but they're inspired from traditional programming:</p>
+<blockquote>
+<p>In a dictionary/map:</p>
+<ul>
+<li>
+<p>You issue a <strong>query</strong> (what you're searching for)</p>
+</li>
+<li>
+<p>It is matched with a <strong>key</strong></p>
+</li>
+<li>
+<p>And you retrieve a <strong>value</strong>
+</p>
+</li>
+</ul>
+</blockquote>
+<p>Self-attention is conceptually similar:<br />
+Each word "queries" the sentence for related information, finds "keys", and pulls out their corresponding "values".</p>
+<hr />
+<h3 id="62-a-problem-one-embedding-three-roles">6.2 A Problem: One Embedding, Three Roles<a class="headerlink" href="#62-a-problem-one-embedding-three-roles" title="Permanent link">&para;</a></h3>
+<p>In our setup so far, <strong>every word uses the same vector</strong> to act as a Query, a Key, and a Value.</p>
+<p><img alt="6" src="../images/6.png" /></p>
+<p>This is not ideal.</p>
+<p>Why? Because each of these roles requires different behavior:</p>
+<ul>
+<li>
+<p>As a <strong>query</strong>, the word should try to find relevant neighbors.</p>
+</li>
+<li>
+<p>As a <strong>key</strong>, it should offer meaningful comparison metrics.</p>
+</li>
+<li>
+<p>As a <strong>value</strong>, it should offer rich contextual information.</p>
+</li>
+</ul>
+<hr />
+<h3 id="63-solution-projecting-into-separate-spaces">6.3 Solution: Projecting into Separate Spaces<a class="headerlink" href="#63-solution-projecting-into-separate-spaces" title="Permanent link">&para;</a></h3>
+<p>Instead of forcing a single embedding to wear all three hats, let's <em>transform</em> it into <strong>three different vectors</strong>:</p>
+<ul>
+<li>
+<p>Query vector</p>
+</li>
+<li>
+<p>Key vector</p>
+</li>
+<li>
+<p>Value vector</p>
+</li>
+</ul>
+<p>Each derived using a separate <strong>learnable linear projection</strong>.</p>
+<p><img alt="7" src="../images/7.png" /></p>
+<p>This separation allows the model to <strong>specialize</strong> each part:</p>
+<ul>
+<li>
+<p>The <strong>Query projection</strong> learns how to <em>ask</em> relevant questions.</p>
+</li>
+<li>
+<p>The <strong>Key projection</strong> learns how to <em>represent</em> itself to be attended to.</p>
+</li>
+<li>
+<p>The <strong>Value projection</strong> learns how to <em>contribute</em> to final output when attended.</p>
+</li>
+</ul>
+<hr />
+<h3 id="64-intuitive-benefits-of-qkv-separation">6.4 Intuitive Benefits of Q/K/V Separation<a class="headerlink" href="#64-intuitive-benefits-of-qkv-separation" title="Permanent link">&para;</a></h3>
+<p>Let's say you're in a room full of people and you're interested in finding someone to collaborate on a project.</p>
+<ul>
+<li>
+<p>As the <strong>query</strong>, you are looking for someone who aligns with your interests.</p>
+</li>
+<li>
+<p>Everyone else has a <strong>key</strong> that describes their area of expertise.</p>
+</li>
+<li>
+<p>Once you identify relevant people, you ask them to share insights (their <strong>values</strong>).</p>
+</li>
+</ul>
+<p>Now, imagine if everyone had just one description for all three roles. You'd miss out on subtle but crucial distinctions.</p>
+<p>By allowing separate <strong>Q, K, and V vectors</strong>, we give the model the <strong>freedom to behave differently</strong> in each role—which is exactly what a robust learning system needs.</p>
+<hr />
+<h3 id="65-conclusion">6.5 Conclusion<a class="headerlink" href="#65-conclusion" title="Permanent link">&para;</a></h3>
+<p>By projecting our original embedding into <strong>three distinct learnable vectors (Q, K, V)</strong>, we turn self-attention into a truly <strong>trainable</strong> mechanism:</p>
+<ul>
+<li>
+<p>Capable of <strong>learning from data</strong></p>
+</li>
+<li>
+<p>Adapting to different tasks</p>
+</li>
+<li>
+<p>Assigning role-specific behavior to each word in the sentence</p>
+</li>
+</ul>
+<p>In the next section, we will formalize how these Query, Key, and Value vectors are generated using linear layers, and how the attention mechanism operates with them from end to end.</p>
+<p>Let's now move from concept to implementation.</p>
+<hr />
+<h2 id="7-building-the-query-key-and-value-vectors">7. Building the Query, Key, and Value Vectors<a class="headerlink" href="#7-building-the-query-key-and-value-vectors" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>QKV Generation</summary>
+<p>The process of generating Query, Key, and Value vectors from input embeddings is the first step in implementing self-attention.</p>
+</details>
+<p>So far, we've established that:</p>
+<ul>
+<li>
+<p>Each word in a sentence needs to play <strong>three different roles</strong>: query, key, and value.</p>
+</li>
+<li>
+<p>These roles should ideally have <strong>separate vector representations</strong>.</p>
+</li>
+<li>
+<p>We can achieve this by <strong>transforming</strong> the original word embedding into three new vectors.</p>
+</li>
+</ul>
+<p>Now the core question becomes:</p>
+<blockquote>
+<p><strong>How do we generate the Q, K, and V vectors from a given word embedding?</strong></p>
+</blockquote>
+<p>This is what we'll design next.</p>
+<hr />
+<h3 id="71-visualizing-the-goal">7.1 Visualizing the Goal<a class="headerlink" href="#71-visualizing-the-goal" title="Permanent link">&para;</a></h3>
+<p>Let's start by imagining what we want to do:</p>
+<p><img alt="8" src="../images/8.png" /></p>
+<p>Each word embedding (like <code>emoney</code>) should be transformed into:</p>
+<ul>
+<li>
+<p><code>qmoney</code>: Query vector</p>
+</li>
+<li>
+<p><code>kmoney</code>: Key vector</p>
+</li>
+<li>
+<p><code>vmoney</code>: Value vector</p>
+</li>
+</ul>
+<p>And similarly for every word.</p>
+<hr />
+<h3 id="72-how-do-we-transform-a-vector">7.2 How Do We Transform a Vector?<a class="headerlink" href="#72-how-do-we-transform-a-vector" title="Permanent link">&para;</a></h3>
+<p>There are two basic methods for generating new vectors from an existing one:</p>
+<ol>
+<li>
+<p><strong>Scaling</strong> (e.g., multiply each value by 2)</p>
+</li>
+<li>
+<p><strong>Linear Transformation</strong> (matrix multiplication)</p>
+</li>
+</ol>
+<p>For our case, <strong>linear transformation</strong> is ideal because:</p>
+<ul>
+<li>
+<p>It allows flexible, trainable changes.</p>
+</li>
+<li>
+<p>It preserves relative patterns while allowing reshaping of meaning.</p>
+</li>
+</ul>
+<hr />
+<h3 id="73-linear-transformations-with-weight-matrices">7.3 Linear Transformations with Weight Matrices<a class="headerlink" href="#73-linear-transformations-with-weight-matrices" title="Permanent link">&para;</a></h3>
+<p>We'll use three learnable matrices:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(W_q\)</span> : for generating Query vectors</p>
+</li>
+<li>
+<p><span class="arithmatex">\(W_k\)</span> : for generating Key vectors</p>
+</li>
+<li>
+<p><span class="arithmatex">\(W_v\)</span> : for generating Value vectors</p>
+</li>
+</ul>
+<p>Each of these will be applied to the original embedding:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">generate_qkv</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">Wq</span><span class="p">,</span> <span class="n">Wk</span><span class="p">,</span> <span class="n">Wv</span><span class="p">):</span>
+<span class="hll">    <span class="n">q</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">Wq</span><span class="p">)</span>  <span class="c1"># Query projection</span>
+</span><span class="hll">    <span class="n">k</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">Wk</span><span class="p">)</span>  <span class="c1"># Key projection</span>
+</span><span class="hll">    <span class="n">v</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">Wv</span><span class="p">)</span>  <span class="c1"># Value projection</span>
+</span>    <span class="k">return</span> <span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span>
+</code></pre></div>
+<p>Initially, these matrices <span class="arithmatex">\(W_q, W_k, W_v\)</span> are <strong>randomly initialized</strong>, but they are <strong>trainable</strong>—meaning they will be updated during backpropagation.<br />
+This is the <strong>learning</strong> phase of the self-attention module.</p>
+<p>We now have a way to extract <strong>task-specific Q, K, and V vectors</strong> from each input word embedding.</p>
+<hr />
+<h3 id="74-end-to-end-flow-for-a-single-word">7.4 End-to-End Flow for a Single Word<a class="headerlink" href="#74-end-to-end-flow-for-a-single-word" title="Permanent link">&para;</a></h3>
+<p>Let's now visualize how a single word's embedding goes through the entire QKV transformation and attention calculation:</p>
+<p><img alt="10" src="../images/10.png" /></p>
+<ul>
+<li>
+<p>Each word is projected to Q, K, and V using its respective weight matrices.</p>
+</li>
+<li>
+<p>The dot product between the <strong>query</strong> and all <strong>keys</strong> is computed.</p>
+</li>
+<li>
+<p>Attention weights (after softmax) are used to combine <strong>values</strong>.</p>
+</li>
+<li>
+<p>Final result: a new, <strong>contextualized output vector</strong> for the word.</p>
+</li>
+</ul>
+<hr />
+<h3 id="75-extending-to-the-whole-sequence">7.5 Extending to the Whole Sequence<a class="headerlink" href="#75-extending-to-the-whole-sequence" title="Permanent link">&para;</a></h3>
+<p>Since these operations are all <strong>linear and parallelizable</strong>, we can compute Q, K, and V for all words in the sequence at once.</p>
+<p>This is shown in the next diagram:</p>
+<p><img alt="11" src="../images/11.png" /></p>
+<p>Every step—from embedding to final output—can be done <strong>in matrix form</strong>, enabling efficient training and inference.</p>
+<hr />
+<h3 id="76-full-matrix-level-self-attention-flow">7.6 Full Matrix-Level Self-Attention Flow<a class="headerlink" href="#76-full-matrix-level-self-attention-flow" title="Permanent link">&para;</a></h3>
+<p>Here's the complete view of self-attention at matrix scale:</p>
+<p><img alt="12" src="../images/12.png" /></p>
+<p><strong>Step-by-step explanation:</strong></p>
+<ol>
+<li>
+<p><strong>Input Word Embeddings</strong> (3 × d):<br />
+    Each row is a word embedding: <code>emoney</code>, <code>ebank</code>, <code>egrows</code>.</p>
+</li>
+<li>
+<p><strong>Linear Projections</strong>:</p>
+<ul>
+<li>
+<p>Multiply the embedding matrix with <span class="arithmatex">\(W_q, W_k, W_v\)</span> to get:</p>
+<ul>
+<li>
+<p>Q: Query matrix (3 × d₁)</p>
+</li>
+<li>
+<p>K: Key matrix (3 × d₁)</p>
+</li>
+<li>
+<p>V: Value matrix (3 × d₂)</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Similarity Scores</strong>:</p>
+<ul>
+<li>Compute dot product: <span class="arithmatex">\(Q \cdot K^T\)</span> → gives similarity matrix (3 × 3)</li>
+</ul>
+</li>
+<li>
+<p><strong>Softmax</strong>:</p>
+<ul>
+<li>Normalize each row of similarity scores to get attention weights (3 × 3)</li>
+</ul>
+</li>
+<li>
+<p><strong>Weighted Sum</strong>:</p>
+<ul>
+<li>Multiply attention weights with the Value matrix:<br />
+<span class="arithmatex">\(\text{Attention Weights} \cdot V\)</span></li>
+</ul>
+</li>
+<li>
+<p><strong>Final Output</strong>:</p>
+<ul>
+<li>The resulting matrix contains contextualized embeddings for each word in the input.</li>
+</ul>
+</li>
+</ol>
+<p>Here one question may arise after reading linear projections:</p>
+<h4 id="question">Question:<a class="headerlink" href="#question" title="Permanent link">&para;</a></h4>
+<p><strong>Q: In self-attention, do the Query (Q), Key (K), and Value (V) matrices always have the same dimensionality? If not, which dimensions must match, and how are these typically handled in Transformer models?</strong></p>
+<h4 id="answer">Answer<a class="headerlink" href="#answer" title="Permanent link">&para;</a></h4>
+<p>No, the Query (Q), Key (K), and Value (V) matrices in self-attention do <strong>not</strong> always need to have the same dimensionality. However, certain constraints must be satisfied for the self-attention mechanism to function correctly.</p>
+<p>At the core of self-attention lies the dot product between the <strong>query</strong> and <strong>key</strong> vectors, which yields the attention scores. For this operation to be valid and meaningful, the <strong>Query and Key matrices must have the same feature dimension</strong>, typically denoted as <span class="arithmatex">\(d_k\)</span>. This ensures that the dot product <span class="arithmatex">\(QK^\top\)</span> is well-defined and produces an attention matrix of shape <span class="arithmatex">\(n \times n\)</span>, where <span class="arithmatex">\(n\)</span> is the sequence length.</p>
+<p>In contrast, the <strong>Value (V) matrix</strong> does <strong>not</strong> participate in the dot product. Instead, it is used in the final step, where the attention weights are applied as a weighted sum over the values. Since scalar weights can be applied to vectors of any dimension, the <strong>Value matrix can have a different dimensionality</strong>, denoted as <span class="arithmatex">\(d_v\)</span>.</p>
+<hr />
+<h5 id="dimensionality-in-standard-transformer-models">Dimensionality in Standard Transformer Models<a class="headerlink" href="#dimensionality-in-standard-transformer-models" title="Permanent link">&para;</a></h5>
+<p>In typical Transformer architectures, the input sequence <span class="arithmatex">\(X \in \mathbb{R}^{n \times d_m}\)</span> (where <span class="arithmatex">\(d_m\)</span> is the model dimension) is projected into Q, K, and V using learned linear transformations:</p>
+<p><span class="arithmatex">\(Q = XW^Q \in \mathbb{R}^{n \times d_k}, \quad K = XW^K \in \mathbb{R}^{n \times d_k}, \quad V = XW^V \in \mathbb{R}^{n \times d_v}\)</span></p>
+<p>In multi-head attention, this is often further constrained such that:</p>
+<p><span class="arithmatex">\(d_k = d_v = \frac{d_m}{h}\)</span></p>
+<p>where <span class="arithmatex">\(h\)</span> is the number of attention heads. This ensures that each head operates in a lower-dimensional subspace and simplifies the implementation by keeping dimensions consistent across Q, K, and V.</p>
+<hr />
+<h5 id="our-case">Our Case<a class="headerlink" href="#our-case" title="Permanent link">&para;</a></h5>
+<p>In practice, more flexible configurations are also valid. For example, consider the setup:</p>
+<p><span class="arithmatex">\(Q \in \mathbb{R}^{3 \times d_1}, \quad K \in \mathbb{R}^{3 \times d_1}, \quad V \in \mathbb{R}^{3 \times d_2}\)</span></p>
+<p>This configuration works, provided:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(d_1 = d_k\)</span>, the shared dimension of queries and keys.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(d_2 = d_v\)</span>, the value dimension, which can differ from <span class="arithmatex">\(d_k\)</span>.</p>
+</li>
+</ul>
+<p>Such setups are occasionally used in custom attention mechanisms where the output representation is intentionally designed to differ in size from the attention scoring space.</p>
+<hr />
+<h5 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p><strong>Q and K</strong> must share the same dimension <span class="arithmatex">\(d_k\)</span> to allow valid dot-product attention computation.</p>
+</li>
+<li>
+<p><strong>V</strong> can have a different dimension <span class="arithmatex">\(d_v\)</span>, since it is only involved in the final weighted sum.</p>
+</li>
+<li>
+<p>In standard Transformers, it's common to set <span class="arithmatex">\(d_k = d_v = d_m / h\)</span>, but this is not a strict requirement.</p>
+</li>
+</ul>
+<p>This flexibility allows the architecture to adapt the representation space of the attention output independently from the space used to compute attention scores.</p>
+<hr />
+<h3 id="77-section-summary">7.7 Section Summary<a class="headerlink" href="#77-section-summary" title="Permanent link">&para;</a></h3>
+<p>With this transformation mechanism in place, we now have a complete self-attention module that:</p>
+<ul>
+<li>
+<p>Uses learnable parameters (<span class="arithmatex">\(Wq, Wk, Wv\)</span>)</p>
+</li>
+<li>
+<p>Computes attention dynamically based on context</p>
+</li>
+<li>
+<p>Produces <strong>contextualized, task-aware embeddings</strong></p>
+</li>
+</ul>
+<p>This attention operation is the <strong>core building block of Transformer models</strong>.</p>
+<hr />
+<h2 id="8-why-do-we-need-a-scaling-factor-in-attention">8. Why Do We Need a Scaling Factor in Attention?<a class="headerlink" href="#8-why-do-we-need-a-scaling-factor-in-attention" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>The Need for Scaling</summary>
+<p>The scaling factor in attention is crucial for maintaining stable gradients and preventing the softmax function from producing extremely peaked distributions.</p>
+</details>
+<p>Until now, we've derived the self-attention formula as:</p>
+<p><span class="arithmatex">\(\text{Attention}(Q, K, V) = \text{Softmax}(Q \cdot K^T) \cdot V\)</span></p>
+<p>This formulation is correct and aligns with everything we've built step-by-step so far.</p>
+<p>However, when we read the original Transformer paper—<strong>"Attention is All You Need"</strong>—we encounter a slightly different version of the equation:</p>
+<p><span class="arithmatex">\(\text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) \cdot V\)</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(d_k\)</span> is the <strong>dimension of the key vector</strong></li>
+</ul>
+<p>So now, we naturally wonder:</p>
+<blockquote>
+<p>Why is this <strong><span class="arithmatex">\(\frac{1}{\sqrt{d_k}}\)</span></strong> scaling factor needed?<br />
+Why not just use dot product directly?</p>
+</blockquote>
+<p>To answer this, we need to understand a <strong>property of dot products</strong> in high-dimensional vector spaces.</p>
+<hr />
+<h3 id="81-nature-of-dot-product-in-high-dimensions">8.1 Nature of Dot Product in High Dimensions<a class="headerlink" href="#81-nature-of-dot-product-in-high-dimensions" title="Permanent link">&para;</a></h3>
+<p>In linear algebra, it's a well-known fact:</p>
+<blockquote>
+<p>As the <strong>dimension</strong> of the vectors increases, the <strong>variance of their dot product</strong> increases too.</p>
+</blockquote>
+<p>Let's unpack this.</p>
+<p>Suppose we randomly sample two vectors and take their dot product:</p>
+<ul>
+<li>
+<p>In 3 dimensions, their dot product stays within a narrow range.</p>
+</li>
+<li>
+<p>But in 100 or 1000 dimensions, the result fluctuates much more.</p>
+</li>
+</ul>
+<p>We ran an experiment:<br />
+We generated 1000 random pairs of vectors for each dimension and plotted the dot product values.</p>
+<p>Here are the histograms:</p>
+<hr />
+<h4 id="dot-product-distributions-across-dimensions">Dot Product Distributions Across Dimensions<a class="headerlink" href="#dot-product-distributions-across-dimensions" title="Permanent link">&para;</a></h4>
+<p><strong>Dimension = 3</strong></p>
+<p><img alt="13" src="../images/13.png" /></p>
+<p><strong>Dimension = 100</strong></p>
+<p><img alt="14" src="../images/14.png" /></p>
+<p><strong>Dimension = 1000</strong></p>
+<p><img alt="15" src="../images/15.png" /></p>
+<p><strong>Overlay of All Three</strong></p>
+<hr />
+<p>From these plots, it's clear:</p>
+<ul>
+<li>
+<p><strong>As dimension increases, the variance of dot product values also increases.</strong></p>
+</li>
+<li>
+<p>High variance means some values will be <strong>very high</strong>, and others <strong>very low</strong>.</p>
+</li>
+</ul>
+<p>This leads us to the next critical question.</p>
+<hr />
+<h3 id="82-why-high-variance-is-a-problem-in-attention">8.2 Why High Variance Is a Problem in Attention?<a class="headerlink" href="#82-why-high-variance-is-a-problem-in-attention" title="Permanent link">&para;</a></h3>
+<p>Recall that in attention, the dot products go through a <strong>Softmax</strong> layer.</p>
+<h4 id="what-softmax-does">What Softmax Does:<a class="headerlink" href="#what-softmax-does" title="Permanent link">&para;</a></h4>
+<p>Given inputs <span class="arithmatex">\([x_1, x_2, ..., x_n]\)</span>, Softmax computes:</p>
+<p><span class="arithmatex">\({Softmax}(x_i) = \frac{e^{x_i}}{\sum_j e^{x_j}}\)</span></p>
+<p>This converts raw scores into a <strong>probability distribution</strong>, where all values sum to 1.</p>
+<p>But since it's <strong>exponential</strong>, Softmax has a sharp sensitivity to large differences:</p>
+<ul>
+<li>
+<p>A slightly larger value becomes <strong>dominant</strong> after exponentiation.</p>
+</li>
+<li>
+<p>Smaller values become almost <strong>zero</strong>.</p>
+</li>
+</ul>
+<p>This effect is <strong>amplified</strong> when input values (like dot products) have high variance.</p>
+<hr />
+<h4 id="what-this-means-in-practice">What This Means in Practice<a class="headerlink" href="#what-this-means-in-practice" title="Permanent link">&para;</a></h4>
+<p>If attention scores are very different due to high variance, then:</p>
+<ul>
+<li>
+<p>The softmax output becomes <strong>very peaky</strong>.</p>
+</li>
+<li>
+<p>Only one token gets all the attention.</p>
+</li>
+<li>
+<p>The rest are <strong>ignored</strong> completely.</p>
+</li>
+</ul>
+<p>This hurts learning:</p>
+<ul>
+<li>
+<p>During backpropagation, gradients for ignored tokens approach <strong>zero</strong>.</p>
+</li>
+<li>
+<p>This causes a <strong>vanishing gradient problem</strong> for non-dominant tokens.</p>
+</li>
+<li>
+<p>As a result, the model <strong>fails to learn meaningful attention patterns</strong>.</p>
+</li>
+</ul>
+<p>This is shown in the illustration below:</p>
+<p><img alt="16" src="../images/16.png" /></p>
+<hr />
+<h3 id="83-how-to-fix-it">8.3 How to Fix It?<a class="headerlink" href="#83-how-to-fix-it" title="Permanent link">&para;</a></h3>
+<p>We have two possible solutions:</p>
+<ol>
+<li>
+<p><strong>Reduce dimensionality</strong> of the vectors</p>
+<ul>
+<li>
+<p>But this would degrade the richness of word embeddings</p>
+</li>
+<li>
+<p>Less capacity → worse performance</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Scale the dot product values</strong></p>
+<ul>
+<li>
+<p>So they don't become too large as dimension increases</p>
+</li>
+<li>
+<p>Keeps softmax well-behaved</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Clearly, option 2 is preferable.</p>
+<hr />
+<h2 id="9-how-to-choose-the-right-scaling-factor">9. How to Choose the Right Scaling Factor?<a class="headerlink" href="#9-how-to-choose-the-right-scaling-factor" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>Choosing the Scaling Factor</summary>
+<p>The scaling factor is derived from the relationship between vector dimensions and dot product variance.</p>
+</details>
+<p>In the previous section, we concluded that high-dimensional dot products lead to <strong>high variance</strong>, which causes issues when passed through <strong>Softmax</strong>.</p>
+<p>To fix this, we introduced a <strong>scaling factor</strong>:</p>
+<p><span class="arithmatex">\(\frac{1}{\sqrt{d_k}}\)</span></p>
+<p>Now let's <strong>derive this scaling factor</strong> using basic probability theory and experimental observation.</p>
+<hr />
+<h3 id="91-theoretical-foundation-variance-and-scaling">9.1 Theoretical Foundation: Variance and Scaling<a class="headerlink" href="#91-theoretical-foundation-variance-and-scaling" title="Permanent link">&para;</a></h3>
+<p>We begin with a well-known property in statistics:</p>
+<blockquote>
+<p><strong>If you scale a random variable <span class="arithmatex">\(X\)</span> by a constant <span class="arithmatex">\(c\)</span>, the variance scales by <span class="arithmatex">\(c^2\)</span>:</strong></p>
+<p><span class="arithmatex">\(\text{Var}(Y) = c^2 \cdot \text{Var}(X) \quad \text{where } Y = cX\)</span></p>
+</blockquote>
+<p>This is a key relationship, and we will use it to deduce our scaling factor.</p>
+<hr />
+<h3 id="92-experimental-observation-dimensionality-and-variance">9.2 Experimental Observation: Dimensionality and Variance<a class="headerlink" href="#92-experimental-observation-dimensionality-and-variance" title="Permanent link">&para;</a></h3>
+<p>Let's suppose we sample 1000 random pairs of vectors from a standard normal distribution and take their dot product in various dimensions.</p>
+<p>We observed the following:</p>
+<table>
+<thead>
+<tr>
+<th>Dimension <span class="arithmatex">\(d\)</span></th>
+<th>Approx. Variance of Dot Product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(\text{Var}(X)\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(2 \cdot \text{Var}(X)\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(3 \cdot \text{Var}(X)\)</span></td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d_k\)</span></td>
+<td><span class="arithmatex">\(d_k \cdot \text{Var}(X)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>This tells us:</p>
+<blockquote>
+<p>Dot product variance <strong>increases linearly</strong> with dimension.</p>
+</blockquote>
+<p>Let's define:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(X_d\)</span>: dot product value in <span class="arithmatex">\(d\)</span> dimensions</p>
+</li>
+<li>
+<p>Then:</p>
+</li>
+</ul>
+<p><span class="arithmatex">\(\text{Var}(X_d) = d_k \cdot \text{Var}(X)\)</span></p>
+<hr />
+<h3 id="93-keeping-variance-constant">9.3 Keeping Variance Constant<a class="headerlink" href="#93-keeping-variance-constant" title="Permanent link">&para;</a></h3>
+<p>Now, our goal is to bring the variance back to its original value, i.e., <span class="arithmatex">\(\text{Var}(X)\)</span>, no matter the dimension <span class="arithmatex">\(d_k\)</span>.</p>
+<p>Let's apply a <strong>scaling factor <span class="arithmatex">\(c\)</span></strong> to our dot product such that:</p>
+<p><span class="arithmatex">\(\text{Var}(Y) = \text{Var}(c \cdot X_d) = c^2 \cdot \text{Var}(X_d)\)</span></p>
+<p>We want:</p>
+<p><span class="arithmatex">\(\text{Var}(Y) = \text{Var}(X)\)</span></p>
+<p>Substitute in:</p>
+<p><span class="arithmatex">\(c^2 \cdot (d_k \cdot \text{Var}(X)) = \text{Var}(X)\)</span></p>
+<p>Divide both sides by <span class="arithmatex">\(\text{Var}(X)\)</span>:</p>
+<p><span class="arithmatex">\(c^2 \cdot d_k = 1\)</span> </p>
+<p><span class="arithmatex">\(c^2 = \frac{1}{d_k} \quad \Rightarrow \quad c = \frac{1}{\sqrt{d_k}}\)</span></p>
+<hr />
+<h3 id="94-final-derivation-of-scaling-factor">9.4 Final Derivation of Scaling Factor<a class="headerlink" href="#94-final-derivation-of-scaling-factor" title="Permanent link">&para;</a></h3>
+<p>To maintain <strong>stable variance across dimensions</strong> and avoid exploding Softmax values, we must scale the dot product matrix by:</p>
+<p><span class="arithmatex">\(\boxed{ \frac{1}{\sqrt{d_k}} }\)</span></p>
+<p>This ensures:</p>
+<ul>
+<li>
+<p>Variance remains <strong>independent of dimension</strong></p>
+</li>
+<li>
+<p>Softmax stays <strong>numerically stable</strong></p>
+</li>
+<li>
+<p>Gradients remain <strong>well-behaved during training</strong></p>
+</li>
+</ul>
+<p>And thus, the final attention formula becomes:</p>
+<p><span class="arithmatex">\(\boxed{ \text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) \cdot V }\)</span></p>
+<p>This concludes the deep dive into the scaling factor.</p>
+<hr />
+<h2 id="10-final-conclusion">10. Final Conclusion<a class="headerlink" href="#10-final-conclusion" title="Permanent link">&para;</a></h2>
+<h3 id="101-why-scaling-matters">10.1 Why Scaling Matters<a class="headerlink" href="#101-why-scaling-matters" title="Permanent link">&para;</a></h3>
+<p>The scaling factor <span class="arithmatex">\(\frac{1}{\sqrt{d_k}}\)</span> is crucial for maintaining stable attention weights and preventing exploding gradients.</p>
+<h3 id="102-final-attention-equation">10.2 Final Attention Equation<a class="headerlink" href="#102-final-attention-equation" title="Permanent link">&para;</a></h3>
+<p>The final attention formula is:</p>
+<p><span class="arithmatex">\(\text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) \cdot V\)</span></p>
+<h3 id="103-key-takeaways">10.3 Key Takeaways<a class="headerlink" href="#103-key-takeaways" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Scaling factor</strong> <span class="arithmatex">\(\frac{1}{\sqrt{d_k}}\)</span> is necessary to maintain stable attention weights.</p>
+</li>
+<li>
+<p><strong>Dot product</strong> <span class="arithmatex">\(Q \cdot K^T\)</span> is computed before applying Softmax.</p>
+</li>
+<li>
+<p><strong>Softmax</strong> converts raw scores into a probability distribution.</p>
+</li>
+<li>
+<p><strong>Attention weights</strong> are then used to combine <strong>values</strong> to produce contextual embeddings.</p>
+</li>
+</ol>
+<p>This concludes the detailed explanation of self-attention and its components.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../../Pydantic/Chapter%202/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chapter 2">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Chapter 2
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../Kubernetes/Why%20Kubernetes/" class="md-footer__link md-footer__link--next" aria-label="Next: Why Kubernetes">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Why Kubernetes
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Paritosh Sharma
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.math", "search.highlight", "search.share", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.path", "navigation.indexes"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../../assets/collapsible-toc.js"></script>
+      
+    
+  </body>
+</html>

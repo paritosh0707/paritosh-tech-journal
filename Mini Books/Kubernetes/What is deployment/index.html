@@ -1,0 +1,2748 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Kubernetes%20Architecture/">
+      
+      
+        <link rel="next" href="../Service/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>What is deployment - Paritosh's Tech Universe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deployments-in-kubernetes-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paritosh&#39;s Tech Universe" class="md-header__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paritosh's Tech Universe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              What is deployment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Pydantic/Introduction/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mini Books
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paritosh&#39;s Tech Universe" class="md-nav__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Paritosh's Tech Universe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mini Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pydantic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pydantic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Chapter%201/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Chapter%202/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Transformers
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Transformers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Transformers/Self%20Attention/Self%20Attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Why%20Kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Why Kubernetes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Pod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kubernetes%20Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    What is deployment
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    What is deployment
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-do-we-need-deployments-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Do We Need Deployments in Kubernetes?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Do We Need Deployments in Kubernetes?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-happens-if-your-pod-crashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. What happens if your Pod crashes?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-how-do-you-scale-manually-created-pods" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. How do you scale manually created Pods?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-what-if-you-want-to-update-the-image-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. What if you want to update the image version?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts-of-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concepts of Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts of Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-a-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is a Deployment?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-controller-the-automation-engine-behind-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Controller: The Automation Engine Behind Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pod-vs-replicaset-vs-deployment-understanding-the-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pod vs ReplicaSet vs Deployment: Understanding the Hierarchy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-yaml-structure-and-key-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment YAML: Structure and Key Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#labels-and-selectors-the-glue-of-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Labels and Selectors: The Glue of Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-and-managing-deployments-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating and Managing Deployments in Kubernetes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating and Managing Deployments in Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-deployment-using-yaml-and-kubectl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a Deployment using YAML and kubectl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspecting-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspecting Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Editing Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deleting Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-replicas-in-kubernetes-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing Replicas in Kubernetes Deployments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing Replicas in Kubernetes Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-and-updating-replicas-count-in-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting and Updating replicas Count in YAML
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling-manually-using-kubectl-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scaling Manually Using kubectl scale
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introduction-to-horizontal-pod-autoscaler-hpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Horizontal Pod Autoscaler (HPA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rolling-updates-and-rollbacks-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rolling Updates and Rollbacks in Kubernetes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rolling Updates and Rollbacks in Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-strategies-rollingupdate-vs-recreate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Strategies: RollingUpdate vs Recreate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-parameters-maxunavailable-and-maxsurge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Parameters: maxUnavailable and maxSurge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performing-and-monitoring-rolling-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performing and Monitoring Rolling Updates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rollbacks-reverting-to-a-previous-revision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rollbacks: Reverting to a Previous Revision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewing-deployment-history-and-revisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Viewing Deployment History and Revisions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-kubernetes-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary: Kubernetes Deployments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary: Kubernetes Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-why-do-we-need-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Why Do We Need Deployments?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-core-concepts-of-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Concepts of Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-creating-and-managing-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Creating and Managing Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-replica-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Replica Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-rolling-updates-and-rollbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Rolling Updates and Rollbacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-thoughts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Final Thoughts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    JavaScript
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            JavaScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/01.%20Immediately%20Invoked%20Function%20Expressions%20%28IIFE%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Immediately Invoked Function Expressions (IIFE)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/02.%20Call%20Stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Call Stack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/03.%20Control%20Flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Flow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/04.%20For%20Loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    For Loop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/05.%20while%20and%20do-while%20Loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    While and do-while Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/06.%20Higher%20Order%20Loops%20and%20Array%20Iteration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Higher Order Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            MCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MCP/JRPC%20-%20JSON%20Remote%20Procedure%20Call/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JRPC - JSON Remote Procedure Call
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-do-we-need-deployments-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Do We Need Deployments in Kubernetes?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Do We Need Deployments in Kubernetes?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-happens-if-your-pod-crashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. What happens if your Pod crashes?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-how-do-you-scale-manually-created-pods" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. How do you scale manually created Pods?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-what-if-you-want-to-update-the-image-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. What if you want to update the image version?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts-of-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concepts of Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts of Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-a-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is a Deployment?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-controller-the-automation-engine-behind-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Controller: The Automation Engine Behind Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pod-vs-replicaset-vs-deployment-understanding-the-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pod vs ReplicaSet vs Deployment: Understanding the Hierarchy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-yaml-structure-and-key-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment YAML: Structure and Key Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#labels-and-selectors-the-glue-of-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Labels and Selectors: The Glue of Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-and-managing-deployments-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating and Managing Deployments in Kubernetes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating and Managing Deployments in Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-deployment-using-yaml-and-kubectl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a Deployment using YAML and kubectl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspecting-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspecting Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Editing Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deleting Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-replicas-in-kubernetes-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing Replicas in Kubernetes Deployments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing Replicas in Kubernetes Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-and-updating-replicas-count-in-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting and Updating replicas Count in YAML
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling-manually-using-kubectl-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scaling Manually Using kubectl scale
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introduction-to-horizontal-pod-autoscaler-hpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Horizontal Pod Autoscaler (HPA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rolling-updates-and-rollbacks-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rolling Updates and Rollbacks in Kubernetes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rolling Updates and Rollbacks in Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-strategies-rollingupdate-vs-recreate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Strategies: RollingUpdate vs Recreate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-parameters-maxunavailable-and-maxsurge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Parameters: maxUnavailable and maxSurge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performing-and-monitoring-rolling-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performing and Monitoring Rolling Updates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rollbacks-reverting-to-a-previous-revision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rollbacks: Reverting to a Previous Revision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewing-deployment-history-and-revisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Viewing Deployment History and Revisions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-kubernetes-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary: Kubernetes Deployments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary: Kubernetes Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-why-do-we-need-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Why Do We Need Deployments?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-core-concepts-of-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Concepts of Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-creating-and-managing-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Creating and Managing Deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-replica-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Replica Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-rolling-updates-and-rollbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Rolling Updates and Rollbacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-thoughts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Final Thoughts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="deployments-in-kubernetes-introduction">Deployments in Kubernetes: Introduction<a class="headerlink" href="#deployments-in-kubernetes-introduction" title="Permanent link">&para;</a></h1>
+<p>In the previous chapters, we learned how to define and launch <strong>Pods</strong>, the most basic execution unit in Kubernetes. While Pods are useful for running applications, managing them manually—especially at scale—quickly becomes inefficient and error-prone.</p>
+<p>Imagine this:</p>
+<ul>
+<li>A Pod crashes unexpectedly—who brings it back?</li>
+<li>You need to run multiple identical Pods—how do you ensure consistency?</li>
+<li>You want to update the container image for your app—how do you do that with zero downtime?</li>
+</ul>
+<p>This is where <strong>Deployments</strong> come in.</p>
+<p>A <strong>Deployment</strong> is a higher-level Kubernetes object that allows you to:</p>
+<ul>
+<li>Define your application's desired state</li>
+<li>Run and maintain multiple replicas</li>
+<li>Perform rolling updates to new versions</li>
+<li>Automatically replace failed or outdated Pods</li>
+<li>Roll back to a previous stable version if something goes wrong</li>
+</ul>
+<p>Deployments make your workloads <strong>self-healing, declarative, and version-controlled</strong>—essential characteristics for modern cloud-native systems.</p>
+<p>In this chapter, we'll explore:</p>
+<ul>
+<li>What Deployments are and how they work behind the scenes</li>
+<li>How to create, scale, update, and delete Deployments</li>
+<li>How Kubernetes handles rollouts and rollbacks with zero downtime</li>
+<li>The role of ReplicaSets and how they relate to Deployments and Pods</li>
+</ul>
+<p>By the end of this chapter, you'll be able to manage applications in Kubernetes confidently using Deployments as the foundational building block.</p>
+<p>Let's begin with the core concepts.</p>
+<h2 id="why-do-we-need-deployments-in-kubernetes">Why Do We Need Deployments in Kubernetes?<a class="headerlink" href="#why-do-we-need-deployments-in-kubernetes" title="Permanent link">&para;</a></h2>
+<p>So far, we've learned how to create and manage Pods directly. While this is useful for learning and for one-off debugging tasks, managing Pods manually in production is <strong>not scalable or fault-tolerant</strong>.</p>
+<p>Let's walk through a few real-world challenges.</p>
+<h3 id="1-what-happens-if-your-pod-crashes">1. What happens if your Pod crashes?<a class="headerlink" href="#1-what-happens-if-your-pod-crashes" title="Permanent link">&para;</a></h3>
+<p>If you create a Pod manually using <code>kubectl create -f pod.yaml</code>, and the Pod crashes or the node hosting it fails, <strong>Kubernetes does not recreate it</strong>. You'll have to re-run it yourself.</p>
+<h3 id="2-how-do-you-scale-manually-created-pods">2. How do you scale manually created Pods?<a class="headerlink" href="#2-how-do-you-scale-manually-created-pods" title="Permanent link">&para;</a></h3>
+<p>If you want 5 copies of your application running, you'll need to manually create 5 Pod definitions. Managing them individually becomes impractical as the number grows.</p>
+<h3 id="3-what-if-you-want-to-update-the-image-version">3. What if you want to update the image version?<a class="headerlink" href="#3-what-if-you-want-to-update-the-image-version" title="Permanent link">&para;</a></h3>
+<p>You'd need to manually delete and recreate Pods or edit each one individually, which risks downtime and inconsistency.</p>
+<p>These limitations are what <strong>Deployments</strong> solve.</p>
+<p>A <strong>Deployment</strong> in Kubernetes provides a higher-level abstraction that manages the lifecycle of Pods <strong>in a declarative and automated manner</strong>.</p>
+<h2 id="core-concepts-of-deployment">Core Concepts of Deployment<a class="headerlink" href="#core-concepts-of-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="what-is-a-deployment">What is a Deployment?<a class="headerlink" href="#what-is-a-deployment" title="Permanent link">&para;</a></h3>
+<p>A <strong>Deployment</strong> is a Kubernetes object that defines:</p>
+<ul>
+<li>What kind of Pods to run</li>
+<li>How many replicas to maintain</li>
+<li>How to update them</li>
+<li>What to do if something goes wrong</li>
+</ul>
+<p>It ensures that the declared state is always maintained — even if Pods fail, the system will bring them back automatically. It also provides mechanisms for:</p>
+<ul>
+<li><strong>Scaling</strong></li>
+<li><strong>Rolling updates</strong></li>
+<li><strong>Rollbacks</strong></li>
+<li><strong>Declarative configuration</strong></li>
+</ul>
+<p>In essence, a Deployment manages a <strong>ReplicaSet</strong>, which in turn manages <strong>Pods</strong>.</p>
+<h3 id="deployment-controller-the-automation-engine-behind-deployments">Deployment Controller: The Automation Engine Behind Deployments<a class="headerlink" href="#deployment-controller-the-automation-engine-behind-deployments" title="Permanent link">&para;</a></h3>
+<p>Once you understand what a Deployment is—essentially a desired state specification for your application—the natural next step is to explore what ensures that this desired state is actually achieved and continuously maintained. This is where the <strong>Deployment Controller</strong> comes in.</p>
+<p>The Deployment Controller is a core component of the Kubernetes control plane that <strong>automates the creation, scaling, and rolling updates of Pods</strong> through ReplicaSets. It acts as a background reconciliation loop, ensuring that the current state of your cluster converges toward the desired state you define in your Deployment manifest.</p>
+<h4 id="role-of-the-deployment-controller">Role of the Deployment Controller<a class="headerlink" href="#role-of-the-deployment-controller" title="Permanent link">&para;</a></h4>
+<p>At its core, the Deployment Controller performs the following responsibilities:</p>
+<ol>
+<li>
+<p><strong>Ensures Desired Replica Count</strong><br />
+    When you specify a <code>replicas</code> field in your Deployment YAML (say, 3 replicas), the Deployment Controller ensures that exactly 3 Pods are always running. If one crashes or gets deleted, it immediately instructs the ReplicaSet to spin up a new Pod.</p>
+</li>
+<li>
+<p><strong>Orchestrates Rolling Updates</strong><br />
+    If you update the container image or any other spec in the Pod template, the controller <strong>gracefully transitions</strong> from the old ReplicaSet to a new one using the specified update strategy (typically <code>RollingUpdate</code>).</p>
+</li>
+<li>
+<p><strong>Maintains History for Rollbacks</strong><br />
+    Kubernetes automatically maintains a history of prior ReplicaSets. If a rollout fails or has an issue, the controller allows you to roll back to a previous state using:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>undo<span class="w"> </span>deployment<span class="w"> </span>&lt;deployment-name&gt;
+</code></pre></div>
+</li>
+<li>
+<p><strong>Monitors and Reports Status</strong><br />
+    The Deployment Controller constantly tracks the status of the Deployment and updates status fields such as:</p>
+<ul>
+<li><code>availableReplicas</code></li>
+<li><code>updatedReplicas</code></li>
+<li><code>conditions</code> (e.g., progressing, complete)</li>
+</ul>
+</li>
+</ol>
+<h4 id="a-visual-example-how-deployment-controller-works">A Visual Example: How Deployment Controller Works<a class="headerlink" href="#a-visual-example-how-deployment-controller-works" title="Permanent link">&para;</a></h4>
+<p>Let's look at a scenario:</p>
+<p>You have a Deployment manifest with 3 replicas and an image version <code>v1</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp:v1</span>
+</code></pre></div>
+<p>The controller ensures that:</p>
+<ul>
+<li>A ReplicaSet is created to manage 3 Pods with image <code>myapp:v1</code></li>
+<li>All 3 Pods are up and running</li>
+</ul>
+<p>Now, you update the Deployment to use <code>myapp:v2</code>. Here's what happens:</p>
+<ul>
+<li>A <strong>new ReplicaSet</strong> is created for <code>myapp:v2</code></li>
+<li>The controller gradually increases Pods from the new ReplicaSet while decreasing from the old one</li>
+<li>This process is governed by the <code>strategy.rollingUpdate</code> settings such as <code>maxUnavailable</code> and <code>maxSurge</code></li>
+<li>Once the update is complete, the old ReplicaSet is scaled to zero but retained for rollback purposes</li>
+</ul>
+<h4 id="behind-the-scenes-how-the-controller-reconciles">Behind the Scenes: How the Controller Reconciles<a class="headerlink" href="#behind-the-scenes-how-the-controller-reconciles" title="Permanent link">&para;</a></h4>
+<p>The Deployment Controller continuously compares two things:</p>
+<ul>
+<li><strong>Desired state</strong>: Defined in the Deployment object</li>
+<li><strong>Current state</strong>: Actual state in the cluster (Pods running, image versions, number of replicas)</li>
+</ul>
+<p>If there's any drift, the controller reconciles by adjusting the underlying ReplicaSets. This reconciliation loop is <strong>event-driven</strong>, meaning it reacts to changes such as updated Deployment specs or failed Pods.</p>
+<h4 id="in-short">In Short<a class="headerlink" href="#in-short" title="Permanent link">&para;</a></h4>
+<p>The Deployment Controller is the <strong>engine</strong> that brings declarative configuration in Kubernetes to life. While the Deployment object is your intent, the controller ensures that reality conforms to that intent, automatically handling scaling, updates, and health management. By offloading this operational burden, the controller enables you to focus on application logic rather than infrastructure orchestration.</p>
+<p>If you are comfortable with Deployments as YAML specs, understanding the Deployment Controller helps you see the full picture—how Kubernetes ensures availability, consistency, and progressive delivery with minimal manual intervention.</p>
+<p>Let me know if you'd like to add diagrams or animation suggestions that visually show rolling updates or reconciliation loops.</p>
+<h3 id="pod-vs-replicaset-vs-deployment-understanding-the-hierarchy">Pod vs ReplicaSet vs Deployment: Understanding the Hierarchy<a class="headerlink" href="#pod-vs-replicaset-vs-deployment-understanding-the-hierarchy" title="Permanent link">&para;</a></h3>
+<p>To grasp Deployments fully, it's important to understand how it fits in the hierarchy of Kubernetes objects.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pod</strong></td>
+<td>The basic unit of deployment. Represents one or more containers.</td>
+</tr>
+<tr>
+<td><strong>ReplicaSet</strong></td>
+<td>Ensures that a specified number of <strong>identical Pods</strong> are running at all times. If one Pod crashes, the ReplicaSet spins up another.</td>
+</tr>
+<tr>
+<td><strong>Deployment</strong></td>
+<td>Manages ReplicaSets. Provides declarative updates to Pods and ReplicaSets. Also handles rolling updates, rollbacks, and revision history.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="analogy">Analogy:<a class="headerlink" href="#analogy" title="Permanent link">&para;</a></h4>
+<p>Think of this in terms of a team structure:</p>
+<ul>
+<li>A <strong>Pod</strong> is like an individual team member.</li>
+<li>A <strong>ReplicaSet</strong> is like a manager who ensures the team always has the right number of members.</li>
+<li>A <strong>Deployment</strong> is the department head who can reorganize the team, change how it operates, and roll back to previous team setups if something goes wrong.</li>
+</ul>
+<p>You rarely manage ReplicaSets directly in practice. Instead, you define a Deployment, and Kubernetes takes care of the ReplicaSet and Pods underneath.</p>
+<h3 id="deployment-yaml-structure-and-key-fields">Deployment YAML: Structure and Key Fields<a class="headerlink" href="#deployment-yaml-structure-and-key-fields" title="Permanent link">&para;</a></h3>
+<p>Here is a minimal example of a Deployment definition:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-deployment</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.25.2</span>
+<span class="w">          </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</code></pre></div>
+<h4 id="breakdown-of-key-fields">Breakdown of Key Fields:<a class="headerlink" href="#breakdown-of-key-fields" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>apiVersion</strong>: Always <code>apps/v1</code> for Deployments</li>
+<li><strong>kind</strong>: Must be <code>Deployment</code></li>
+<li><strong>metadata</strong>: Metadata about the deployment object</li>
+<li><strong>spec.replicas</strong>: Number of desired Pods to be running at all times</li>
+<li><strong>spec.selector</strong>: A required field that defines how the Deployment finds which Pods to manage</li>
+<li><strong>spec.template</strong>: Template for creating new Pods<ul>
+<li><strong>metadata.labels</strong>: Must match <code>spec.selector.matchLabels</code></li>
+<li><strong>spec.containers</strong>: Actual containers to run</li>
+</ul>
+</li>
+</ul>
+<h3 id="labels-and-selectors-the-glue-of-deployments">Labels and Selectors: The Glue of Deployments<a class="headerlink" href="#labels-and-selectors-the-glue-of-deployments" title="Permanent link">&para;</a></h3>
+<p>Labels and selectors play a critical role in tying the Deployment to its Pods (and ReplicaSet).</p>
+<h4 id="labels">Labels<a class="headerlink" href="#labels" title="Permanent link">&para;</a></h4>
+<p>Labels are key-value pairs attached to Kubernetes objects. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">labels</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+</code></pre></div>
+<h4 id="selectors">Selectors<a class="headerlink" href="#selectors" title="Permanent link">&para;</a></h4>
+<p>Selectors define how a Deployment identifies the Pods it is supposed to manage. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">selector</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+</code></pre></div>
+<p>If the labels in the Pod template do <strong>not</strong> match the selector, the Deployment will fail.</p>
+<p>This tight coupling ensures that Deployments only manage the Pods they are responsible for.</p>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
+<p>Deployments bring automation, resilience, and scalability to Kubernetes workloads. While Pods are great for simple use-cases, <strong>Deployments are essential</strong> for production environments where uptime, updates, and rollbacks must be handled with precision.</p>
+<h2 id="creating-and-managing-deployments-in-kubernetes">Creating and Managing Deployments in Kubernetes<a class="headerlink" href="#creating-and-managing-deployments-in-kubernetes" title="Permanent link">&para;</a></h2>
+<p>After understanding what Deployments are and why they're essential, the next step is to learn how to <strong>create, inspect, modify, and delete</strong> them effectively.</p>
+<h3 id="creating-a-deployment-using-yaml-and-kubectl">Creating a Deployment using YAML and <code>kubectl</code><a class="headerlink" href="#creating-a-deployment-using-yaml-and-kubectl" title="Permanent link">&para;</a></h3>
+<p>The most production-friendly way to create a Deployment is through a <strong>YAML manifest</strong>. This ensures your configuration is version-controlled, declarative, and repeatable.</p>
+<h4 id="sample-deployment-yaml-nginx-deploymentyaml">Sample Deployment YAML (<code>nginx-deployment.yaml</code>)<a class="headerlink" href="#sample-deployment-yaml-nginx-deploymentyaml" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-deployment</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.25.2</span>
+<span class="w">          </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</code></pre></div>
+<h4 id="apply-the-deployment">Apply the Deployment<a class="headerlink" href="#apply-the-deployment" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>nginx-deployment.yaml
+</code></pre></div>
+<p>This creates the Deployment, which in turn creates a <strong>ReplicaSet</strong> and <strong>Pods</strong>. Kubernetes takes over the responsibility of ensuring the desired state (2 replicas in this case) is always met.</p>
+<h3 id="inspecting-deployments">Inspecting Deployments<a class="headerlink" href="#inspecting-deployments" title="Permanent link">&para;</a></h3>
+<p>Once the Deployment is created, you'll want to inspect it using various <code>kubectl</code> commands.</p>
+<h4 id="get-deployments">Get Deployments<a class="headerlink" href="#get-deployments" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>deployments
+</code></pre></div>
+<p>To view more details like the number of available/unavailable replicas:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment<span class="w"> </span>-o<span class="w"> </span>wide
+</code></pre></div>
+<h4 id="get-related-replicasets-and-pods">Get Related ReplicaSets and Pods<a class="headerlink" href="#get-related-replicasets-and-pods" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>replicasets
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>nginx
+</code></pre></div>
+<p>This ensures that the Pods are actually running and managed by the Deployment.</p>
+<h4 id="describe-deployment">Describe Deployment<a class="headerlink" href="#describe-deployment" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>describe<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment
+</code></pre></div>
+<p>This provides comprehensive details including:</p>
+<ul>
+<li>ReplicaSet references</li>
+<li>Events such as pod creation or failures</li>
+<li>Current state vs. desired state</li>
+</ul>
+<h4 id="logs-of-a-pod-managed-by-a-deployment">Logs of a Pod Managed by a Deployment<a class="headerlink" href="#logs-of-a-pod-managed-by-a-deployment" title="Permanent link">&para;</a></h4>
+<p>To fetch logs from a container running inside one of the Pods:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>pods
+kubectl<span class="w"> </span>logs<span class="w"> </span>pod-name
+</code></pre></div>
+<p>Since Deployments manage Pods indirectly, you always inspect logs from <strong>Pods</strong>, not the Deployment itself.</p>
+<h3 id="editing-deployments">Editing Deployments<a class="headerlink" href="#editing-deployments" title="Permanent link">&para;</a></h3>
+<p>There are two main ways to update a Deployment: <strong>live editing</strong> or <strong>reapplying YAML</strong>.</p>
+<h4 id="method-1-live-editing-using-kubectl-edit">Method 1: Live Editing Using <code>kubectl edit</code><a class="headerlink" href="#method-1-live-editing-using-kubectl-edit" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>edit<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment
+</code></pre></div>
+<p>This opens the Deployment manifest in a terminal editor (usually Vim). You can:</p>
+<ul>
+<li>Change the replica count</li>
+<li>Update the image version</li>
+<li>Modify labels, ports, or other fields</li>
+</ul>
+<p>Once saved, Kubernetes will automatically apply the change. For example, changing the image from <code>nginx:1.25.2</code> to <code>nginx:1.26.0</code> triggers a <strong>rolling update</strong>.</p>
+<h4 id="method-2-modify-yaml-and-reapply">Method 2: Modify YAML and Reapply<a class="headerlink" href="#method-2-modify-yaml-and-reapply" title="Permanent link">&para;</a></h4>
+<p>This is the preferred method in teams where YAML is stored in Git or used in CI/CD pipelines.</p>
+<ol>
+<li>Edit <code>nginx-deployment.yaml</code> locally</li>
+<li>Apply it again:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>nginx-deployment.yaml
+</code></pre></div>
+<p>The <code>apply</code> command detects changes and updates the existing resource declaratively.</p>
+<blockquote>
+<p><code>apply</code> can be used both for <strong>creating new resources</strong> and <strong>updating existing ones</strong>.</p>
+</blockquote>
+<h3 id="deleting-deployments">Deleting Deployments<a class="headerlink" href="#deleting-deployments" title="Permanent link">&para;</a></h3>
+<p>To completely remove a Deployment (and its underlying ReplicaSet and Pods):</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>delete<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment
+</code></pre></div>
+<p>This:</p>
+<ul>
+<li>Deletes the Deployment object</li>
+<li>Deletes the associated ReplicaSet(s)</li>
+<li>Deletes all Pods managed by those ReplicaSets</li>
+</ul>
+<p>To confirm deletion:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>deployments
+kubectl<span class="w"> </span>get<span class="w"> </span>pods
+</code></pre></div>
+<p>You should no longer see the Deployment or any related Pods.</p>
+<h3 id="summary_1">Summary<a class="headerlink" href="#summary_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create Deployment</td>
+<td><code>kubectl apply -f deployment.yaml</code></td>
+</tr>
+<tr>
+<td>View Deployments</td>
+<td><code>kubectl get deployments</code></td>
+</tr>
+<tr>
+<td>Inspect a Deployment</td>
+<td><code>kubectl describe deployment &lt;name&gt;</code></td>
+</tr>
+<tr>
+<td>View logs</td>
+<td><code>kubectl logs &lt;pod-name&gt;</code></td>
+</tr>
+<tr>
+<td>Edit live</td>
+<td><code>kubectl edit deployment &lt;name&gt;</code></td>
+</tr>
+<tr>
+<td>Reapply YAML</td>
+<td><code>kubectl apply -f deployment.yaml</code></td>
+</tr>
+<tr>
+<td>Delete Deployment</td>
+<td><code>kubectl delete deployment &lt;name&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Deployments abstract away the complexity of managing Pods directly, and these commands are your everyday tools for working with them.</p>
+<h2 id="managing-replicas-in-kubernetes-deployments">Managing Replicas in Kubernetes Deployments<a class="headerlink" href="#managing-replicas-in-kubernetes-deployments" title="Permanent link">&para;</a></h2>
+<p>One of the most important responsibilities of a Deployment is to ensure that the correct number of application instances (Pods) are always running. This is crucial for:</p>
+<ul>
+<li>Load distribution</li>
+<li>Fault tolerance</li>
+<li>High availability</li>
+</ul>
+<p>Whether you're scaling your application manually or automatically, Deployments make this process straightforward and reliable.</p>
+<h3 id="setting-and-updating-replicas-count-in-yaml">Setting and Updating <code>replicas</code> Count in YAML<a class="headerlink" href="#setting-and-updating-replicas-count-in-yaml" title="Permanent link">&para;</a></h3>
+<p>The number of replicas you want Kubernetes to maintain is defined in the Deployment manifest using the <code>replicas</code> field.</p>
+<h4 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+</code></pre></div>
+<p>This tells Kubernetes to always keep <strong>3 Pods</strong> running that match the template.</p>
+<p>If any of these Pods fail, the underlying <strong>ReplicaSet</strong> (managed by the Deployment) will automatically create new ones to maintain the desired count.</p>
+<p>To update the count, simply modify the YAML:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</code></pre></div>
+<p>Then reapply the updated file:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>deployment.yaml
+</code></pre></div>
+<p>Kubernetes will scale up or down accordingly.</p>
+<h3 id="scaling-manually-using-kubectl-scale">Scaling Manually Using <code>kubectl scale</code><a class="headerlink" href="#scaling-manually-using-kubectl-scale" title="Permanent link">&para;</a></h3>
+<p>Instead of editing YAML, you can scale directly from the command line:</p>
+<h4 id="scale-up">Scale Up:<a class="headerlink" href="#scale-up" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>scale<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment<span class="w"> </span>--replicas<span class="o">=</span><span class="m">6</span>
+</code></pre></div>
+<h4 id="scale-down">Scale Down:<a class="headerlink" href="#scale-down" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>scale<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment<span class="w"> </span>--replicas<span class="o">=</span><span class="m">2</span>
+</code></pre></div>
+<p>You can verify the scaling operation with:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment
+kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>nginx
+</code></pre></div>
+<p>Behind the scenes:</p>
+<ul>
+<li>The Deployment updates the ReplicaSet</li>
+<li>The ReplicaSet adds or removes Pods to match the desired count</li>
+</ul>
+<p>This manual scaling is useful for quick experiments or responding to short-term traffic changes.</p>
+<h3 id="introduction-to-horizontal-pod-autoscaler-hpa">Introduction to Horizontal Pod Autoscaler (HPA)<a class="headerlink" href="#introduction-to-horizontal-pod-autoscaler-hpa" title="Permanent link">&para;</a></h3>
+<p>While manual scaling is useful, in production you often want your system to <strong>scale automatically based on metrics</strong> like CPU or memory usage. That's where <strong>Horizontal Pod Autoscaling</strong> comes in.</p>
+<h4 id="what-is-hpa">What is HPA?<a class="headerlink" href="#what-is-hpa" title="Permanent link">&para;</a></h4>
+<p>The <strong>Horizontal Pod Autoscaler (HPA)</strong> automatically adjusts the number of Pods in a Deployment (or ReplicaSet) based on real-time metrics.</p>
+<p>For example:</p>
+<ul>
+<li>If average CPU usage exceeds 80%, HPA might scale from 3 to 6 Pods</li>
+<li>If load drops below a threshold, it can scale down to conserve resources</li>
+</ul>
+<p>HPA uses the <strong>Metrics Server</strong> to gather data from the cluster. Once installed and configured, you can create an autoscaler like this:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>autoscale<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment<span class="w"> </span>--cpu-percent<span class="o">=</span><span class="m">70</span><span class="w"> </span>--min<span class="o">=</span><span class="m">2</span><span class="w"> </span>--max<span class="o">=</span><span class="m">10</span>
+</code></pre></div>
+<p>This command means:</p>
+<ul>
+<li>Start with a minimum of 2 Pods</li>
+<li>Scale up to 10 if CPU usage exceeds 70%</li>
+</ul>
+<p>You can check the status with:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>hpa
+</code></pre></div>
+<blockquote>
+<p>Note: The <strong>metrics-server</strong> must be installed and running in the cluster. Without it, HPA will not have the data it needs to make scaling decisions.</p>
+</blockquote>
+<h3 id="summary_2">Summary<a class="headerlink" href="#summary_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command / YAML</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Set replica count (YAML)</td>
+<td><code>spec.replicas: &lt;number&gt;</code></td>
+</tr>
+<tr>
+<td>Apply updated count</td>
+<td><code>kubectl apply -f deployment.yaml</code></td>
+</tr>
+<tr>
+<td>Scale manually</td>
+<td><code>kubectl scale deployment &lt;name&gt; --replicas=&lt;n&gt;</code></td>
+</tr>
+<tr>
+<td>Create HPA</td>
+<td><code>kubectl autoscale deployment &lt;name&gt; --cpu-percent=X --min=A --max=B</code></td>
+</tr>
+<tr>
+<td>View HPA status</td>
+<td><code>kubectl get hpa</code></td>
+</tr>
+</tbody>
+</table>
+<p>Deployments allow you to scale your application with ease — either explicitly or automatically — making them a cornerstone for building resilient and elastic systems in Kubernetes.</p>
+<h2 id="rolling-updates-and-rollbacks-in-kubernetes">Rolling Updates and Rollbacks in Kubernetes<a class="headerlink" href="#rolling-updates-and-rollbacks-in-kubernetes" title="Permanent link">&para;</a></h2>
+<p>In any production system, updating applications without downtime or disruption is essential. Kubernetes Deployments provide built-in mechanisms to:</p>
+<ul>
+<li>Upgrade applications incrementally (rolling updates)</li>
+<li>Roll back to a previous stable state in case of failures</li>
+</ul>
+<p>Let's walk through the full lifecycle of updating and reverting changes in a controlled and observable way.</p>
+<h3 id="update-strategies-rollingupdate-vs-recreate">Update Strategies: <code>RollingUpdate</code> vs <code>Recreate</code><a class="headerlink" href="#update-strategies-rollingupdate-vs-recreate" title="Permanent link">&para;</a></h3>
+<p>The <code>strategy</code> field in a Deployment defines how updates are performed.</p>
+<h4 id="1-rollingupdate-default">1. <code>RollingUpdate</code> (default)<a class="headerlink" href="#1-rollingupdate-default" title="Permanent link">&para;</a></h4>
+<p>This is the default strategy and the most common one used in production.</p>
+<ul>
+<li>Gradually replaces old Pods with new ones</li>
+<li>Ensures <strong>zero downtime</strong></li>
+<li>Useful for high-availability applications</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">strategy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RollingUpdate</span>
+<span class="w">  </span><span class="nt">rollingUpdate</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</code></pre></div>
+<p>In this configuration:</p>
+<ul>
+<li><code>maxUnavailable: 1</code> → At most one old Pod can be unavailable during the update</li>
+<li><code>maxSurge: 1</code> → At most one extra Pod (beyond the desired replicas) can be created temporarily</li>
+</ul>
+<p>This ensures that there's always a minimum number of available Pods during the update process.</p>
+<h4 id="2-recreate">2. <code>Recreate</code><a class="headerlink" href="#2-recreate" title="Permanent link">&para;</a></h4>
+<p>This is a more aggressive strategy:</p>
+<ul>
+<li>Terminates <strong>all existing Pods</strong> before starting new ones</li>
+<li>Causes <strong>temporary downtime</strong></li>
+<li>Can be useful when Pods can't run in parallel (e.g., apps that lock shared resources)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">strategy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Recreate</span>
+</code></pre></div>
+<blockquote>
+<p>Most modern applications are designed for rolling updates, so <code>Recreate</code> is rarely used.</p>
+</blockquote>
+<h3 id="update-parameters-maxunavailable-and-maxsurge">Update Parameters: <code>maxUnavailable</code> and <code>maxSurge</code><a class="headerlink" href="#update-parameters-maxunavailable-and-maxsurge" title="Permanent link">&para;</a></h3>
+<p>These two fields fine-tune the behavior of rolling updates.</p>
+<h4 id="maxunavailable"><code>maxUnavailable</code><a class="headerlink" href="#maxunavailable" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The maximum number of Pods that can be <strong>unavailable</strong> during the update.</li>
+<li>Expressed as an absolute number or percentage.</li>
+</ul>
+<h4 id="maxsurge"><code>maxSurge</code><a class="headerlink" href="#maxsurge" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The maximum number of Pods that can be <strong>created above the desired replica count</strong> during the update.</li>
+<li>Also specified as a number or percentage.</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">rollingUpdate</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25%</span>
+<span class="w">  </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25%</span>
+</code></pre></div>
+<p>If your deployment has 4 replicas:</p>
+<ul>
+<li>Up to 1 Pod can be unavailable (<code>25% of 4</code>)</li>
+<li>Up to 1 extra Pod can be scheduled during the update</li>
+</ul>
+<h3 id="performing-and-monitoring-rolling-updates">Performing and Monitoring Rolling Updates<a class="headerlink" href="#performing-and-monitoring-rolling-updates" title="Permanent link">&para;</a></h3>
+<h4 id="step-1-change-the-image">Step 1: Change the Image<a class="headerlink" href="#step-1-change-the-image" title="Permanent link">&para;</a></h4>
+<p>Update the image version in the deployment YAML:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.26.0</span>
+</code></pre></div>
+<p>Then apply the change:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>deployment.yaml
+</code></pre></div>
+<p>Kubernetes begins a rolling update:</p>
+<ul>
+<li>New Pods are scheduled</li>
+<li>Old Pods are terminated one-by-one</li>
+<li>Health checks are used to verify that new Pods are ready before proceeding</li>
+</ul>
+<h4 id="step-2-monitor-the-progress">Step 2: Monitor the Progress<a class="headerlink" href="#step-2-monitor-the-progress" title="Permanent link">&para;</a></h4>
+<p>You can track the update using:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment
+</code></pre></div>
+<p>This will show a live status of the rollout process.</p>
+<p>Or describe the deployment:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>describe<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment
+</code></pre></div>
+<p>Look under the <code>Events:</code> section for messages about old Pods being terminated and new ones starting.</p>
+<h3 id="rollbacks-reverting-to-a-previous-revision">Rollbacks: Reverting to a Previous Revision<a class="headerlink" href="#rollbacks-reverting-to-a-previous-revision" title="Permanent link">&para;</a></h3>
+<p>Sometimes, an update introduces a bug or breaks functionality. In such cases, Kubernetes lets you <strong>roll back to a previous version</strong> easily.</p>
+<h4 id="step-1-rollback-command">Step 1: Rollback Command<a class="headerlink" href="#step-1-rollback-command" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>undo<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment
+</code></pre></div>
+<p>This will roll back to the previous Deployment revision.</p>
+<p>You can also roll back to a specific revision number:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>undo<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment<span class="w"> </span>--to-revision<span class="o">=</span><span class="m">2</span>
+</code></pre></div>
+<h4 id="step-2-check-rollback-status">Step 2: Check Rollback Status<a class="headerlink" href="#step-2-check-rollback-status" title="Permanent link">&para;</a></h4>
+<p>Monitor the rollback with:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment
+</code></pre></div>
+<p>You can verify the current image/tag to confirm that the rollback was successful:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment<span class="w"> </span>-o<span class="w"> </span>yaml
+</code></pre></div>
+<h3 id="viewing-deployment-history-and-revisions">Viewing Deployment History and Revisions<a class="headerlink" href="#viewing-deployment-history-and-revisions" title="Permanent link">&para;</a></h3>
+<p>Each Deployment change is versioned automatically.</p>
+<h4 id="view-history">View History:<a class="headerlink" href="#view-history" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span><span class="nb">history</span><span class="w"> </span>deployment<span class="w"> </span>nginx-deployment
+</code></pre></div>
+<p>This shows all revisions along with their change-cause (if provided).</p>
+<p>To inspect a specific revision:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span><span class="nb">history</span><span class="w"> </span>deployment<span class="w"> </span>nginx-deployment<span class="w"> </span>--revision<span class="o">=</span><span class="m">2</span>
+</code></pre></div>
+<p>To make rollback decisions easier, you can annotate your YAML with a change-cause:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>annotate<span class="w"> </span>deployment<span class="w"> </span>nginx-deployment<span class="w"> </span>kubernetes.io/change-cause<span class="o">=</span><span class="s2">&quot;Upgrade to nginx 1.26&quot;</span>
+</code></pre></div>
+<p>This will show up in the revision history.</p>
+<h3 id="summary_3">Summary<a class="headerlink" href="#summary_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Change image/version</td>
+<td><code>kubectl apply -f deployment.yaml</code></td>
+</tr>
+<tr>
+<td>Monitor update</td>
+<td><code>kubectl rollout status deployment &lt;name&gt;</code></td>
+</tr>
+<tr>
+<td>Rollback to previous</td>
+<td><code>kubectl rollout undo deployment &lt;name&gt;</code></td>
+</tr>
+<tr>
+<td>Rollback to revision</td>
+<td><code>kubectl rollout undo deployment &lt;name&gt; --to-revision=&lt;n&gt;</code></td>
+</tr>
+<tr>
+<td>View history</td>
+<td><code>kubectl rollout history deployment &lt;name&gt;</code></td>
+</tr>
+<tr>
+<td>View specific revision</td>
+<td><code>kubectl rollout history deployment &lt;name&gt; --revision=&lt;n&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Rolling updates and rollbacks are foundational for safe, continuous delivery of applications in Kubernetes. They eliminate downtime while providing full control over versioned deployments, making Kubernetes a powerful platform for modern software delivery.</p>
+<h2 id="summary-kubernetes-deployments">Summary: Kubernetes Deployments<a class="headerlink" href="#summary-kubernetes-deployments" title="Permanent link">&para;</a></h2>
+<p>In this chapter, we explored <strong>Deployments</strong>, one of the most critical abstractions in Kubernetes for managing application lifecycle at scale.</p>
+<p>Below is a recap of the key concepts, tools, and workflows:</p>
+<h3 id="1-why-do-we-need-deployments">1. Why Do We Need Deployments?<a class="headerlink" href="#1-why-do-we-need-deployments" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pods created manually are <strong>not self-healing</strong> or scalable.</li>
+<li>Deployments allow us to <strong>declaratively manage Pods</strong>, ensuring availability and consistency.</li>
+<li>They introduce <strong>automated rollout</strong>, <strong>rollback</strong>, and <strong>scaling</strong> mechanisms out-of-the-box.</li>
+</ul>
+<h3 id="2-core-concepts-of-deployments">2. Core Concepts of Deployments<a class="headerlink" href="#2-core-concepts-of-deployments" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pod</strong></td>
+<td>Smallest unit of deployment (container wrapper)</td>
+</tr>
+<tr>
+<td><strong>ReplicaSet</strong></td>
+<td>Ensures a specified number of identical Pods are running</td>
+</tr>
+<tr>
+<td><strong>Deployment</strong></td>
+<td>Manages ReplicaSets, provides declarative updates and rollback capabilities</td>
+</tr>
+<tr>
+<td><strong>Labels &amp; Selectors</strong></td>
+<td>Connect Deployments to their managed Pods via metadata</td>
+</tr>
+<tr>
+<td><strong>YAML Fields</strong></td>
+<td><code>apiVersion</code>, <code>kind</code>, <code>metadata</code>, and <code>spec</code> define the structure of a Deployment</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-creating-and-managing-deployments">3. Creating and Managing Deployments<a class="headerlink" href="#3-creating-and-managing-deployments" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Create Deployments using <code>kubectl apply -f &lt;yaml&gt;</code> or generate them with <code>kubectl run --dry-run</code>.</li>
+<li>Inspect with:<ul>
+<li><code>kubectl get deployments</code></li>
+<li><code>kubectl describe deployment &lt;name&gt;</code></li>
+<li><code>kubectl get pods</code>, <code>logs</code>, and <code>replicasets</code> for related resources</li>
+</ul>
+</li>
+<li>Modify Deployments via:<ul>
+<li><code>kubectl edit deployment &lt;name&gt;</code></li>
+<li>Updating the YAML and reapplying with <code>kubectl apply</code></li>
+</ul>
+</li>
+<li>Delete a Deployment using <code>kubectl delete deployment &lt;name&gt;</code></li>
+</ul>
+<h3 id="4-replica-management">4. Replica Management<a class="headerlink" href="#4-replica-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set the number of replicas in the YAML with <code>spec.replicas</code></li>
+<li>
+<p>Scale manually using:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>scale<span class="w"> </span>deployment<span class="w"> </span>&lt;name&gt;<span class="w"> </span>--replicas<span class="o">=</span>&lt;count&gt;
+</code></pre></div>
+</li>
+<li>
+<p>Use <strong>Horizontal Pod Autoscaler (HPA)</strong> to scale automatically based on metrics:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>autoscale<span class="w"> </span>deployment<span class="w"> </span>&lt;name&gt;<span class="w"> </span>--cpu-percent<span class="o">=</span><span class="m">70</span><span class="w"> </span>--min<span class="o">=</span><span class="m">2</span><span class="w"> </span>--max<span class="o">=</span><span class="m">10</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="5-rolling-updates-and-rollbacks">5. Rolling Updates and Rollbacks<a class="headerlink" href="#5-rolling-updates-and-rollbacks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Strategy Types</strong></td>
+<td><code>RollingUpdate</code> (default) and <code>Recreate</code></td>
+</tr>
+<tr>
+<td><strong>Update Parameters</strong></td>
+<td><code>maxUnavailable</code>, <code>maxSurge</code> control rollout granularity</td>
+</tr>
+<tr>
+<td><strong>Rolling Update</strong></td>
+<td>Triggered by image change or applied YAML</td>
+</tr>
+<tr>
+<td><strong>Monitor Rollout</strong></td>
+<td><code>kubectl rollout status deployment &lt;name&gt;</code></td>
+</tr>
+<tr>
+<td><strong>Rollback</strong></td>
+<td>Undo changes with <code>kubectl rollout undo deployment &lt;name&gt;</code></td>
+</tr>
+<tr>
+<td><strong>History</strong></td>
+<td>Track with <code>kubectl rollout history deployment &lt;name&gt;</code> and annotate with change-cause</td>
+</tr>
+</tbody>
+</table>
+<h3 id="final-thoughts">Final Thoughts<a class="headerlink" href="#final-thoughts" title="Permanent link">&para;</a></h3>
+<p>Kubernetes Deployments serve as the foundation for any reliable, maintainable, and scalable containerized system. They abstract complexity while offering full control over:</p>
+<ul>
+<li>Application versioning</li>
+<li>Lifecycle automation</li>
+<li>Recovery from failure</li>
+<li>Declarative configuration management</li>
+</ul>
+<p>With Deployments mastered, you're now prepared to move into <strong>Kubernetes Services</strong>, where we tackle networking, service discovery, and routing traffic to these managed Pods.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Kubernetes%20Architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Kubernetes Architecture">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Kubernetes Architecture
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Service/" class="md-footer__link md-footer__link--next" aria-label="Next: Service">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Service
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Paritosh Sharma
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.math", "search.highlight", "search.share", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.path", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../assets/collapsible-toc.js"></script>
+      
+    
+  </body>
+</html>

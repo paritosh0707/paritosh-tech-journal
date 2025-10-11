@@ -1,0 +1,2089 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Pod/">
+      
+      
+        <link rel="next" href="../What%20is%20deployment/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Kubernetes Architecture - Paritosh's Tech Universe</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes-architecture-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paritosh&#39;s Tech Universe" class="md-header__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paritosh's Tech Universe
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubernetes Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Pydantic/Introduction/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mini Books
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paritosh&#39;s Tech Universe" class="md-nav__button md-logo" aria-label="Paritosh's Tech Universe" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Paritosh's Tech Universe
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Mini Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Books
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Books
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Pydantic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pydantic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Chapter%201/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pydantic/Chapter%202/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Transformers
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Transformers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Transformers/Self%20Attention/Self%20Attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Why%20Kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Why Kubernetes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Pod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Architecture
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Architecture
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-control-plane-master-node-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Control Plane / Master Node in Kubernetes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Control Plane / Master Node in Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-the-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview of the Control Plane
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scheduler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scheduler
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controller-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controller Manager
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      etcd
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloud-controller-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cloud Controller Manager
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-communication-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal Communication Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worker-node-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Node in Kubernetes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worker Node in Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#components-of-a-worker-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Components of a Worker Node
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-all-works-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It All Works Together
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-worker-node-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Worker Node Components
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table-control-plane-vs-worker-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary Table: Control Plane vs Worker Node
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-kubernetes-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete Kubernetes Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Complete Kubernetes Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-request-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step-by-Step Request Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-component-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Component Collaboration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../What%20is%20deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    What is deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    JavaScript
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            JavaScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/01.%20Immediately%20Invoked%20Function%20Expressions%20%28IIFE%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Immediately Invoked Function Expressions (IIFE)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/02.%20Call%20Stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Call Stack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/03.%20Control%20Flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Flow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/04.%20For%20Loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    For Loop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/05.%20while%20and%20do-while%20Loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    While and do-while Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JavaScript/06.%20Higher%20Order%20Loops%20and%20Array%20Iteration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Higher Order Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            MCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MCP/JRPC%20-%20JSON%20Remote%20Procedure%20Call/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JRPC - JSON Remote Procedure Call
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-control-plane-master-node-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Control Plane / Master Node in Kubernetes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Control Plane / Master Node in Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-the-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview of the Control Plane
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scheduler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scheduler
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controller-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controller Manager
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      etcd
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloud-controller-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cloud Controller Manager
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-communication-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal Communication Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worker-node-in-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Node in Kubernetes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worker Node in Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#components-of-a-worker-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Components of a Worker Node
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-all-works-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It All Works Together
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-worker-node-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Worker Node Components
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table-control-plane-vs-worker-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary Table: Control Plane vs Worker Node
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-kubernetes-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete Kubernetes Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Complete Kubernetes Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-request-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step-by-Step Request Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-component-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary of Component Collaboration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="kubernetes-architecture-introduction">Kubernetes Architecture: Introduction<a class="headerlink" href="#kubernetes-architecture-introduction" title="Permanent link">&para;</a></h1>
+<p>Before we dive into how Kubernetes works under the hood, it's essential to understand the <strong>architecture</strong> that powers it. Kubernetes is a distributed system built to manage containerized applications at scale, and it achieves this through a robust and modular architecture.</p>
+<p>At its core, the Kubernetes architecture is divided into two major parts:</p>
+<ol>
+<li><strong>Control Plane (Master Node)</strong> – This is the brain of the cluster. It makes global decisions, handles orchestration logic, and ensures that the desired state of the system is always maintained.</li>
+<li><strong>Worker Nodes</strong> – These are the machines (virtual or physical) where your applications actually run inside containers, grouped as Pods.</li>
+</ol>
+<p>Each of these components is responsible for a distinct part of the orchestration process—from accepting user commands to scheduling Pods and managing their lifecycle across nodes.</p>
+<p>In this chapter, we will break down:
+- The individual components of the Control Plane and Worker Nodes
+- Their responsibilities
+- How they interact with one another
+- The complete lifecycle of a request, from creation to execution</p>
+<p>By the end of this chapter, you will have a strong conceptual foundation of how Kubernetes orchestrates your application infrastructure efficiently and reliably.</p>
+<h2 id="the-control-plane-master-node-in-kubernetes">The Control Plane / Master Node in Kubernetes<a class="headerlink" href="#the-control-plane-master-node-in-kubernetes" title="Permanent link">&para;</a></h2>
+<p><img alt="Kubernetes Control Plane" src="../images/Kubernetes_Architecture_1.png" /></p>
+<p>In a Kubernetes cluster, there are two broad categories of components:</p>
+<ul>
+<li><strong>Control Plane (Master Node)</strong>: Responsible for managing the cluster state and orchestration decisions</li>
+<li><strong>Worker Nodes</strong>: Responsible for running actual workloads (Pods)</li>
+</ul>
+<p>Let's begin with the <strong>Control Plane</strong>.</p>
+<hr />
+<h3 id="overview-of-the-control-plane">Overview of the Control Plane<a class="headerlink" href="#overview-of-the-control-plane" title="Permanent link">&para;</a></h3>
+<p>The <strong>Control Plane</strong> is like the brain of Kubernetes. It is responsible for the <strong>global decisions</strong> of the cluster — like scheduling, scaling, and responding to cluster events — and for exposing the Kubernetes API to users and internal components.</p>
+<p>Here are the key components inside the Control Plane:</p>
+<hr />
+<h3 id="api-server">API Server<a class="headerlink" href="#api-server" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Acts as the <strong>front door</strong> or <strong>gateway</strong> to the Kubernetes cluster.</li>
+<li>It is the only component in the Control Plane that interacts with every other component.</li>
+<li>Every <code>kubectl</code> command you run (e.g., <code>kubectl get pods</code>) hits the <strong>API Server</strong>, which then fetches the relevant data from the underlying store or routes it to the appropriate internal component.</li>
+</ul>
+<blockquote>
+<p><strong>Think of it as the HTTP REST server for Kubernetes.</strong></p>
+</blockquote>
+<ul>
+<li>It exposes a RESTful API and communicates using JSON over HTTP(S).</li>
+<li>All other components (Scheduler, Controller Manager, kubelet, etc.) talk to the API Server.</li>
+<li>API requests (like creating a Pod, fetching logs, updating configuration) are all <strong>logged and validated</strong> here.</li>
+</ul>
+<hr />
+<h3 id="scheduler">Scheduler<a class="headerlink" href="#scheduler" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Officially called <code>kube-scheduler</code></li>
+<li>It is responsible for <strong>assigning newly created Pods</strong> to nodes (i.e., scheduling them).</li>
+</ul>
+<h4 id="how-it-works">How it works:<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Watches for Pods that are <strong>waiting for scheduling</strong></li>
+<li>Looks at the requirements of the Pod (CPU, memory, affinity rules, etc.)</li>
+<li>Evaluates which node can accommodate the Pod based on constraints</li>
+<li>Selects the most appropriate node and <strong>binds the Pod</strong> to it</li>
+</ul>
+<blockquote>
+<p>Note: It <strong>does not</strong> run the Pod — it only <em>decides where</em> it should run.</p>
+</blockquote>
+<hr />
+<h3 id="controller-manager">Controller Manager<a class="headerlink" href="#controller-manager" title="Permanent link">&para;</a></h3>
+<p>This is a daemon that runs multiple controllers in a single process. Each <strong>controller</strong> is a loop that watches the desired state of some part of the cluster and tries to make the actual state match it.</p>
+<p>Common types of controllers:</p>
+<ul>
+<li><strong>Deployment Controller</strong> – Ensures that the desired number of Pods are always running for a Deployment.</li>
+<li><strong>ReplicaSet Controller</strong> – Manages the replicas of a Pod.</li>
+<li><strong>Namespace Controller</strong> – Watches for namespace creation/deletion.</li>
+<li><strong>Node Controller</strong> – Watches node availability (e.g., marks nodes as "NotReady" if they stop responding).</li>
+</ul>
+<blockquote>
+<p>Think of controllers as <strong>autopilots</strong> — constantly reconciling reality with the desired state.</p>
+</blockquote>
+<hr />
+<h3 id="etcd">etcd<a class="headerlink" href="#etcd" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A <strong>key-value store</strong> and the <strong>source of truth</strong> for the cluster</li>
+<li>Stores <strong>all configuration data</strong>, <strong>cluster state</strong>, and <strong>metadata</strong></li>
+<li>Highly consistent and reliable</li>
+<li>Used by API Server to read/write the cluster state</li>
+</ul>
+<h4 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<p>When you run:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>pods
+</code></pre></div>
+<ul>
+<li>The request goes to the <strong>API Server</strong></li>
+<li>API Server fetches the list of pods from <strong>etcd</strong></li>
+<li>API Server returns the data to your terminal</li>
+</ul>
+<p>Similarly, if you <strong>create a Pod</strong>, the API Server:</p>
+<ol>
+<li>Validates the request</li>
+<li>Stores the definition in <code>etcd</code></li>
+<li>Passes it to the Scheduler and Controller Manager</li>
+</ol>
+<hr />
+<h3 id="cloud-controller-manager">Cloud Controller Manager<a class="headerlink" href="#cloud-controller-manager" title="Permanent link">&para;</a></h3>
+<p>This component exists <strong>only if you're using Kubernetes on a public cloud</strong> (like GKE, EKS, or AKS). It abstracts the cloud-specific logic out of the main Kubernetes components.</p>
+<h4 id="it-is-responsible-for">It is responsible for:<a class="headerlink" href="#it-is-responsible-for" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Communicating with the <strong>cloud provider's APIs</strong></li>
+<li>Managing resources like:<ul>
+<li>Load balancers</li>
+<li>Volumes</li>
+<li>Nodes (via auto-scaling groups)</li>
+<li>IP addresses</li>
+</ul>
+</li>
+</ul>
+<h4 id="how-it-works_1">How it works:<a class="headerlink" href="#how-it-works_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>API Server receives a request (e.g., to create a LoadBalancer service)</li>
+<li>It forwards the request to <strong>Cloud Controller Manager</strong></li>
+<li>The Cloud Controller Manager then interacts with the <strong>Cloud Provider API</strong></li>
+<li>After provisioning, it writes the state back into <code>etcd</code></li>
+</ul>
+<hr />
+<h3 id="internal-communication-flow">Internal Communication Flow<a class="headerlink" href="#internal-communication-flow" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>All communication between these components <strong>flows through the API Server</strong>.</p>
+</blockquote>
+<ul>
+<li>The Scheduler doesn't talk directly to <code>etcd</code></li>
+<li>The Controller Manager doesn't talk directly to the Scheduler</li>
+<li>Even the Cloud Controller Manager interacts via the API Server</li>
+</ul>
+<p>This centralization ensures:</p>
+<ul>
+<li>All operations go through <strong>access control, authentication, and audit logging</strong></li>
+<li>Consistency and synchronization via a single source of truth</li>
+</ul>
+<hr />
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>API Server</strong></td>
+<td>Central control hub and RESTful interface to the cluster</td>
+</tr>
+<tr>
+<td><strong>Scheduler</strong></td>
+<td>Assigns Pods to Nodes</td>
+</tr>
+<tr>
+<td><strong>Controller Manager</strong></td>
+<td>Runs various reconciliation loops to maintain cluster state</td>
+</tr>
+<tr>
+<td><strong>etcd</strong></td>
+<td>Stores all data and state of the cluster</td>
+</tr>
+<tr>
+<td><strong>Cloud Controller Manager</strong></td>
+<td>Cloud-specific integration layer for managed Kubernetes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="worker-node-in-kubernetes">Worker Node in Kubernetes<a class="headerlink" href="#worker-node-in-kubernetes" title="Permanent link">&para;</a></h2>
+<p><img alt="Kubernetes Worker Node" src="../images/Kubernetes_Architecture_2.png" /></p>
+<p>A <strong>Worker Node</strong> is a machine (virtual or physical) that hosts the <strong>containers</strong> for running your application workloads.</p>
+<p>While the Control Plane makes the decisions, <strong>Worker Nodes execute those decisions</strong>.</p>
+<p>Each Worker Node contains a few critical components to function effectively in the Kubernetes cluster.</p>
+<hr />
+<h3 id="components-of-a-worker-node">Components of a Worker Node<a class="headerlink" href="#components-of-a-worker-node" title="Permanent link">&para;</a></h3>
+<hr />
+<h4 id="kubelet">kubelet<a class="headerlink" href="#kubelet" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>kubelet</code> is an <strong>agent</strong> that runs on every node in the cluster.</li>
+<li>It is the bridge between the <strong>API Server (control plane)</strong> and the <strong>containers running on the node</strong>.</li>
+</ul>
+<h5 id="responsibilities">Responsibilities:<a class="headerlink" href="#responsibilities" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Registers the node with the Kubernetes API Server.</li>
+<li>Watches for Pod specifications from the API Server.</li>
+<li>Ensures that the specified containers are running and healthy.</li>
+<li>Reports back to the API Server with the <strong>status of the node and Pods</strong>.</li>
+</ul>
+<blockquote>
+<p>If a Pod crashes or stops, kubelet will try to restart it based on the defined policy (e.g., <code>Always</code>, <code>OnFailure</code>).</p>
+</blockquote>
+<p>However, kubelet <strong>does not manage containers directly</strong> — it delegates that responsibility to a <strong>container runtime</strong>.</p>
+<hr />
+<h4 id="container-runtime-interface-cri">Container Runtime Interface (CRI)<a class="headerlink" href="#container-runtime-interface-cri" title="Permanent link">&para;</a></h4>
+<p>The <strong>Container Runtime</strong> is the software responsible for:</p>
+<ul>
+<li>Pulling container images</li>
+<li>Starting and stopping containers</li>
+<li>Managing container lifecycle</li>
+</ul>
+<p>Examples of container runtimes:</p>
+<ul>
+<li>Docker (deprecated in newer Kubernetes versions)</li>
+<li><strong>containerd</strong></li>
+<li><strong>CRI-O</strong></li>
+</ul>
+<p>Kubelet uses the <strong>Container Runtime Interface (CRI)</strong> to communicate with the container runtime underneath.</p>
+<blockquote>
+<p>The container runtime is what actually launches and manages the containers on the system.</p>
+</blockquote>
+<hr />
+<h4 id="pods">Pods<a class="headerlink" href="#pods" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Pods</strong> are the smallest unit of deployment in Kubernetes and represent one or more containers.</li>
+<li>The Scheduler in the Control Plane assigns Pods to this node.</li>
+<li>Once a Pod is assigned, kubelet ensures the Pod runs on the node using the container runtime.</li>
+</ul>
+<p>Each Pod on a worker node:</p>
+<ul>
+<li>Gets a unique IP</li>
+<li>Shares networking and storage if multiple containers are inside</li>
+</ul>
+<hr />
+<h4 id="kube-proxy">Kube Proxy<a class="headerlink" href="#kube-proxy" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>kube-proxy</code> is the <strong>networking component</strong> on each node.</li>
+<li>It maintains the <strong>network rules</strong> for Pod-to-Pod communication and <strong>Service IP routing</strong>.</li>
+</ul>
+<h5 id="key-roles">Key Roles:<a class="headerlink" href="#key-roles" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Implements <strong>iptables</strong> or <strong>IPVS</strong> rules to direct traffic to the right Pod</li>
+<li>Handles <strong>load balancing</strong> for traffic directed to Services</li>
+<li>Ensures <strong>network accessibility</strong> between services and across nodes</li>
+</ul>
+<blockquote>
+<p>Think of kube-proxy as the internal DNS traffic cop that routes requests efficiently across the cluster.</p>
+</blockquote>
+<hr />
+<h3 id="how-it-all-works-together">How It All Works Together<a class="headerlink" href="#how-it-all-works-together" title="Permanent link">&para;</a></h3>
+<p>Let's tie this into a real flow:</p>
+<ol>
+<li>You create a Pod using:
+    <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>pod.yaml
+</code></pre></div></li>
+<li>API Server logs the request, validates it, and saves it in <strong>etcd</strong>.</li>
+<li>The <strong>Scheduler</strong> picks an appropriate Worker Node and binds the Pod to it.</li>
+<li>On the assigned node:<ul>
+<li><code>kubelet</code> sees the new Pod specification</li>
+<li>It uses the <strong>Container Runtime (CRI)</strong> to pull the image and run the container</li>
+<li>The container(s) are launched inside a <strong>Pod</strong></li>
+<li><code>kube-proxy</code> ensures that networking rules are updated for communication</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="summary-of-worker-node-components">Summary of Worker Node Components<a class="headerlink" href="#summary-of-worker-node-components" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>kubelet</strong></td>
+<td>Connects node to API Server, ensures Pod containers are running</td>
+</tr>
+<tr>
+<td><strong>CRI</strong></td>
+<td>Container engine (e.g., containerd, CRI-O) that actually runs containers</td>
+</tr>
+<tr>
+<td><strong>Pods</strong></td>
+<td>Encapsulate application containers</td>
+</tr>
+<tr>
+<td><strong>kube-proxy</strong></td>
+<td>Maintains networking and service routing rules</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="summary-table-control-plane-vs-worker-node">Summary Table: Control Plane vs Worker Node<a class="headerlink" href="#summary-table-control-plane-vs-worker-node" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Control Plane</th>
+<th>Worker Node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API Server, Scheduler, Controllers</td>
+<td>kubelet, kube-proxy, CRI, Pods</td>
+</tr>
+<tr>
+<td>Global decision-making</td>
+<td>Execution of workloads</td>
+</tr>
+<tr>
+<td>Stores state in etcd</td>
+<td>Runs containerized applications</td>
+</tr>
+<tr>
+<td>Does not run application containers</td>
+<td>Responsible for container lifecycle</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="complete-kubernetes-architecture">Complete Kubernetes Architecture<a class="headerlink" href="#complete-kubernetes-architecture" title="Permanent link">&para;</a></h2>
+<p><img alt="Complete Kubernetes Architecture" src="../images/Kubernetes_Architecture_3.png" /></p>
+<p>Now that we've explored each component of Kubernetes in isolation, let's bring everything together and walk through the <strong>complete flow of a Kubernetes request</strong> from start to finish.</p>
+<p>This full diagram represents the Kubernetes architecture in action, with a Control Plane managing multiple Worker Nodes.</p>
+<hr />
+<h3 id="step-by-step-request-lifecycle">Step-by-Step Request Lifecycle<a class="headerlink" href="#step-by-step-request-lifecycle" title="Permanent link">&para;</a></h3>
+<h4 id="client-sends-a-request">Client Sends a Request<a class="headerlink" href="#client-sends-a-request" title="Permanent link">&para;</a></h4>
+<p>A developer or administrator uses <code>kubectl</code> to interact with the cluster:</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>my-app.yaml
+</code></pre></div>
+<p>This request is sent to the <strong>API Server</strong>, the main entry point of the cluster.</p>
+<h4 id="api-server-receives-and-validates-the-request">API Server Receives and Validates the Request<a class="headerlink" href="#api-server-receives-and-validates-the-request" title="Permanent link">&para;</a></h4>
+<p>The <strong>API Server</strong>:</p>
+<ul>
+<li>Authenticates and authorizes the request</li>
+<li>Validates the manifest</li>
+<li>Stores the desired state in <strong>etcd</strong>, the key-value store used by Kubernetes</li>
+</ul>
+<h4 id="scheduler-assigns-the-pod">Scheduler Assigns the Pod<a class="headerlink" href="#scheduler-assigns-the-pod" title="Permanent link">&para;</a></h4>
+<p>The <strong>Scheduler</strong>:</p>
+<ul>
+<li>Watches for unscheduled Pods</li>
+<li>Selects the most suitable Worker Node</li>
+<li>Binds the Pod to that node (through the API Server)</li>
+</ul>
+<h4 id="controller-manager-ensures-desired-state">Controller Manager Ensures Desired State<a class="headerlink" href="#controller-manager-ensures-desired-state" title="Permanent link">&para;</a></h4>
+<p>The <strong>Controller Manager</strong>:</p>
+<ul>
+<li>Monitors the actual state of the system</li>
+<li>Compares it with the desired state (as defined in etcd)</li>
+<li>Initiates actions to reconcile differences, such as creating or restarting Pods</li>
+</ul>
+<h4 id="cloud-controller-manager-for-managed-cloud">Cloud Controller Manager (for Managed Cloud)<a class="headerlink" href="#cloud-controller-manager-for-managed-cloud" title="Permanent link">&para;</a></h4>
+<p>If you're using a managed Kubernetes service (EKS, AKS, GKE):</p>
+<ul>
+<li>The <strong>Cloud Controller Manager</strong> interacts with cloud provider APIs</li>
+<li>It provisions cloud-specific resources (e.g., LoadBalancers, Volumes)</li>
+<li>These changes are also recorded in etcd</li>
+</ul>
+<h4 id="kubelet-on-the-worker-node-acts">Kubelet on the Worker Node Acts<a class="headerlink" href="#kubelet-on-the-worker-node-acts" title="Permanent link">&para;</a></h4>
+<p>On the selected Worker Node:</p>
+<ul>
+<li>The <strong>kubelet</strong> receives instructions from the API Server</li>
+<li>It invokes the <strong>Container Runtime Interface (CRI)</strong> (e.g., containerd, CRI-O) to:<ul>
+<li>Pull the container image</li>
+<li>Launch the container(s) in a Pod</li>
+</ul>
+</li>
+</ul>
+<h4 id="kube-proxy-manages-networking">kube-proxy Manages Networking<a class="headerlink" href="#kube-proxy-manages-networking" title="Permanent link">&para;</a></h4>
+<p>The <strong>kube-proxy</strong>:</p>
+<ul>
+<li>Configures network routing rules (via iptables or IPVS)</li>
+<li>Enables communication between services and Pods</li>
+<li>Ensures traffic is correctly routed and load-balanced across Pods</li>
+</ul>
+<hr />
+<h3 id="summary-of-component-collaboration">Summary of Component Collaboration<a class="headerlink" href="#summary-of-component-collaboration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API Server</td>
+<td>Central API interface and request router</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>Persistent, consistent state store</td>
+</tr>
+<tr>
+<td>Scheduler</td>
+<td>Assigns Pods to nodes based on resource availability</td>
+</tr>
+<tr>
+<td>Controller Manager</td>
+<td>Reconciles desired and actual state of resources</td>
+</tr>
+<tr>
+<td>Cloud Controller Manager</td>
+<td>Manages cloud provider-specific resources</td>
+</tr>
+<tr>
+<td>kubelet</td>
+<td>Ensures container state on Worker Nodes</td>
+</tr>
+<tr>
+<td>CRI</td>
+<td>Pulls images and manages container lifecycle</td>
+</tr>
+<tr>
+<td>kube-proxy</td>
+<td>Manages Pod-to-Pod and Pod-to-Service networking</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
+<p>This full system flow illustrates how Kubernetes combines the intelligence of the <strong>Control Plane</strong> with the execution power of <strong>Worker Nodes</strong>. Every request is processed, validated, stored, scheduled, and executed through a well-coordinated series of steps and components.</p>
+<p>Understanding this architecture is crucial for mastering Kubernetes operations, optimizing performance, and troubleshooting complex workloads in production environments.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Pod/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Pod">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Pod
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../What%20is%20deployment/" class="md-footer__link md-footer__link--next" aria-label="Next: What is deployment">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                What is deployment
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Paritosh Sharma
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.math", "search.highlight", "search.share", "navigation.top", "navigation.footer", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.path", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../assets/collapsible-toc.js"></script>
+      
+    
+  </body>
+</html>
