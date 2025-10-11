@@ -65,6 +65,8 @@ nav:
               - For Loop: Mini Books/JavaScript/04. For Loop.md
               - While and do-while Loops: Mini Books/JavaScript/05. while and do-while Loops.md
               - Higher Order Loops: Mini Books/JavaScript/06. Higher Order Loops and Array Iteration.md
+          - MCP:
+              - JRPC - JSON Remote Procedure Call: Mini Books/MCP/JRPC - JSON Remote Procedure Call.md
 
 markdown_extensions:
   - admonition
